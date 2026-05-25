@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundial 2026 - FIFA World Cup USA/México/Canadá</title>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
+    <link rel="apple-touch-icon" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* ===== VARIABLES ===== */
@@ -115,7 +118,7 @@
         }
         .hero-bg {
             position: absolute; inset: 0;
-            background: url('https://picsum.photos/seed/worldcup2026stadium/1920/1080.jpg') center/cover;
+            background: url('https://www.negocios.com/asset/thumbnail,1280,720,center,center/media/negocios/images/2026/05/06/2026050610121767986.jpg') center/cover;
             opacity: 0.15;
         }
         .hero-particles {
@@ -505,35 +508,53 @@
         }
         .cart-overlay.open { display: block; }
 
-        /* ===== CHATBOT ===== */
+        /* ===== CHATBOT (ACTUALIZADO) ===== */
         .chatbot-toggle {
-            position: fixed; bottom: 24px; right: 24px; z-index: 1500;
-            width: 56px; height: 56px; border-radius: 50%;
-            background: var(--green); color: var(--white); font-size: 24px;
+            position: fixed; bottom: 28px; right: 28px; z-index: 1500;
+            width: 72px; height: 72px; border-radius: 50%;
+            background: var(--green); border: 3px solid var(--white);
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 20px rgba(27,122,61,0.4);
-            transition: var(--transition);
+            box-shadow: 0 6px 24px rgba(27,122,61,0.5);
+            transition: var(--transition); overflow: visible;
         }
         .chatbot-toggle:hover { transform: scale(1.1); background: var(--green-light); }
+        .chatbot-toggle img { width:100%; height:100%; border-radius:50%; object-fit:cover; }
+        .chatbot-tooltip {
+            position: absolute; right: 90px; top: 50%; transform: translateY(-50%);
+            background: var(--white); color: var(--gray-900);
+            padding: 10px 18px; border-radius: 12px 12px 12px 0;
+            font-size: 14px; font-weight: 600; box-shadow: var(--shadow-lg);
+            white-space: nowrap; pointer-events: none;
+            animation: tooltipBounce 2s ease infinite;
+        }
+        .chatbot-tooltip::after {
+            content:''; position:absolute; bottom:0; right:-8px;
+            width:0; height:0; border-style:solid;
+            border-width:0 0 12px 12px; border-color:transparent transparent transparent var(--white);
+        }
+        @keyframes tooltipBounce {
+            0%,100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-6px); }
+        }
         .chatbot-window {
-            position: fixed; bottom: 90px; right: 24px; z-index: 1500;
-            width: 380px; max-width: calc(100vw - 48px);
-            height: 520px; max-height: calc(100vh - 120px);
-            background: var(--white); border-radius: var(--radius);
+            position: fixed; bottom: 110px; right: 28px; z-index: 1500;
+            width: 400px; max-width: calc(100vw - 48px);
+            height: 580px; max-height: calc(100vh - 140px);
+            background: var(--white); border-radius: 16px;
             box-shadow: var(--shadow-lg); display: none; flex-direction: column;
             overflow: hidden; animation: modalIn 0.3s ease;
         }
         .chatbot-window.open { display: flex; }
         .chatbot-header {
-            background: var(--green); color: var(--white); padding: 16px 20px;
+            background: var(--green); color: var(--white); padding: 14px 18px;
             display: flex; align-items: center; gap: 12px;
         }
         .chatbot-avatar {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: rgba(255,255,255,0.2); display: flex;
-            align-items: center; justify-content: center; font-size: 18px;
+            width: 44px; height: 44px; border-radius: 50%;
+            overflow: hidden; border: 2px solid rgba(255,255,255,0.3); flex-shrink: 0;
         }
-        .chatbot-header-info h4 { font-size: 14px; font-weight: 600; }
+        .chatbot-avatar img { width:100%; height:100%; object-fit:cover; }
+        .chatbot-header-info h4 { font-size: 15px; font-weight: 600; }
         .chatbot-header-info p { font-size: 11px; opacity: 0.8; }
         .chatbot-close {
             margin-left: auto; background: rgba(255,255,255,0.15);
@@ -543,7 +564,7 @@
         }
         .chatbot-messages {
             flex: 1; overflow-y: auto; padding: 16px; display: flex;
-            flex-direction: column; gap: 12px;
+            flex-direction: column; gap: 10px;
         }
         .chat-msg {
             max-width: 85%; padding: 10px 14px; border-radius: 12px;
@@ -558,11 +579,12 @@
             align-self: flex-end; border-bottom-right-radius: 4px;
         }
         .chat-options {
-            display: flex; flex-wrap: wrap; gap: 6px;
-            padding: 12px 16px; border-top: 1px solid var(--gray-200);
+            display: flex; flex-wrap: wrap; gap: 5px;
+            padding: 10px 14px; border-top: 1px solid var(--gray-200);
+            max-height: 110px; overflow-y: auto;
         }
         .chat-opt {
-            padding: 7px 14px; border-radius: 50px; font-size: 12px;
+            padding: 6px 12px; border-radius: 50px; font-size: 11px;
             font-weight: 500; background: var(--off-white);
             border: 1px solid var(--gray-200); color: var(--gray-700);
             transition: var(--transition);
@@ -571,6 +593,23 @@
             background: var(--green); color: var(--white);
             border-color: var(--green);
         }
+        .chat-input-area {
+            padding: 10px 14px; border-top: 1px solid var(--gray-200);
+            display: flex; gap: 8px; align-items: center;
+        }
+        .chat-input {
+            flex: 1; padding: 10px 14px; border: 1.5px solid var(--gray-200);
+            border-radius: 50px; font-size: 13px; outline: none;
+            transition: var(--transition);
+        }
+        .chat-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(27,122,61,0.1); }
+        .chat-send {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: var(--green); color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; transition: var(--transition); flex-shrink: 0;
+        }
+        .chat-send:hover { background: var(--green-light); }
 
         /* ===== NOTIFICATIONS ===== */
         .notif-container {
@@ -606,7 +645,7 @@
         .notif-text h4 { font-size: 13px; font-weight: 600; }
         .notif-text p { font-size: 12px; color: var(--gray-500); }
 
-        /* ===== USER BAR (when logged in) ===== */
+        /* ===== USER BAR ===== */
         .user-bar {
             display: none; align-items: center; gap: 10px;
         }
@@ -640,7 +679,7 @@
 
         /* ===== SCROLL TOP ===== */
         .scroll-top {
-            position: fixed; bottom: 90px; left: 24px; z-index: 1400;
+            position: fixed; bottom: 100px; left: 24px; z-index: 1400;
             width: 44px; height: 44px; border-radius: 50%;
             background: var(--blue); color: var(--white); font-size: 18px;
             display: none; align-items: center; justify-content: center;
@@ -671,18 +710,8 @@
             .footer-grid { grid-template-columns: 1fr; }
             .hero-stats { gap: 24px; }
             .hero-btns { flex-direction: column; align-items: center; }
+            .chatbot-tooltip { display: none; }
         }
-
-        /* ===== TOAST ===== */
-        .toast {
-            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-            background: var(--gray-900); color: var(--white); padding: 14px 24px;
-            border-radius: 10px; font-size: 14px; font-weight: 500; z-index: 3000;
-            box-shadow: var(--shadow-lg);
-            animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
-        }
-        @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-        @keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
     </style>
 </head>
 <body>
@@ -701,9 +730,9 @@
             <a href="#balon">Balón</a>
             <a href="#copa">Copa</a>
             <a href="#entradas">Entradas</a>
-            <a href="calendario.html">Calendario</a>
-            <a href="equipos.html">Equipos</a>
-            <a href="noticias.html">Noticias</a>
+            <a href="calendario.html">→</a>
+            <a href="album.html">Mi Álbum</a>
+            <a href="noticias.html">←</a>
         </div>
         <div class="nav-actions">
             <button class="btn-nav btn-nav-outline" onclick="openModal('login')" id="btnLogin">Iniciar Sesión</button>
@@ -733,9 +762,9 @@
     <a href="#balon" onclick="toggleMobile()">Balón</a>
     <a href="#copa" onclick="toggleMobile()">Copa</a>
     <a href="#entradas" onclick="toggleMobile()">Entradas</a>
-    <a href="calendario.html">Calendario</a>
-    <a href="equipos.html">Equipos</a>
-    <a href="noticias.html">Noticias</a>
+    <a href="calendario.html">→</a>
+    <a href="album.html">Mi Álbum</a>
+    <a href="noticias.html">←</a>
 </div>
 
 <!-- Countdown -->
@@ -757,42 +786,20 @@
             <i class="fas fa-globe-americas"></i>
             3 Países · 16 Ciudades · 48 Selecciones
         </div>
-        <h1 class="hero-title">
-            FIFA World Cup <span>2026</span>
-        </h1>
-        <p class="hero-sub">
-            El torneo más grande del mundo llega a Norteamérica. 
-            Estados Unidos, México y Canadá se unen para hacer historia.
-        </p>
+        <h1 class="hero-title">FIFA World Cup <span>2026</span></h1>
+        <p class="hero-sub">El torneo más grande del mundo llega a Norteamérica. Estados Unidos, México y Canadá se unen para hacer historia.</p>
         <div class="hero-btns">
-            <a href="#entradas" class="btn-hero btn-hero-primary">
-                <i class="fas fa-ticket-alt"></i>&nbsp; Comprar Entradas
-            </a>
-            <a href="#historia" class="btn-hero btn-hero-secondary">
-                <i class="fas fa-info-circle"></i>&nbsp; Descubre Más
-            </a>
+            <a href="#entradas" class="btn-hero btn-hero-primary"><i class="fas fa-ticket-alt"></i>&nbsp; Comprar Entradas</a>
+            <a href="#historia" class="btn-hero btn-hero-secondary"><i class="fas fa-info-circle"></i>&nbsp; Descubre Más</a>
         </div>
         <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat-num">48</div>
-                <div class="hero-stat-label">Selecciones</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-num">104</div>
-                <div class="hero-stat-label">Partidos</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-num">16</div>
-                <div class="hero-stat-label">Sedes</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-num">3</div>
-                <div class="hero-stat-label">Países</div>
-            </div>
+            <div class="hero-stat"><div class="hero-stat-num">48</div><div class="hero-stat-label">Selecciones</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">104</div><div class="hero-stat-label">Partidos</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">16</div><div class="hero-stat-label">Sedes</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Países</div></div>
         </div>
     </div>
 </section>
-
 <!-- ===== HISTORIA ===== -->
 <section class="section history" id="historia">
     <div class="section-inner">
@@ -801,9 +808,9 @@
             <h2 class="section-title">Un Mundial Sin Precedentes</h2>
             <p class="section-desc">La primera Copa del Mundo con 48 equipos y organizada en tres países simultáneamente.</p>
         </div>
-        <div class="history-grid">
+                <div class="history-grid">
             <div class="history-img">
-                <img src="https://picsum.photos/seed/worldcup-history/700/400.jpg" alt="Historia del Mundial">
+                <img src="https://eltablerodigital.com.ar/wp-content/uploads/2026/05/2026145-TR-S.jpg" alt="Historia del Mundial">
                 <span class="history-img-badge">Desde 1930</span>
             </div>
             <div class="history-text">
@@ -836,7 +843,6 @@
         </div>
     </div>
 </section>
-
 <!-- ===== SEDES ===== -->
 <section class="section venues" id="sedes">
     <div class="section-inner">
@@ -846,138 +852,22 @@
             <p class="section-desc">Descubre las ciudades y estadios que serán escenario del torneo más grande del planeta.</p>
         </div>
         <div class="venues-grid">
-            <!-- USA -->
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/metlife-stadium/400/200.jpg" alt="MetLife Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>MetLife Stadium</h4>
-                    <p>Nueva York / Nueva Jersey — Final del Mundial</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/sofi-stadium/400/200.jpg" alt="SoFi Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>SoFi Stadium</h4>
-                    <p>Los Ángeles, California</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/att-stadium/400/200.jpg" alt="AT&T Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>AT&T Stadium</h4>
-                    <p>Arlington, Texas</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/hard-rock-stadium/400/200.jpg" alt="Hard Rock Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Hard Rock Stadium</h4>
-                    <p>Miami, Florida</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/mercedes-benz-stadium/400/200.jpg" alt="Mercedes-Benz">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Mercedes-Benz Stadium</h4>
-                    <p>Atlanta, Georgia</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/lumen-field/400/200.jpg" alt="Lumen Field">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Lumen Field</h4>
-                    <p>Seattle, Washington</p>
-                </div>
-            </div>
-            <!-- México -->
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/estadio-azteca/400/200.jpg" alt="Estadio Azteca">
-                <div class="venue-info">
-                    <span class="venue-country country-mex">🇲🇽 México</span>
-                    <h4>Estadio Azteca</h4>
-                    <p>Ciudad de México — Partido Inaugural</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/estadio-bbva/400/200.jpg" alt="Estadio BBVA">
-                <div class="venue-info">
-                    <span class="venue-country country-mex">🇲🇽 México</span>
-                    <h4>Estadio BBVA</h4>
-                    <p>Monterrey, Nuevo León</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/estadio-akron/400/200.jpg" alt="Estadio Akron">
-                <div class="venue-info">
-                    <span class="venue-country country-mex">🇲🇽 México</span>
-                    <h4>Estadio Akron</h4>
-                    <p>Guadalajara, Jalisco</p>
-                </div>
-            </div>
-            <!-- Canadá -->
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/bmo-field/400/200.jpg" alt="BMO Field">
-                <div class="venue-info">
-                    <span class="venue-country country-can">🇨🇦 Canadá</span>
-                    <h4>BMO Field</h4>
-                    <p>Toronto, Ontario</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/bc-place/400/200.jpg" alt="BC Place">
-                <div class="venue-info">
-                    <span class="venue-country country-can">🇨🇦 Canadá</span>
-                    <h4>BC Place</h4>
-                    <p>Vancouver, Columbia Británica</p>
-                </div>
-            </div>
-            <!-- Más USA -->
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/gillette-stadium/400/200.jpg" alt="Gillette Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Gillette Stadium</h4>
-                    <p>Foxborough, Massachusetts</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/lincoln-financial/400/200.jpg" alt="Lincoln Financial">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Lincoln Financial Field</h4>
-                    <p>Filadelfia, Pensilvania</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/nrg-stadium/400/200.jpg" alt="NRG Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>NRG Stadium</h4>
-                    <p>Houston, Texas</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/arrowhead-stadium/400/200.jpg" alt="Arrowhead">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Arrowhead Stadium</h4>
-                    <p>Kansas City, Misuri</p>
-                </div>
-            </div>
-            <div class="venue-card">
-                <img src="https://picsum.photos/seed/levi-stadium/400/200.jpg" alt="Levi's Stadium">
-                <div class="venue-info">
-                    <span class="venue-country country-usa">🇺🇸 EE.UU.</span>
-                    <h4>Levi's Stadium</h4>
-                    <p>Santa Clara, California</p>
-                </div>
-            </div>
+            <div class="venue-card"><img src="https://thumbs.6sqft.com/wp-content/uploads/2022/06/17100144/MetLife-Stadium-Aerial-View.jpg?w=2000&format=webp" alt="MetLife Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>MetLife Stadium</h4><p>Nueva York / Nueva Jersey — Final del Mundial</p></div></div>
+            <div class="venue-card"><img src="https://stadiumdb.com/pictures/stadiums/usa/sofi_stadium/sofi_stadium274.jpg" alt="SoFi Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>SoFi Stadium</h4><p>Los Ángeles, California</p></div></div>
+            <div class="venue-card"><img src="https://www.hksinc.com/wp-content/uploads/2009/10/ATT_economic-1.jpg" alt="AT&T Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>AT&T Stadium</h4><p>Arlington, Texas</p></div></div>
+            <div class="venue-card"><img src="https://c7.alamy.com/comp/2YR73GM/hard-rock-stadium-miami-aerial-view-home-of-the-miami-dolphins-miami-florida-november-3-2024-2YR73GM.jpg" alt="Hard Rock Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Hard Rock Stadium</h4><p>Miami, Florida</p></div></div>
+            <div class="venue-card"><img src="https://cdn.mos.cms.futurecdn.net/QT7b7RtMfc7doghPBpNutJ-1024-80.jpg.webp" alt="Mercedes-Benz"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Mercedes-Benz Stadium</h4><p>Atlanta, Georgia</p></div></div>
+            <div class="venue-card"><img src="https://s1.ticketm.net/dam/a/6ba/cca88b1c-9704-49ea-83ff-23d0e4c246ba_1665171_TABLET_LANDSCAPE_LARGE_16_9.jpg" alt="Lumen Field"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Lumen Field</h4><p>Seattle, Washington</p></div></div>
+            <div class="venue-card"><img src="https://wallpapercave.com/wp/wp8132990.jpg" alt="Estadio Azteca"><div class="venue-info"><span class="venue-country country-mex">🇲🇽 México</span><h4>Estadio Azteca</h4><p>Ciudad de México — Partido Inaugural</p></div></div>
+            <div class="venue-card"><img src="https://tzmedia.b-cdn.net/media/images/mx/place/max/bb313a77a6cb75cde27237faf8fdc63a.jpg?1582270511" alt="Estadio BBVA"><div class="venue-info"><span class="venue-country country-mex">🇲🇽 México</span><h4>Estadio BBVA</h4><p>Monterrey, Nuevo León</p></div></div>
+            <div class="venue-card"><img src="https://stadiony.net/pictures/stadiums/mex/estadio_omnilife/estadio_omnilife65.jpg" alt="Estadio Akron"><div class="venue-info"><span class="venue-country country-mex">🇲🇽 México</span><h4>Estadio Akron</h4><p>Guadalajara, Jalisco</p></div></div>
+            <div class="venue-card"><img src="https://www.canam.com/wp-content/uploads/2016/05/BMO-Field-07.jpg" alt="BMO Field"><div class="venue-info"><span class="venue-country country-can">🇨🇦 Canadá</span><h4>BMO Field</h4><p>Toronto, Ontario</p></div></div>
+            <div class="venue-card"><img src="https://i.pinimg.com/736x/00/cb/9d/00cb9dee7905cf91cfd5f5c31767c6ac.jpg" alt="BC Place"><div class="venue-info"><span class="venue-country country-can">🇨🇦 Canadá</span><h4>BC Place</h4><p>Vancouver, Columbia Británica</p></div></div>
+            <div class="venue-card"><img src="https://cdn.suwalls.com/wallpapers/world/gillette-stadium-43696-3840x2160.jpg" alt="Gillette Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Gillette Stadium</h4><p>Foxborough, Massachusetts</p></div></div>
+            <div class="venue-card"><img src="https://stadiumsguide.com/wp-content/uploads/2023/04/lincoln-financial-field-philadelphia-pennsylvania.jpg" alt="Lincoln Financial"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Lincoln Financial Field</h4><p>Filadelfia, Pensilvania</p></div></div>
+            <div class="venue-card"><img src="https://stadiumdb.com/pictures/stadiums/usa/reliant_stadium/reliant_stadium29.jpg" alt="NRG Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>NRG Stadium</h4><p>Houston, Texas</p></div></div>
+            <div class="venue-card"><img src="https://wallpapercave.com/wp/wp9518745.jpg" alt="Arrowhead"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Arrowhead Stadium</h4><p>Kansas City, Misuri</p></div></div>
+            <div class="venue-card"><img src="https://mlyqxhs8ijge.i.optimole.com/w:789/h:526/q:85/f:best/https://www.clarkpacific.com/wp-content/uploads/2016/10/K1A1860R.jpg" alt="Levi's Stadium"><div class="venue-info"><span class="venue-country country-usa">🇺🇸 EE.UU.</span><h4>Levi's Stadium</h4><p>Santa Clara, California</p></div></div>
         </div>
     </div>
 </section>
@@ -992,7 +882,7 @@
         </div>
         <div class="features-row">
             <div class="feature-card" id="balon">
-                <img src="https://picsum.photos/seed/official-ball-2026/700/300.jpg" alt="Balón Oficial">
+                <img src="https://elportalslp.com.mx/wp-content/uploads/2026/05/Trionda-el-balon-oficial-del-Mundial-2026-tecnologia-diseno-y-precios-para-todos-los-aficionados-1.webp" alt="Balón Oficial">
                 <div class="feature-body">
                     <h3>⚽ Balón Oficial: Adidas Tournament Ball</h3>
                     <p>Adidas presentará el balón oficial del Mundial 2026 con tecnología de última generación. El diseño rinde homenaje a la cultura norteamericana con patrones inspirados en el arte nativo y colores vibrantes que representan a los tres países anfitriones.</p>
@@ -1000,7 +890,7 @@
                 </div>
             </div>
             <div class="feature-card">
-                <img src="https://picsum.photos/seed/mascot-2026/700/300.jpg" alt="Mascota Oficial">
+                <img src="https://media.elobservador.com.uy/p/dc1655e1729e354dbd4162e8e14d01a2/adjuntos/362/imagenes/100/676/0100676226/1000x0/smart/las-mascotas-oficiales-del-mundial-2026-izquierda-derecha-maple-el-alce-canadiense-zayu-el-jaguar-mexicano-y-clutch-el-aguila-americana.jpg" alt="Mascota Oficial">
                 <div class="feature-body">
                     <h3>🦅 Mascota Oficial</h3>
                     <p>La mascota del Mundial 2026 fue revelada por la FIFA como un personaje inspirado en la biodiversidad de Norteamérica. Combina elementos de las tres culturas: el águila (EE.UU.), el jaguar (México) y el castor (Canadá), simbolizando la unión de las tres naciones.</p>
@@ -1021,33 +911,18 @@
         </div>
         <div class="trophy-grid">
             <div class="trophy-img">
-                <img src="https://picsum.photos/seed/world-cup-trophy/700/500.jpg" alt="Copa Mundial">
+                <img src="https://www.xtrafondos.com/wallpapers/trofeo-copa-mundial-de-la-fifa-catar-2022-11216.jpg" alt="Copa Mundial">
             </div>
             <div class="trophy-text">
                 <h3>La Copa Mundial de la FIFA</h3>
                 <p>El trofeo actual fue diseñado por el artista italiano Silvio Gazzaniga y presentado en 1974. Fabricado en oro de 18 quilates, pesa 6.1 kg y mide 36.8 centímetros de alto. Las dos figuras humanas que sostienen la Tierra simbolizan la emoción de la victoria y la grandeza del deporte.</p>
                 <p>A diferencia de la Copa Jules Rimet (que se otorgaba permanentemente al ganar tres mundiales), este trofeo es propiedad permanente de la FIFA. Los campeones reciben una réplica bañada en oro, no el original.</p>
                 <div class="trophy-facts">
-                    <div class="trophy-fact">
-                        <i class="fas fa-weight-hanging"></i>
-                        <span>Peso: 6.175 kg de oro macizo de 18 quilates</span>
-                    </div>
-                    <div class="trophy-fact">
-                        <i class="fas fa-ruler-vertical"></i>
-                        <span>Altura: 36.8 centímetros</span>
-                    </div>
-                    <div class="trophy-fact">
-                        <i class="fas fa-gem"></i>
-                        <span>Base: Dos anillos de malaquita verde</span>
-                    </div>
-                    <div class="trophy-fact">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Seguridad: Guardado por FIFA en cofre secreto; réplicas para campeones</span>
-                    </div>
-                    <div class="trophy-fact">
-                        <i class="fas fa-crown"></i>
-                        <span>Último campeón: Argentina (2022) — ¿Quién lo levantará en 2026?</span>
-                    </div>
+                    <div class="trophy-fact"><i class="fas fa-weight-hanging"></i><span>Peso: 6.175 kg de oro macizo de 18 quilates</span></div>
+                    <div class="trophy-fact"><i class="fas fa-ruler-vertical"></i><span>Altura: 36.8 centímetros</span></div>
+                    <div class="trophy-fact"><i class="fas fa-gem"></i><span>Base: Dos anillos de malaquita verde</span></div>
+                    <div class="trophy-fact"><i class="fas fa-shield-alt"></i><span>Seguridad: Guardado por FIFA en cofre secreto; réplicas para campeones</span></div>
+                    <div class="trophy-fact"><i class="fas fa-crown"></i><span>Último campeón: Argentina (2022) — ¿Quién lo levantará en 2026?</span></div>
                 </div>
             </div>
         </div>
@@ -1064,638 +939,180 @@
         </div>
         <div class="tickets-grid">
             <div class="ticket-card">
-                <div class="ticket-icon">🏟️</div>
-                <h4>Fase de Grupos</h4>
-                <p class="ticket-desc">Partidos de primera ronda</p>
-                <div class="ticket-price">$95 <span>USD</span></div>
-                <ul class="ticket-features">
-                    <li><i class="fas fa-check"></i> Asiento en zona general</li>
-                    <li><i class="fas fa-check"></i> Acceso al estadio</li>
-                    <li><i class="fas fa-check"></i> Recuerdo digital</li>
-                </ul>
+                <div class="ticket-icon">🏟️</div><h4>Fase de Grupos</h4><p class="ticket-desc">Partidos de primera ronda</p><div class="ticket-price">$95 <span>USD</span></div>
+                <ul class="ticket-features"><li><i class="fas fa-check"></i> Asiento en zona general</li><li><i class="fas fa-check"></i> Acceso al estadio</li><li><i class="fas fa-check"></i> Recuerdo digital</li></ul>
                 <button class="btn-ticket btn-ticket-green" onclick="addToCart('Fase de Grupos', 95, '🏟️')">Agregar al Carrito</button>
             </div>
             <div class="ticket-card">
-                <div class="ticket-icon">⚡</div>
-                <h4>Octavos de Final</h4>
-                <p class="ticket-desc">Ronda eliminatoria</p>
-                <div class="ticket-price">$185 <span>USD</span></div>
-                <ul class="ticket-features">
-                    <li><i class="fas fa-check"></i> Asiento preferente</li>
-                    <li><i class="fas fa-check"></i> Bebida incluida</li>
-                    <li><i class="fas fa-check"></i> Recuerdo oficial</li>
-                </ul>
+                <div class="ticket-icon">⚡</div><h4>Octavos de Final</h4><p class="ticket-desc">Ronda eliminatoria</p><div class="ticket-price">$185 <span>USD</span></div>
+                <ul class="ticket-features"><li><i class="fas fa-check"></i> Asiento preferente</li><li><i class="fas fa-check"></i> Bebida incluida</li><li><i class="fas fa-check"></i> Recuerdo oficial</li></ul>
                 <button class="btn-ticket btn-ticket-blue" onclick="addToCart('Octavos de Final', 185, '⚡')">Agregar al Carrito</button>
             </div>
             <div class="ticket-card popular">
-                <div class="ticket-icon">🔥</div>
-                <h4>Semifinal</h4>
-                <p class="ticket-desc">Los 4 mejores del mundo</p>
-                <div class="ticket-price">$450 <span>USD</span></div>
-                <ul class="ticket-features">
-                    <li><i class="fas fa-check"></i> Asiento VIP</li>
-                    <li><i class="fas fa-check"></i> Hospitality pack</li>
-                    <li><i class="fas fa-check"></i> Merchandising oficial</li>
-                </ul>
+                <div class="ticket-icon">🔥</div><h4>Semifinal</h4><p class="ticket-desc">Los 4 mejores del mundo</p><div class="ticket-price">$450 <span>USD</span></div>
+                <ul class="ticket-features"><li><i class="fas fa-check"></i> Asiento VIP</li><li><i class="fas fa-check"></i> Hospitality pack</li><li><i class="fas fa-check"></i> Merchandising oficial</li></ul>
                 <button class="btn-ticket btn-ticket-red" onclick="addToCart('Semifinal', 450, '🔥')">Agregar al Carrito</button>
             </div>
             <div class="ticket-card">
-                <div class="ticket-icon">🏆</div>
-                <h4>La Gran Final</h4>
-                <p class="ticket-desc">MetLife Stadium, Nueva Jersey</p>
-                <div class="ticket-price">$1,100 <span>USD</span></div>
-                <ul class="ticket-features">
-                    <li><i class="fas fa-check"></i> Asiento Premium</li>
-                    <li><i class="fas fa-check"></i> Full hospitality</li>
-                    <li><i class="fas fa-check"></i> Kit exclusivo final</li>
-                </ul>
+                <div class="ticket-icon">🏆</div><h4>La Gran Final</h4><p class="ticket-desc">MetLife Stadium, Nueva Jersey</p><div class="ticket-price">$1,100 <span>USD</span></div>
+                <ul class="ticket-features"><li><i class="fas fa-check"></i> Asiento Premium</li><li><i class="fas fa-check"></i> Full hospitality</li><li><i class="fas fa-check"></i> Kit exclusivo final</li></ul>
                 <button class="btn-ticket btn-ticket-outline" onclick="addToCart('La Gran Final', 1100, '🏆')">Agregar al Carrito</button>
             </div>
         </div>
     </div>
 </section>
-
+<!-- ===== HECHO POR JOSÉ EMILIO LEMUS MONTEPEQUE ===== -->
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-grid">
-            <div class="footer-brand">
-                <h3><i class="fas fa-futbol"></i> Mundial 2026</h3>
-                <p>Sitio informativo no oficial sobre la Copa Mundial de la FIFA 2026. Todos los derechos de marca pertenecen a la FIFA.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navegación</h4>
-                <a href="#inicio">Inicio</a>
-                <a href="#historia">Historia</a>
-                <a href="#sedes">Sedes</a>
-                <a href="#entradas">Entradas</a>
-            </div>
-            <div class="footer-col">
-                <h4>Páginas</h4>
-                <a href="calendario.html">Calendario</a>
-                <a href="equipos.html">Equipos</a>
-                <a href="noticias.html">Noticias</a>
-                <a href="FAQ.html">Preguntas Frecuentes</a>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Términos de Uso</a>
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Cookies</a>
-                <a href="#">Contacto</a>
-            </div>
+            <div class="footer-brand"><h3><i class="fas fa-futbol"></i> Mundial 2026</h3><p>Sitio informativo no oficial sobre la Copa Mundial de la FIFA 2026. Todos los derechos de marca pertenecen a la FIFA.<br><br>Hecho por elementt<br> Carné: 6190-26-7182</p></div>
+            <div class="footer-col"><h4>Navegación</h4><a href="#inicio">Inicio</a><a href="#historia">Historia</a><a href="#sedes">Sedes</a><a href="#entradas">Entradas</a></div>
+            <div class="footer-col"><h4>Páginas</h4><a href="calendario.html">.</a><a href="album.html">Mi Álbum</a><a href="noticias.html">..</a><a href="FAQ.html">Preguntas Frecuentes</a></div>
+            <div class="footer-col"><h4>Legal</h4><a href="#">Términos de Uso</a><a href="#">Política de Privacidad</a><a href="#">Cookies</a><a href="#">Contacto</a></div>
         </div>
         <div class="footer-bottom">
             <span>© 2025 Mundial 2026 Info. Sitio informativo no oficial.</span>
-            <div class="footer-socials">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
+            <div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-tiktok"></i></a></div>
         </div>
     </div>
 </footer>
-
-<!-- ===== CART OVERLAY ===== -->
+<!-- ===== CARNÉ: 6190-26-7182 ===== -->
+<!-- ===== CART ===== -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-
-<!-- ===== CART SIDEBAR ===== -->
 <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-        <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
-        <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cartItems">
-        <div class="cart-empty">
-            <i class="fas fa-shopping-bag"></i>
-            <p>Tu carrito está vacío</p>
-        </div>
-    </div>
-    <div class="cart-footer">
-        <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">$0 USD</span>
-        </div>
-        <button class="btn-checkout" onclick="checkout()">Proceder al Pago</button>
-    </div>
+    <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3><button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div></div>
+    <div class="cart-footer"><div class="cart-total"><span>Total:</span><span id="cartTotal">$0 USD</span></div><button class="btn-checkout" onclick="checkout()">Proceder al Pago</button></div>
 </div>
 
-<!-- ===== LOGIN MODAL ===== -->
-<div class="modal-overlay" id="loginModal">
-    <div class="modal">
-        <button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button>
-        <h2>Iniciar Sesión</h2>
-        <p class="modal-sub">Accede a tu cuenta para comprar entradas y recibir notificaciones</p>
-        <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com">
-        </div>
-        <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" id="loginPassword" placeholder="Tu contraseña">
-        </div>
-        <button class="btn-form btn-form-green" onclick="login()">Iniciar Sesión</button>
-        <div class="form-switch">
-            ¿No tienes cuenta? <a onclick="switchModal('login','register')">Regístrate aquí</a>
-        </div>
-    </div>
-</div>
-
-<!-- ===== REGISTER MODAL ===== -->
-<div class="modal-overlay" id="registerModal">
-    <div class="modal">
-        <button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button>
-        <h2>Crear Cuenta</h2>
-        <p class="modal-sub">Regístrate para acceder a entradas, notificaciones y más</p>
-        <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="regName" placeholder="Tu nombre">
-        </div>
-        <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com">
-        </div>
-        <div class="form-group">
-            <label>País</label>
-            <select id="regCountry">
-                <option value="">Selecciona tu país</option>
-                <option value="MX">México</option>
-                <option value="US">Estados Unidos</option>
-                <option value="CA">Canadá</option>
-                <option value="AR">Argentina</option>
-                <option value="BR">Brasil</option>
-                <option value="CO">Colombia</option>
-                <option value="ES">España</option>
-                <option value="OTRO">Otro</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres">
-        </div>
-        <div class="form-group">
-            <label>
-                <input type="checkbox" id="regNotif" checked>
-                Quiero recibir notificaciones sobre el Mundial 2026
-            </label>
-        </div>
-        <button class="btn-form btn-form-blue" onclick="register()">Crear Cuenta</button>
-        <div class="form-switch">
-            ¿Ya tienes cuenta? <a onclick="switchModal('register','login')">Inicia sesión</a>
-        </div>
-    </div>
-</div>
-
-<!-- ===== NOTIFICATION CONTAINER ===== -->
+<!-- ===== NOTIF ===== -->
 <div class="notif-container" id="notifContainer"></div>
 
-<!-- ===== CHATBOT ===== -->
+<!-- ===== CHATBOT (ACTUALIZADO) ===== -->
 <button class="chatbot-toggle" id="chatToggle" onclick="toggleChat()">
-    <i class="fas fa-comments"></i>
+    <img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="FIFA Bot">
+    <span class="chatbot-tooltip" id="chatTooltip">¿Dudas? ¡Pregúntame!</span>
 </button>
+
 <div class="chatbot-window" id="chatWindow">
     <div class="chatbot-header">
-        <div class="chatbot-avatar"><i class="fas fa-robot"></i></div>
-        <div class="chatbot-header-info">
-            <h4>FIFA Bot 2026</h4>
-            <p>En línea · Responde al instante</p>
-        </div>
+        <div class="chatbot-avatar"><img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="Bot"></div>
+        <div class="chatbot-header-info"><h4>FIFA Bot 2026</h4><p>En línea · Responde al instante</p></div>
         <button class="chatbot-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
     </div>
     <div class="chatbot-messages" id="chatMessages">
-        <div class="chat-msg bot">
-            ¡Hola! 👋 Soy el asistente virtual del Mundial 2026. ¿En qué puedo ayudarte? Selecciona una opción o escribe tu pregunta:
-        </div>
+        <div class="chat-msg bot">¡Hola! 👋 Soy el asistente virtual del Mundial 2026. ¿En qué puedo ayudarte? Selecciona una opción o escribe tu pregunta:</div>
     </div>
     <div class="chat-options" id="chatOptions">
-        <button class="chat-opt" onclick="chatOption('fechas')">📅 Fechas del Mundial</button>
-        <button class="chat-opt" onclick="chatOption('sedes')">🏟️ Sedes y estadios</button>
-        <button class="chat-opt" onclick="chatOption('formato')">⚽ Formato del torneo</button>
-        <button class="chat-opt" onclick="chatOption('entradas')">🎫 Dónde comprar entradas</button>
-        <button class="chat-opt" onclick="chatOption('equipos')">🌍 Equipos clasificados</button>
-        <button class="chat-opt" onclick="chatOption('inaugural')">🎯 Partido inaugural</button>
-        <button class="chat-opt" onclick="chatOption('final')">🏆 Dónde es la final</button>
-        <button class="chat-opt" onclick="chatOption('visa')">🛂 Visa y viaje</button>
+        <button class="chat-opt" onclick="chatOption('fechas')">📅 Fechas</button>
+        <button class="chat-opt" onclick="chatOption('sedes')">🏟️ Sedes</button>
+        <button class="chat-opt" onclick="chatOption('formato')">⚽ Formato</button>
+        <button class="chat-opt" onclick="chatOption('entradas')">🎫 Entradas</button>
+        <button class="chat-opt" onclick="chatOption('equipos')">🌍 Equipos</button>
+        <button class="chat-opt" onclick="chatOption('inaugural')">🎯 Inaugural</button>
+        <button class="chat-opt" onclick="chatOption('final')">🏆 Final</button>
+        <button class="chat-opt" onclick="chatOption('visa')">🛂 Visa</button>
+        <button class="chat-opt" onclick="chatOption('mascota')">🦅 Mascota</button>
+        <button class="chat-opt" onclick="chatOption('balon')">⚽ Balón</button>
+        <button class="chat-opt" onclick="chatOption('copa')">🏆 Copa</button>
+        <button class="chat-opt" onclick="chatOption('precios')">💰 Precios</button>
+        <button class="chat-opt" onclick="chatOption('transporte')">🚌 Transporte</button>
+        <button class="chat-opt" onclick="chatOption('clima')">🌤️ Clima</button>
+        <button class="chat-opt" onclick="chatOption('seguridad')">🔒 Seguridad</button>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
     </div>
 </div>
 
-<!-- ===== SCROLL TOP ===== -->
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <i class="fas fa-chevron-up"></i>
-</button>
+<!-- ===== MODALS ===== -->
+<div class="modal-overlay" id="loginModal"><div class="modal"><button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="modal-sub">Accede a tu cuenta para comprar entradas y recibir notificaciones</p><div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>Contraseña</label><input type="password" id="loginPassword" placeholder="Tu contraseña"></div><button class="btn-form btn-form-green" onclick="login()">Iniciar Sesión</button><div class="form-switch">¿No tienes cuenta? <a onclick="switchModal('login','register')">Regístrate aquí</a></div></div></div>
+<div class="modal-overlay" id="registerModal"><div class="modal"><button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="modal-sub">Regístrate para acceder a entradas, notificaciones y más</p><div class="form-group"><label>Nombre completo</label><input type="text" id="regName" placeholder="Tu nombre"></div><div class="form-group"><label>Correo electrónico</label><input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>País</label><select id="regCountry"><option value="">Selecciona tu país</option><option value="MX">México</option><option value="US">Estados Unidos</option><option value="CA">Canadá</option><option value="AR">Argentina</option><option value="BR">Brasil</option><option value="CO">Colombia</option><option value="ES">España</option><option value="OTRO">Otro</option></select></div><div class="form-group"><label>Contraseña</label><input type="password" id="regPassword" placeholder="Mínimo 6 caracteres"></div><div class="form-group"><label><input type="checkbox" id="regNotif" checked> Quiero recibir notificaciones sobre el Mundial 2026</label></div><button class="btn-form btn-form-blue" onclick="register()">Crear Cuenta</button><div class="form-switch">¿Ya tienes cuenta? <a onclick="switchModal('register','login')">Inicia sesión</a></div></div></div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
 
 <script>
-// ========================================
-// APP STATE
-// ========================================
-let currentUser = JSON.parse(localStorage.getItem('wc2026_user')) || null;
-let cart = JSON.parse(localStorage.getItem('wc2026_cart')) || [];
+let currentUser=JSON.parse(localStorage.getItem('wc2026_user'))||null;let cart=JSON.parse(localStorage.getItem('wc2026_cart'))||[];
 
-// ========================================
-// COUNTDOWN
-// ========================================
-function updateCountdown() {
-    const target = new Date('2026-06-11T18:00:00');
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) {
-        document.getElementById('countdownBar').innerHTML = '⚽ <strong>¡El Mundial 2026 está en marcha!</strong>';
-        return;
-    }
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    document.getElementById('countDays').textContent = days;
-    document.getElementById('countHours').textContent = hours;
-    document.getElementById('countMins').textContent = mins;
-}
-updateCountdown();
-setInterval(updateCountdown, 60000);
+function updateCountdown(){const target=new Date('2026-06-11T18:00:00');const now=new Date();const diff=target-now;if(diff<=0){document.getElementById('countdownBar').innerHTML='⚽ <strong>¡El Mundial 2026 está en marcha!</strong>';return}const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));const mins=Math.floor((diff%(1000*60*60))/(1000*60));document.getElementById('countDays').textContent=days;document.getElementById('countHours').textContent=hours;document.getElementById('countMins').textContent=mins}updateCountdown();setInterval(updateCountdown,60000);
 
-// ========================================
-// AUTH - REGISTER
-// ========================================
-function register() {
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const country = document.getElementById('regCountry').value;
-    const password = document.getElementById('regPassword').value;
-    const notif = document.getElementById('regNotif').checked;
+function register(){const name=document.getElementById('regName').value.trim(),email=document.getElementById('regEmail').value.trim(),country=document.getElementById('regCountry').value,password=document.getElementById('regPassword').value,notif=document.getElementById('regNotif').checked;if(!name||!email||!country||!password){showNotif('error','Campos incompletos','Por favor completa todos los campos.');return}if(password.length<6){showNotif('error','Contraseña débil','La contraseña debe tener al menos 6 caracteres.');return}if(!email.includes('@')){showNotif('error','Email inválido','Ingresa un correo electrónico válido.');return}const user={name,email,country,password,notif,registeredAt:new Date().toISOString()};const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];if(users.find(u=>u.email===email)){showNotif('error','Email ya registrado','Este correo electrónico ya tiene una cuenta.');return}users.push(user);localStorage.setItem('wc2026_users',JSON.stringify(users));localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;closeModal('register');updateUserUI();showNotif('success','¡Registro exitoso!',`Bienvenido/a, ${name}. ¡Ya eres parte del Mundial 2026!`);if(notif){setTimeout(()=>showNotif('info','🔔 Notificaciones activadas','Recibirás actualizaciones sobre partidos, entradas y novedades del Mundial 2026.'),3000);setTimeout(()=>showNotif('info','⚽ Dato del día','El Mundial 2026 será el primero con 48 selecciones. ¡Historia pura!'),12000)}}
 
-    if (!name || !email || !country || !password) {
-        showNotif('error', 'Campos incompletos', 'Por favor completa todos los campos.');
-        return;
-    }
-    if (password.length < 6) {
-        showNotif('error', 'Contraseña débil', 'La contraseña debe tener al menos 6 caracteres.');
-        return;
-    }
-    if (!email.includes('@')) {
-        showNotif('error', 'Email inválido', 'Ingresa un correo electrónico válido.');
-        return;
-    }
+function login(){const email=document.getElementById('loginEmail').value.trim(),password=document.getElementById('loginPassword').value;if(!email||!password){showNotif('error','Campos vacíos','Ingresa tu correo y contraseña.');return}const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];const user=users.find(u=>u.email===email&&u.password===password);if(!user){showNotif('error','Datos incorrectos','No se encontró una cuenta con esos datos.');return}localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;closeModal('login');updateUserUI();showNotif('success','¡Bienvenido de vuelta!',`Hola, ${user.name}. Tu cuenta está lista.`)}
 
-    // Save user
-    const user = { name, email, country, password, notif, registeredAt: new Date().toISOString() };
-    
-    // Save to users list
-    const users = JSON.parse(localStorage.getItem('wc2026_users')) || [];
-    if (users.find(u => u.email === email)) {
-        showNotif('error', 'Email ya registrado', 'Este correo electrónico ya tiene una cuenta.');
-        return;
-    }
-    users.push(user);
-    localStorage.setItem('wc2026_users', JSON.stringify(users));
-    localStorage.setItem('wc2026_user', JSON.stringify(user));
-    currentUser = user;
+function logout(){localStorage.removeItem('wc2026_user');currentUser=null;updateUserUI();showNotif('info','Sesión cerrada','Has cerrado sesión correctamente.')}
 
-    closeModal('register');
-    updateUserUI();
-    showNotif('success', '¡Registro exitoso!', `Bienvenido/a, ${name}. ¡Ya eres parte del Mundial 2026!`);
-    
-    // Welcome notification after 3s
-    if (notif) {
-        setTimeout(() => {
-            showNotif('info', '🔔 Notificaciones activadas', 'Recibirás actualizaciones sobre partidos, entradas y novedades del Mundial 2026.');
-        }, 3000);
-        // Simulated scheduled notification
-        setTimeout(() => {
-            showNotif('info', '⚽ Dato del día', 'El Mundial 2026 será el primero con 48 selecciones. ¡Historia pura!');
-        }, 12000);
-    }
-}
+function updateUserUI(){const loginBtn=document.getElementById('btnLogin'),registerBtn=document.getElementById('btnRegister'),userBar=document.getElementById('userBar'),userAvatar=document.getElementById('userAvatar'),userNameEl=document.getElementById('userName');if(currentUser){loginBtn.style.display='none';registerBtn.style.display='none';userBar.classList.add('active');userAvatar.textContent=currentUser.name.charAt(0).toUpperCase();userNameEl.textContent=currentUser.name.split(' ')[0]}else{loginBtn.style.display='';registerBtn.style.display='';userBar.classList.remove('active')}}
 
-// ========================================
-// AUTH - LOGIN
-// ========================================
-function login() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
+function openModal(type){document.getElementById(type+'Modal').classList.add('active')}function closeModal(type){document.getElementById(type+'Modal').classList.remove('active')}function switchModal(from,to){closeModal(from);setTimeout(()=>openModal(to),200)}document.querySelectorAll('.modal-overlay').forEach(overlay=>{overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('active')})});
 
-    if (!email || !password) {
-        showNotif('error', 'Campos vacíos', 'Ingresa tu correo y contraseña.');
-        return;
-    }
+function addToCart(name,price,icon){if(!currentUser){showNotif('error','Inicia sesión','Debes iniciar sesión para comprar entradas.');openModal('login');return}const existing=cart.find(item=>item.name===name);if(existing){existing.qty+=1}else{cart.push({name,price,icon,qty:1,id:Date.now()})}saveCart();renderCart();showNotif('success','Agregado al carrito',`${name} — $${price} USD`)}function removeFromCart(id){cart=cart.filter(item=>item.id!==id);saveCart();renderCart()}function saveCart(){localStorage.setItem('wc2026_cart',JSON.stringify(cart))}function renderCart(){const container=document.getElementById('cartItems'),badge=document.getElementById('cartBadge'),totalEl=document.getElementById('cartTotal');const totalQty=cart.reduce((sum,item)=>sum+item.qty,0),totalPrice=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);badge.textContent=totalQty;if(cart.length===0){container.innerHTML=`<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>`}else{container.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img">${item.icon}</div><div class="cart-item-info"><h4>${item.name} ${item.qty>1?'×'+item.qty:''}</h4><p>Entrada individual</p><div class="cart-item-price">$${item.price*item.qty} USD</div></div><button class="cart-item-remove" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button></div>`).join('')}totalEl.textContent='$'+totalPrice.toLocaleString()+' USD'}function toggleCart(){document.getElementById('cartSidebar').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('open')}function checkout(){if(!currentUser){showNotif('error','Inicia sesión','Debes iniciar sesión para proceder al pago.');openModal('login');return}if(cart.length===0){showNotif('error','Carrito vacío','Agrega entradas antes de pagar.');return}const total=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);showNotif('success','¡Compra procesada!',`Total: $${total.toLocaleString()} USD. Recibirás confirmación por email.`);const orders=JSON.parse(localStorage.getItem('wc2026_orders'))||[];orders.push({user:currentUser.email,items:[...cart],total,date:new Date().toISOString(),id:'ORD-'+Date.now()});localStorage.setItem('wc2026_orders',JSON.stringify(orders));cart=[];saveCart();renderCart();toggleCart();setTimeout(()=>showNotif('info','📧 Confirmación enviada',`Se envió confirmación a ${currentUser.email}. ¡Nos vemos en el Mundial!`),4000)}
 
-    const users = JSON.parse(localStorage.getItem('wc2026_users')) || [];
-    const user = users.find(u => u.email === email && u.password === password);
+function showNotif(type,title,message){const container=document.getElementById('notifContainer'),icons={success:'fa-check',error:'fa-exclamation',info:'fa-info'};const notif=document.createElement('div');notif.className=`notif ${type}`;notif.innerHTML=`<div class="notif-icon"><i class="fas ${icons[type]}"></i></div><div class="notif-text"><h4>${title}</h4><p>${message}</p></div>`;container.appendChild(notif);setTimeout(()=>notif.remove(),5000)}
 
-    if (!user) {
-        showNotif('error', 'Datos incorrectos', 'No se encontró una cuenta con esos datos.');
-        return;
-    }
-
-    localStorage.setItem('wc2026_user', JSON.stringify(user));
-    currentUser = user;
-    closeModal('login');
-    updateUserUI();
-    showNotif('success', '¡Bienvenido de vuelta!', `Hola, ${user.name}. Tu cuenta está lista.`);
-}
-
-// ========================================
-// AUTH - LOGOUT
-// ========================================
-function logout() {
-    localStorage.removeItem('wc2026_user');
-    currentUser = null;
-    updateUserUI();
-    showNotif('info', 'Sesión cerrada', 'Has cerrado sesión correctamente.');
-}
-
-// ========================================
-// UPDATE UI BASED ON AUTH STATE
-// ========================================
-function updateUserUI() {
-    const loginBtn = document.getElementById('btnLogin');
-    const registerBtn = document.getElementById('btnRegister');
-    const userBar = document.getElementById('userBar');
-    const userAvatar = document.getElementById('userAvatar');
-    const userNameEl = document.getElementById('userName');
-
-    if (currentUser) {
-        loginBtn.style.display = 'none';
-        registerBtn.style.display = 'none';
-        userBar.classList.add('active');
-        userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
-        userNameEl.textContent = currentUser.name.split(' ')[0];
-    } else {
-        loginBtn.style.display = '';
-        registerBtn.style.display = '';
-        userBar.classList.remove('active');
-    }
-}
-
-// ========================================
-// MODALS
-// ========================================
-function openModal(type) {
-    document.getElementById(type + 'Modal').classList.add('active');
-}
-function closeModal(type) {
-    document.getElementById(type + 'Modal').classList.remove('active');
-}
-function switchModal(from, to) {
-    closeModal(from);
-    setTimeout(() => openModal(to), 200);
-}
-
-// Close modal on overlay click
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) overlay.classList.remove('active');
-    });
-});
-
-// ========================================
-// CART
-// ========================================
-function addToCart(name, price, icon) {
-    if (!currentUser) {
-        showNotif('error', 'Inicia sesión', 'Debes iniciar sesión para comprar entradas.');
-        openModal('login');
-        return;
-    }
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({ name, price, icon, qty: 1, id: Date.now() });
-    }
-    saveCart();
-    renderCart();
-    showNotif('success', 'Agregado al carrito', `${name} — $${price} USD`);
-}
-
-function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    saveCart();
-    renderCart();
-}
-
-function saveCart() {
-    localStorage.setItem('wc2026_cart', JSON.stringify(cart));
-}
-
-function renderCart() {
-    const container = document.getElementById('cartItems');
-    const badge = document.getElementById('cartBadge');
-    const totalEl = document.getElementById('cartTotal');
-
-    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-    badge.textContent = totalQty;
-
-    if (cart.length === 0) {
-        container.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>`;
-    } else {
-        container.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-img">${item.icon}</div>
-                <div class="cart-item-info">
-                    <h4>${item.name} ${item.qty > 1 ? '×' + item.qty : ''}</h4>
-                    <p>Entrada individual</p>
-                    <div class="cart-item-price">$${item.price * item.qty} USD</div>
-                </div>
-                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-    totalEl.textContent = `$${totalPrice.toLocaleString()} USD`;
-}
-
-function toggleCart() {
-    document.getElementById('cartSidebar').classList.toggle('open');
-    document.getElementById('cartOverlay').classList.toggle('open');
-}
-
-function checkout() {
-    if (!currentUser) {
-        showNotif('error', 'Inicia sesión', 'Debes iniciar sesión para proceder al pago.');
-        openModal('login');
-        return;
-    }
-    if (cart.length === 0) {
-        showNotif('error', 'Carrito vacío', 'Agrega entradas antes de pagar.');
-        return;
-    }
-    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    showNotif('success', '¡Compra procesada!', `Total: $${total.toLocaleString()} USD. Recibirás confirmación por email.`);
-    // Save order
-    const orders = JSON.parse(localStorage.getItem('wc2026_orders')) || [];
-    orders.push({
-        user: currentUser.email,
-        items: [...cart],
-        total,
-        date: new Date().toISOString(),
-        id: 'ORD-' + Date.now()
-    });
-    localStorage.setItem('wc2026_orders', JSON.stringify(orders));
-    cart = [];
-    saveCart();
-    renderCart();
-    toggleCart();
-    
-    // Post-purchase notification
-    setTimeout(() => {
-        showNotif('info', '📧 Confirmación enviada', `Se envió la confirmación a ${currentUser.email}. ¡Nos vemos en el Mundial!`);
-    }, 4000);
-}
-
-// ========================================
-// NOTIFICATIONS
-// ========================================
-function showNotif(type, title, message) {
-    const container = document.getElementById('notifContainer');
-    const icons = { success: 'fa-check', error: 'fa-exclamation', info: 'fa-info' };
-    
-    const notif = document.createElement('div');
-    notif.className = `notif ${type}`;
-    notif.innerHTML = `
-        <div class="notif-icon"><i class="fas ${icons[type]}"></i></div>
-        <div class="notif-text"><h4>${title}</h4><p>${message}</p></div>
-    `;
-    container.appendChild(notif);
-    
-    setTimeout(() => notif.remove(), 5000);
-}
-
-// ========================================
-// CHATBOT
-// ========================================
-const chatResponses = {
-    fechas: '📅 El Mundial 2026 se disputará del <strong>11 de junio al 19 de julio de 2026</strong>. El partido inaugural será el 11 de junio en el Estadio Azteca (Ciudad de México) y la final el 19 de julio en el MetLife Stadium (Nueva Jersey).',
-    sedes: '🏟️ Habrá <strong>16 estadios</strong> en 3 países: 11 en EE.UU. (MetLife, SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead, Levi\'s), 3 en México (Azteca, BBVA, Akron) y 2 en Canadá (BMO Field, BC Place).',
-    formato: '⚽ El formato es completamente nuevo: <strong>48 equipos</strong> divididos en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros de cada grupo y los <strong>8 mejores terceros</strong> (32 equipos a eliminatorias). Se jugarán <strong>104 partidos</strong> en total, 40 más que en Qatar 2022.',
-    entradas: '🎫 Las entradas se venden a través de <strong>FIFA.com/tickets</strong>. Hay categorías para Fase de Grupos, Octavos, Semifinal y Final. ¡También puedes comprarlas aquí en nuestra sección de Entradas! Te recomendamos registrarte para acceder a la venta.',
-    equipos: '🌍 Clasifican <strong>48 selecciones</strong>: 8 de CONCACAF (3 anfitriones + 5), 16 de UEFA, 9 de CONMEBOL, 9 de CAF, 8 de AFC y 2 de OFC. Las eliminatorias están en curso. ¡La repesca intercontinental definirá las últimas 2 plazas!',
-    inaugural: '🎯 El <strong>partido inaugural</strong> se jugará el <strong>11 de junio de 2026</strong> en el <strong>Estadio Azteca</strong> de Ciudad de México. México será el equipo local, continuando la tradición de que el anfitrión juega el primer partido.',
-    final: '🏆 La <strong>Gran Final</strong> del Mundial 2026 se jugará el <strong>19 de julio de 2026</strong> en el <strong>MetLife Stadium</strong> de East Rutherford, Nueva Jersey (EE.UU.), con capacidad para 87,000 espectadores.',
-    visa: '🛂 Depende de tu país. <strong>México</strong> no requiere visa para muchos países latinoamericanos. <strong>EE.UU. y Canadá</strong> pueden requerir visa turística. Te recomendamos tramitarla con al menos 6 meses de anticipación. Consulta con las embajadas correspondientes.'
+// ===== CHATBOT AMPLIADO =====
+const chatResponses={
+fechas:'📅 El Mundial 2026 se disputará del <strong>11 de junio al 19 de julio de 2026</strong>. El partido inaugural será el 11 de junio en el Estadio Azteca (Ciudad de México) y la final el 19 de julio en el MetLife Stadium (Nueva Jersey).',
+sedes:'🏟️ Habrá <strong>16 estadios</strong> en 3 países: 11 en EE.UU. (MetLife, SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead, Levi\'s), 3 en México (Azteca, BBVA, Akron) y 2 en Canadá (BMO Field, BC Place).',
+formato:'⚽ El formato es completamente nuevo: <strong>48 equipos</strong> divididos en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros de cada grupo y los <strong>8 mejores terceros</strong> (32 equipos a eliminatorias). Se jugarán <strong>104 partidos</strong> en total, 40 más que en Qatar 2022.',
+entradas:'🎫 Las entradas se venden a través de <strong>FIFA.com/tickets</strong>. Hay categorías para Fase de Grupos, Octavos, Semifinal y Final. ¡También puedes comprarlas aquí en nuestra sección de Entradas! Te recomendamos registrarte para acceder a la venta.',
+equipos:'🌍 Clasifican <strong>48 selecciones</strong>: 8 de CONCACAF (3 anfitriones + 5), 16 de UEFA, 9 de CONMEBOL, 9 de CAF, 8 de AFC y 2 de OFC. Las eliminatorias están en curso. ¡La repesca intercontinental definirá las últimas 2 plazas!',
+inaugural:'🎯 El <strong>partido inaugural</strong> se jugará el <strong>11 de junio de 2026</strong> en el <strong>Estadio Azteca</strong> de Ciudad de México. México será el equipo local, continuando la tradición de que el anfitrión juega el primer partido.',
+final:'🏆 La <strong>Gran Final</strong> del Mundial 2026 se jugará el <strong>19 de julio de 2026</strong> en el <strong>MetLife Stadium</strong> de East Rutherford, Nueva Jersey (EE.UU.), con capacidad para 87,000 espectadores.',
+visa:'🛂 Depende de tu país. <strong>México</strong> no requiere visa para muchos países latinoamericanos. <strong>EE.UU. y Canadá</strong> pueden requerir visa turística. Te recomendamos tramitarla con al menos 6 meses de anticipación. Consulta con las embajadas correspondientes.',
+mascota:'🦅 La mascota combina elementos del <strong>águila (EE.UU.)</strong>, el <strong>jaguar (México)</strong> y el <strong>castor (Canadá)</strong>, simbolizando la unión de las tres naciones con valores de diversidad y pasión por el fútbol.',
+balon:'⚽ El balón oficial incorpora tecnología <strong>Connected Ball</strong> con sensor interno para datos en tiempo real sobre velocidad, trayectoria e impacto, ayudando al VAR y al sistema de gol fantasma.',
+copa:'🏆 La Copa Mundial pesa <strong>6.1 kg de oro de 18 quilates</strong>, mide 36.8 cm y fue diseñada por Silvio Gazzaniga en 1974. Los campeones reciben una réplica bañada en oro; el original es propiedad de la FIFA.',
+precios:'💰 <strong>Precios de entradas:</strong><br>• Fase de Grupos: $95 USD<br>• Octavos de Final: $185 USD<br>• Semifinal: $450 USD<br>• Gran Final: $1,100 USD<br>Los precios pueden variar según categoría y ubicación.',
+transporte:'🚌 Las ciudades sede ofrecen transporte público masivo. Se recomienda usar <strong>metro, tren ligero y shuttles oficiales FIFA</strong>. En EE.UU. es recomendable alquilar auto para estadios suburbanos.',
+clima:'🌤️ <strong>Clima por sede en junio-julio:</strong><br>🇲🇽 CDMX/Monterrey/GDL: 25-35°C, caluroso y húmedo<br>🇺🇸 Nueva York: 25-30°C, veraniego<br>🇺🇸 LA/Miami: 25-35°C<br>🇨🇦 Toronto/Vancouver: 20-28°C, más fresco<br>¡Prepara ropa ligera y protección solar!',
+seguridad:'🔒 Las autoridades de los 3 países implementarán operativos de seguridad masivos. Se recomienda: llegar temprano al estadio (2-3 hrs antes), no llevar objetos prohibidos, usar transporte oficial y mantener documentos de identidad siempre contigo.'
 };
 
-function chatOption(key) {
-    const messages = document.getElementById('chatMessages');
-    const options = document.getElementById('chatOptions');
-    
-    // Add user message
-    const labels = {
-        fechas: '📅 ¿Cuáles son las fechas?',
-        sedes: '🏟️ ¿Dónde se juega?',
-        formato: '⚽ ¿Cuál es el formato?',
-        entradas: '🎫 ¿Dónde compro entradas?',
-        equipos: '🌍 ¿Qué equipos clasifican?',
-        inaugural: '🎯 ¿Dónde es el inaugural?',
-        final: '🏆 ¿Dónde es la final?',
-        visa: '🛂 ¿Necesito visa?'
-    };
-    
-    const userMsg = document.createElement('div');
-    userMsg.className = 'chat-msg user';
-    userMsg.textContent = labels[key];
-    messages.appendChild(userMsg);
-    
-    // Bot response with delay
-    setTimeout(() => {
-        const botMsg = document.createElement('div');
-        botMsg.className = 'chat-msg bot';
-        botMsg.innerHTML = chatResponses[key];
-        messages.appendChild(botMsg);
-        messages.scrollTop = messages.scrollHeight;
-    }, 600);
-    
-    messages.scrollTop = messages.scrollHeight;
-}
-
-function toggleChat() {
-    document.getElementById('chatWindow').classList.toggle('open');
-    document.getElementById('chatToggle').querySelector('i').classList.toggle('fa-comments');
-    document.getElementById('chatToggle').querySelector('i').classList.toggle('fa-times');
-}
-
-// ========================================
-// MOBILE MENU
-// ========================================
-function toggleMobile() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-// ========================================
-// SCROLL EFFECTS
-// ========================================
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    // Scroll top button
-    const scrollTopBtn = document.getElementById('scrollTop');
-    if (scrollY > 600) {
-        scrollTopBtn.classList.add('show');
-    } else {
-        scrollTopBtn.classList.remove('show');
-    }
-    
-    // Navbar shadow
-    const navbar = document.getElementById('navbar');
-    if (scrollY > 10) {
-        navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-    
-    // Active nav link
-    const sections = ['inicio', 'historia', 'sedes', 'mascota', 'balon', 'copa', 'entradas'];
-    sections.forEach(id => {
-        const section = document.getElementById(id);
-        if (section) {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 150 && rect.bottom >= 150) {
-                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-                if (link) link.classList.add('active');
-            }
-        }
-    });
-});
-
-// ========================================
-// PERIODIC NOTIFICATIONS FOR LOGGED-IN USERS
-// ========================================
-const worldCupFacts = [
-    '⚽ Dato: El Estadio Azteca será el primer estadio en albergar 3 mundiales (1970, 1986 y 2026).',
-    '🏆 Dato: La Copa Mundial pesa 6.1 kg de oro macizo de 18 quilates.',
-    '🌍 Dato: El Mundial 2026 tendrá 104 partidos, 40 más que Qatar 2022.',
-    '🇲🇽 Dato: México es el primer país en albergar 3 Copas del Mundo.',
-    '📊 Dato: Se estima que 5 mil millones de personas verán el Mundial 2026.',
-    '🏟️ Dato: El MetLife Stadium tendrá capacidad para 87,000 personas en la final.',
-    '⚽ Dato: 48 equipos competirán por primera vez en la historia del Mundial.',
-    '🎫 Dato: Se espera vender más de 5 millones de entradas en todo el torneo.'
+const chatKeywords=[
+{keys:['hola','hello','hi','hey','buenas','saludos','qué tal','que tal','buenos días','buenas tardes','buenas noches'],resp:'¡Hola! 👋 ¡Bienvenido al asistente del Mundial 2026! ¿En qué puedo ayudarte? Puedes preguntarme sobre fechas, sedes, entradas, equipos, la copa, el balón, la mascota y mucho más.'},
+{keys:['gracias','thanks','thank you','ty','thx','agradecido'],resp:'¡De nada! 😊 Estoy aquí para ayudarte con cualquier duda sobre el Mundial 2026. ¡No dudes en preguntar!'},
+{keys:['adiós','adios','bye','chao','hasta luego','nos vemos','me voy'],resp:'¡Hasta luego! 👋 Fue un placer ayudarte. ¡Nos vemos en el Mundial 2026! ⚽🏆'},
+{keys:['cuándo','cuando','fecha','fechas','día','dia','inicio','empieza','comienza','cuando es'],resp:'chatResponses.fechas'},
+{keys:['dónde','donde','estadio','estadios','sede','sedes','lugar','ciudad','ciudades','donde se juega'],resp:'chatResponses.sedes'},
+{keys:['formato','cómo','como','cuántos equipos','cuantos equipos','grupos','eliminatoria','fase'],resp:'chatResponses.formato'},
+{keys:['entrada','entradas','ticket','tickets','boleto','boletos','comprar','precio','precios','costo','cuánto cuesta','cuanto cuesta','venta'],resp:'chatResponses.entradas'},
+{keys:['equipo','equipos','selección','seleccion','selecciones','clasificado','clasificados','país','pais','países','paises'],resp:'chatResponses.equipos'},
+{keys:['inaugural','inauguración','inauguracion','primer partido','inaugura','apertura'],resp:'chatResponses.inaugural'},
+{keys:['final','último partido','ultimo partido','campeón','campeon','la gran final'],resp:'chatResponses.final'},
+{keys:['visa','visado','pasaporte','viaje','viajar','documento','turista','migración','migracion'],resp:'chatResponses.visa'},
+{keys:['mascota','personaje','animal','símbolo','simbolo','icono'],resp:'chatResponses.mascota'},
+{keys:['balón','balon','pelota','pelota oficial','balon oficial','technology','tecnología','tecnologia'],resp:'chatResponses.balon'},
+{keys:['copa','trofeo','trophy','premio','campeonato'],resp:'chatResponses.copa'},
+{keys:['historia','origen','pasado','antes','antecedente'],resp:'📜 La FIFA aprobó 48 equipos en <strong>2017</strong>. En <strong>2018</strong>, United 2026 ganó con 134 votos vs 65 de Marruecos. En <strong>2022</strong> se confirmó el formato y en <strong>2023</strong> las sedes. Será el primer mundial en 3 países y el primero con 48 selecciones.'},
+{keys:['transporte','cómo llegar','como llegar','metro','autobús','autobus','bus','shuttle','tren','estacionamiento','parking'],resp:'chatResponses.transporte'},
+{keys:['clima','tiempo','temperatura','lluvia','sol','calor','frío','frio'],resp:'chatResponses.clima'},
+{keys:['seguridad','policía','policia','prohibido','restricción','restriccion','seguro','peligro'],resp:'chatResponses.seguridad'},
+{keys:['méxico','mexico','azteca','cdmx','monterrey','guadalajara'],resp:'🇲🇽 México tiene <strong>3 sedes</strong>: Estadio Azteca (CDMX, inaugural), Estadio BBVA (Monterrey) y Estadio Akron (Guadalajara). México será anfitrión por tercera vez tras 1970 y 1986.'},
+{keys:['estados unidos','usa','eeuu','ee.uu','united states','américa','america'],resp:'🇺🇸 EE.UU. tiene <strong>11 sedes</strong>: MetLife (final), SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead y Levi\'s Stadium.'},
+{keys:['canadá','canada'],resp:'🇨🇦 Canadá tiene <strong>2 sedes</strong>: BMO Field (Toronto) y BC Place (Vancouver). Es la segunda vez que Canadá alberga un mundial de fútbol (primera: Femenino 2015).'},
+{keys:['argentina','messi','albiceleste'],resp:'🇦🇷 Argentina es la <strong>campeona defensora</strong> (Qatar 2022). Lionel Messi podría disputar su 6º mundial. Clasificó 1ª en las eliminatorias sudamericanas.'},
+{keys:['brasil','brazil','verdeamarela','canarinha'],resp:'🇧🇷 Brasil es el mayor campeón mundial con <strong>5 títulos</strong> (1958, 1962, 1970, 1994, 2002). Viene de cuartos de final en Qatar 2022.'},
+{keys:['48','cuarenta y ocho','expandió','expansion'],resp:'La expansión a 48 equipos fue aprobada por la FIFA en enero de 2017. Esto permite que <strong>8 países más</strong> experimenten un mundial, aumentando la representación de todas las confederaciones.'},
+{keys:['álbum','album','panini','estampas','stickers'],resp:'📓 ¡Tenemos un <strong>Álbum Panini Digital</strong> en nuestro sitio! Ve a la página <strong>"Mi Álbum"</strong> para coleccionar estampas de las 48 selecciones y subir tus propias fotos.'},
+{keys:['registrar','registro','cuenta','sign up','signup','crear cuenta'],resp:'📝 Para registrarte, haz clic en <strong>"Registrarse"</strong> en la barra superior. Solo necesitas nombre, correo, país y contraseña. Así podrás comprar entradas y guardar tu álbum.'},
+{keys:['carrito','compra','pagar','checkout'],resp:'🛒 Para comprar entradas, ve a la sección <strong>"Entradas"</strong>, agrega al carrito y haz clic en <strong>"Proceder al Pago"</strong>. Necesitas iniciar sesión primero.'}
 ];
 
-let factIndex = 0;
-function sendPeriodicFact() {
-    if (currentUser && currentUser.notif) {
-        showNotif('info', 'Dato del Mundial', worldCupFacts[factIndex % worldCupFacts.length]);
-        factIndex++;
-    }
-}
-setInterval(sendPeriodicFact, 45000); // Every 45 seconds
+function chatOption(key){const msgs=document.getElementById('chatMessages');const labels={fechas:'📅 ¿Cuáles son las fechas?',sedes:'🏟️ ¿Dónde se juega?',formato:'⚽ ¿Cuál es el formato?',entradas:'🎫 ¿Dónde compro entradas?',equipos:'🌍 ¿Qué equipos clasifican?',inaugural:'🎯 ¿Dónde es el inaugural?',final:'🏆 ¿Dónde es la final?',visa:'🛂 ¿Necesito visa?',mascota:'🦅 ¿Cuál es la mascota?',balon:'⚽ ¿Cómo es el balón?',copa:'🏆 Cuéntame de la Copa',precios:'💰 Precios de entradas',transporte:'🚌 Transporte',clima:'🌤️ Clima en las sedes',seguridad:'🔒 Seguridad'};const u=document.createElement('div');u.className='chat-msg user';u.textContent=labels[key]||key;msgs.appendChild(u);setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=chatResponses[key];msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
 
-// ========================================
-// INIT
-// ========================================
-updateUserUI();
-renderCart();
+function sendChat(){const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;input.value='';const msgs=document.getElementById('chatMessages');const u=document.createElement('div');u.className='chat-msg user';u.textContent=text;msgs.appendChild(u);const lower=text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");let response=null;for(const entry of chatKeywords){if(entry.keys.some(k=>lower.includes(k))){response=entry.resp;break}}if(response){if(response.startsWith('chatResponses.')){const key=response.replace('chatResponses.','');response=chatResponses[key]}}if(!response){response='🤔 No estoy seguro de esa pregunta, pero puedo ayudarte con: <strong>fechas, sedes, formato, entradas, equipos, mascota, balón, copa, visa, transporte, clima, seguridad y más</strong>. ¡Pregúntame algo específico!'}setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=response;msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
 
-// Initial notification for returning users
-if (currentUser) {
-    setTimeout(() => {
-        showNotif('info', `¡Hola, ${currentUser.name.split(' ')[0]}!`, 'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!');
-    }, 2000);
-}
+function toggleChat(){const cw=document.getElementById('chatWindow');cw.classList.toggle('open');const tt=document.getElementById('chatTooltip');if(cw.classList.contains('open')&&tt){tt.style.display='none'}}
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+
+window.addEventListener('scroll',()=>{const scrollY=window.scrollY;const scrollTopBtn=document.getElementById('scrollTop');if(scrollY>600)scrollTopBtn.classList.add('show');else scrollTopBtn.classList.remove('show');const navbar=document.getElementById('navbar');if(scrollY>10)navbar.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)';else navbar.style.boxShadow='none';const sections=['inicio','historia','sedes','mascota','balon','copa','entradas'];sections.forEach(id=>{const section=document.getElementById(id);if(section){const rect=section.getBoundingClientRect();if(rect.top<=150&&rect.bottom>=150){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));const link=document.querySelector(`.nav-links a[href="#${id}"]`);if(link)link.classList.add('active')}}})});
+
+const worldCupFacts=['⚽ Dato: El Estadio Azteca será el primer estadio en albergar 3 mundiales (1970, 1986 y 2026).','🏆 Dato: La Copa Mundial pesa 6.1 kg de oro macizo de 18 quilates.','🌍 Dato: El Mundial 2026 tendrá 104 partidos, 40 más que Qatar 2022.','🇲🇽 Dato: México es el primer país en albergar 3 Copas del Mundo.','📊 Dato: Se estima que 5 mil millones de personas verán el Mundial 2026.','🏟️ Dato: El MetLife Stadium tendrá capacidad para 87,000 personas en la final.','⚽ Dato: 48 equipos competirán por primera vez en la historia del Mundial.','🎫 Dato: Se espera vender más de 5 millones de entradas en todo el torneo.'];let factIndex=0;function sendPeriodicFact(){if(currentUser&&currentUser.notif){showNotif('info','Dato del Mundial',worldCupFacts[factIndex%worldCupFacts.length]);factIndex++}}setInterval(sendPeriodicFact,45000);
+
+updateUserUI();renderCart();if(currentUser)setTimeout(()=>showNotif('info',`¡Hola, ${currentUser.name.split(' ')[0]}!`,'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!'),2000);
 </script>
-
 </body>
 </html>
