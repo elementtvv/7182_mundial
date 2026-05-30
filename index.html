@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundial 2026 - FIFA World Cup USA/México/Canadá</title>
+    <title>ELE Mundial 2026</title>
     <!-- FAVICON -->
     <link rel="icon" type="image/jpeg" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
     <link rel="apple-touch-icon" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
@@ -34,7 +34,6 @@
             --radius: 12px;
             --transition: all 0.3s ease;
         }
-
         /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -50,7 +49,6 @@
         img { max-width: 100%; display: block; }
         button { cursor: pointer; border: none; font-family: inherit; }
         input, select { font-family: inherit; }
-
         /* ===== NAVBAR ===== */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -108,7 +106,6 @@
             display: none; color: var(--white); font-size: 24px;
             cursor: pointer; padding: 4px;
         }
-
         /* ===== HERO ===== */
         .hero {
             position: relative; min-height: 100vh;
@@ -179,8 +176,7 @@
             font-size: 36px; font-weight: 700; color: var(--white);
         }
         .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
-
-        /* ===== SECTIONS ===== */
+        /* ===== SECCIONES ===== */
         .section {
             padding: 80px 24px;
         }
@@ -204,8 +200,7 @@
             font-size: 16px; color: var(--gray-500); max-width: 600px;
             margin: 0 auto; font-weight: 300;
         }
-
-        /* ===== HISTORY ===== */
+        /* ===== HISTORIA ===== */
         .history { background: var(--off-white); }
         .history-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
@@ -241,7 +236,6 @@
         }
         .timeline-item p { font-size: 14px; color: var(--gray-700); }
         .timeline-item strong { color: var(--gray-900); }
-
         /* ===== MATCHES / VENUES ===== */
         .venues { background: var(--white); }
         .venues-grid {
@@ -265,8 +259,7 @@
         .country-can { background: rgba(196,30,58,0.1); color: var(--red); }
         .venue-info h4 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
         .venue-info p { font-size: 13px; color: var(--gray-500); }
-
-        /* ===== MASCOT & BALL ===== */
+        /* ===== MASCOTAS Y BALÓN ===== */
         .features-row {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
         }
@@ -280,7 +273,6 @@
         .feature-body { padding: 28px; }
         .feature-body h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
         .feature-body p { color: var(--gray-700); font-size: 14px; line-height: 1.7; }
-
         /* ===== TROPHY ===== */
         .trophy {
             background: linear-gradient(135deg, var(--blue-dark), var(--green-dark));
@@ -306,7 +298,6 @@
         }
         .trophy-fact i { color: var(--green-light); font-size: 18px; }
         .trophy-fact span { font-size: 14px; }
-
         /* ===== TICKETS ===== */
         .tickets { background: var(--off-white); }
         .tickets-grid {
@@ -353,7 +344,6 @@
             border: 1.5px solid var(--blue);
         }
         .btn-ticket-outline:hover { background: var(--blue); color: var(--white); }
-
         /* ===== FOOTER ===== */
         .footer {
             background: var(--blue-dark); color: rgba(255,255,255,0.7);
@@ -391,7 +381,6 @@
             transition: var(--transition);
         }
         .footer-socials a:hover { background: var(--green); color: var(--white); }
-
         /* ===== MODALS ===== */
         .modal-overlay {
             display: none; position: fixed; inset: 0; z-index: 2000;
@@ -447,7 +436,6 @@
             color: var(--green); font-weight: 600; cursor: pointer;
         }
         .form-switch a:hover { text-decoration: underline; }
-
         /* ===== CART SIDEBAR ===== */
         .cart-sidebar {
             position: fixed; top: 0; right: -420px; z-index: 2000;
@@ -507,7 +495,6 @@
             background: rgba(0,0,0,0.4);
         }
         .cart-overlay.open { display: block; }
-
         /* ===== CHATBOT (ACTUALIZADO) ===== */
         .chatbot-toggle {
             position: fixed; bottom: 28px; right: 28px; z-index: 1500;
@@ -610,8 +597,7 @@
             font-size: 14px; transition: var(--transition); flex-shrink: 0;
         }
         .chat-send:hover { background: var(--green-light); }
-
-        /* ===== NOTIFICATIONS ===== */
+        /* ===== NOTIFICACIONES ===== */
         .notif-container {
             position: fixed; top: 80px; right: 24px; z-index: 1800;
             display: flex; flex-direction: column; gap: 10px;
@@ -644,7 +630,6 @@
         .notif.info .notif-icon { background: rgba(26,58,107,0.1); color: var(--blue); }
         .notif-text h4 { font-size: 13px; font-weight: 600; }
         .notif-text p { font-size: 12px; color: var(--gray-500); }
-
         /* ===== USER BAR ===== */
         .user-bar {
             display: none; align-items: center; gap: 10px;
@@ -663,7 +648,6 @@
             transition: var(--transition);
         }
         .btn-logout:hover { background: rgba(196,30,58,0.3); color: var(--white); }
-
         /* ===== MOBILE MENU ===== */
         .mobile-menu {
             display: none; position: fixed; top: 70px; left: 0; right: 0;
@@ -676,7 +660,6 @@
             font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .mobile-menu a:hover { color: var(--white); }
-
         /* ===== SCROLL TOP ===== */
         .scroll-top {
             position: fixed; bottom: 100px; left: 24px; z-index: 1400;
@@ -687,15 +670,13 @@
         }
         .scroll-top.show { display: flex; }
         .scroll-top:hover { background: var(--blue-light); transform: translateY(-2px); }
-
-        /* ===== COUNTDOWN ===== */
+        /* ===== CONTADOR ===== */
         .countdown-bar {
             background: var(--red); color: var(--white); text-align: center;
             padding: 10px 24px; font-size: 14px; font-weight: 500;
             position: fixed; top: 70px; left: 0; right: 0; z-index: 998;
         }
         .countdown-bar strong { font-size: 18px; margin: 0 4px; }
-
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .tickets-grid { grid-template-columns: repeat(2, 1fr); }
@@ -715,12 +696,11 @@
     </style>
 </head>
 <body>
-
-<!-- ===== NAVBAR ===== -->
+<!-- ===== BARRA DE NAVEGACIÓN ===== -->
 <nav class="navbar" id="navbar">
     <div class="navbar-inner">
         <a href="#" class="nav-logo">
-            <i class="fas fa-futbol"></i> Mundial 2026
+            <i class="fas fa-futbol"></i> ELE Mundial 2026
         </a>
         <div class="nav-links">
             <a href="#inicio" class="active">Inicio</a>
@@ -752,8 +732,7 @@
         </div>
     </div>
 </nav>
-
-<!-- Mobile Menu -->
+<!-- MENU MÓVIL -->
 <div class="mobile-menu" id="mobileMenu">
     <a href="#inicio" onclick="toggleMobile()">Inicio</a>
     <a href="#historia" onclick="toggleMobile()">Historia</a>
@@ -766,12 +745,10 @@
     <a href="album.html">Mi Álbum</a>
     <a href="noticias.html">←</a>
 </div>
-
-<!-- Countdown -->
+<!-- CONTADOR -->
 <div class="countdown-bar" id="countdownBar">
     ⚽ Faltan <strong id="countDays">0</strong> días, <strong id="countHours">0</strong> horas y <strong id="countMins">0</strong> minutos para el kickoff del Mundial 2026
 </div>
-
 <!-- ===== HERO ===== -->
 <section class="hero" id="inicio">
     <div class="hero-bg"></div>
@@ -871,7 +848,6 @@
         </div>
     </div>
 </section>
-
 <!-- ===== MASCOTA & BALÓN ===== -->
 <section class="section" id="mascota" style="background: var(--off-white);">
     <div class="section-inner">
@@ -900,7 +876,6 @@
         </div>
     </div>
 </section>
-
 <!-- ===== COPA ===== -->
 <section class="section trophy" id="copa">
     <div class="section-inner">
@@ -911,7 +886,7 @@
         </div>
         <div class="trophy-grid">
             <div class="trophy-img">
-                <img src="https://www.xtrafondos.com/wallpapers/trofeo-copa-mundial-de-la-fifa-catar-2022-11216.jpg" alt="Copa Mundial">
+                <img src="https://imagenes2.mundodeportivo.com/files/og_thumbnail/files/fp/uploads/2026/01/31/697dbc0c087f9.r_d.2595-2183-2246.jpeg" alt="Copa Mundial">
             </div>
             <div class="trophy-text">
                 <h3>La Copa Mundial de la FIFA</h3>
@@ -928,7 +903,6 @@
         </div>
     </div>
 </section>
-
 <!-- ===== ENTRADAS ===== -->
 <section class="section tickets" id="entradas">
     <div class="section-inner">
@@ -962,7 +936,7 @@
     </div>
 </section>
 <!-- ===== HECHO POR JOSÉ EMILIO LEMUS MONTEPEQUE ===== -->
-<!-- ===== FOOTER ===== -->
+<!-- ===== PIE DE PÁGINA ===== -->
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-grid">
@@ -978,23 +952,20 @@
     </div>
 </footer>
 <!-- ===== CARNÉ: 6190-26-7182 ===== -->
-<!-- ===== CART ===== -->
+<!-- ===== CARRITO ===== -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
     <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3><button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
     <div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div></div>
     <div class="cart-footer"><div class="cart-total"><span>Total:</span><span id="cartTotal">$0 USD</span></div><button class="btn-checkout" onclick="checkout()">Proceder al Pago</button></div>
 </div>
-
 <!-- ===== NOTIF ===== -->
 <div class="notif-container" id="notifContainer"></div>
-
 <!-- ===== CHATBOT (ACTUALIZADO) ===== -->
 <button class="chatbot-toggle" id="chatToggle" onclick="toggleChat()">
     <img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="FIFA Bot">
     <span class="chatbot-tooltip" id="chatTooltip">¿Dudas? ¡Pregúntame!</span>
 </button>
-
 <div class="chatbot-window" id="chatWindow">
     <div class="chatbot-header">
         <div class="chatbot-avatar"><img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="Bot"></div>
@@ -1026,33 +997,21 @@
         <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
     </div>
 </div>
-
-<!-- ===== MODALS ===== -->
+<!-- ===== LOGUEO ===== -->
 <div class="modal-overlay" id="loginModal"><div class="modal"><button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="modal-sub">Accede a tu cuenta para comprar entradas y recibir notificaciones</p><div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>Contraseña</label><input type="password" id="loginPassword" placeholder="Tu contraseña"></div><button class="btn-form btn-form-green" onclick="login()">Iniciar Sesión</button><div class="form-switch">¿No tienes cuenta? <a onclick="switchModal('login','register')">Regístrate aquí</a></div></div></div>
 <div class="modal-overlay" id="registerModal"><div class="modal"><button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="modal-sub">Regístrate para acceder a entradas, notificaciones y más</p><div class="form-group"><label>Nombre completo</label><input type="text" id="regName" placeholder="Tu nombre"></div><div class="form-group"><label>Correo electrónico</label><input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>País</label><select id="regCountry"><option value="">Selecciona tu país</option><option value="MX">México</option><option value="US">Estados Unidos</option><option value="CA">Canadá</option><option value="AR">Argentina</option><option value="BR">Brasil</option><option value="CO">Colombia</option><option value="ES">España</option><option value="OTRO">Otro</option></select></div><div class="form-group"><label>Contraseña</label><input type="password" id="regPassword" placeholder="Mínimo 6 caracteres"></div><div class="form-group"><label><input type="checkbox" id="regNotif" checked> Quiero recibir notificaciones sobre el Mundial 2026</label></div><button class="btn-form btn-form-blue" onclick="register()">Crear Cuenta</button><div class="form-switch">¿Ya tienes cuenta? <a onclick="switchModal('register','login')">Inicia sesión</a></div></div></div>
-
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
-
 <script>
 let currentUser=JSON.parse(localStorage.getItem('wc2026_user'))||null;let cart=JSON.parse(localStorage.getItem('wc2026_cart'))||[];
-
 function updateCountdown(){const target=new Date('2026-06-11T18:00:00');const now=new Date();const diff=target-now;if(diff<=0){document.getElementById('countdownBar').innerHTML='⚽ <strong>¡El Mundial 2026 está en marcha!</strong>';return}const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));const mins=Math.floor((diff%(1000*60*60))/(1000*60));document.getElementById('countDays').textContent=days;document.getElementById('countHours').textContent=hours;document.getElementById('countMins').textContent=mins}updateCountdown();setInterval(updateCountdown,60000);
-
 function register(){const name=document.getElementById('regName').value.trim(),email=document.getElementById('regEmail').value.trim(),country=document.getElementById('regCountry').value,password=document.getElementById('regPassword').value,notif=document.getElementById('regNotif').checked;if(!name||!email||!country||!password){showNotif('error','Campos incompletos','Por favor completa todos los campos.');return}if(password.length<6){showNotif('error','Contraseña débil','La contraseña debe tener al menos 6 caracteres.');return}if(!email.includes('@')){showNotif('error','Email inválido','Ingresa un correo electrónico válido.');return}const user={name,email,country,password,notif,registeredAt:new Date().toISOString()};const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];if(users.find(u=>u.email===email)){showNotif('error','Email ya registrado','Este correo electrónico ya tiene una cuenta.');return}users.push(user);localStorage.setItem('wc2026_users',JSON.stringify(users));localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;closeModal('register');updateUserUI();showNotif('success','¡Registro exitoso!',`Bienvenido/a, ${name}. ¡Ya eres parte del Mundial 2026!`);if(notif){setTimeout(()=>showNotif('info','🔔 Notificaciones activadas','Recibirás actualizaciones sobre partidos, entradas y novedades del Mundial 2026.'),3000);setTimeout(()=>showNotif('info','⚽ Dato del día','El Mundial 2026 será el primero con 48 selecciones. ¡Historia pura!'),12000)}}
-
 function login(){const email=document.getElementById('loginEmail').value.trim(),password=document.getElementById('loginPassword').value;if(!email||!password){showNotif('error','Campos vacíos','Ingresa tu correo y contraseña.');return}const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];const user=users.find(u=>u.email===email&&u.password===password);if(!user){showNotif('error','Datos incorrectos','No se encontró una cuenta con esos datos.');return}localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;closeModal('login');updateUserUI();showNotif('success','¡Bienvenido de vuelta!',`Hola, ${user.name}. Tu cuenta está lista.`)}
-
 function logout(){localStorage.removeItem('wc2026_user');currentUser=null;updateUserUI();showNotif('info','Sesión cerrada','Has cerrado sesión correctamente.')}
-
 function updateUserUI(){const loginBtn=document.getElementById('btnLogin'),registerBtn=document.getElementById('btnRegister'),userBar=document.getElementById('userBar'),userAvatar=document.getElementById('userAvatar'),userNameEl=document.getElementById('userName');if(currentUser){loginBtn.style.display='none';registerBtn.style.display='none';userBar.classList.add('active');userAvatar.textContent=currentUser.name.charAt(0).toUpperCase();userNameEl.textContent=currentUser.name.split(' ')[0]}else{loginBtn.style.display='';registerBtn.style.display='';userBar.classList.remove('active')}}
-
 function openModal(type){document.getElementById(type+'Modal').classList.add('active')}function closeModal(type){document.getElementById(type+'Modal').classList.remove('active')}function switchModal(from,to){closeModal(from);setTimeout(()=>openModal(to),200)}document.querySelectorAll('.modal-overlay').forEach(overlay=>{overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('active')})});
-
 function addToCart(name,price,icon){if(!currentUser){showNotif('error','Inicia sesión','Debes iniciar sesión para comprar entradas.');openModal('login');return}const existing=cart.find(item=>item.name===name);if(existing){existing.qty+=1}else{cart.push({name,price,icon,qty:1,id:Date.now()})}saveCart();renderCart();showNotif('success','Agregado al carrito',`${name} — $${price} USD`)}function removeFromCart(id){cart=cart.filter(item=>item.id!==id);saveCart();renderCart()}function saveCart(){localStorage.setItem('wc2026_cart',JSON.stringify(cart))}function renderCart(){const container=document.getElementById('cartItems'),badge=document.getElementById('cartBadge'),totalEl=document.getElementById('cartTotal');const totalQty=cart.reduce((sum,item)=>sum+item.qty,0),totalPrice=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);badge.textContent=totalQty;if(cart.length===0){container.innerHTML=`<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>`}else{container.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img">${item.icon}</div><div class="cart-item-info"><h4>${item.name} ${item.qty>1?'×'+item.qty:''}</h4><p>Entrada individual</p><div class="cart-item-price">$${item.price*item.qty} USD</div></div><button class="cart-item-remove" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button></div>`).join('')}totalEl.textContent='$'+totalPrice.toLocaleString()+' USD'}function toggleCart(){document.getElementById('cartSidebar').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('open')}function checkout(){if(!currentUser){showNotif('error','Inicia sesión','Debes iniciar sesión para proceder al pago.');openModal('login');return}if(cart.length===0){showNotif('error','Carrito vacío','Agrega entradas antes de pagar.');return}const total=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);showNotif('success','¡Compra procesada!',`Total: $${total.toLocaleString()} USD. Recibirás confirmación por email.`);const orders=JSON.parse(localStorage.getItem('wc2026_orders'))||[];orders.push({user:currentUser.email,items:[...cart],total,date:new Date().toISOString(),id:'ORD-'+Date.now()});localStorage.setItem('wc2026_orders',JSON.stringify(orders));cart=[];saveCart();renderCart();toggleCart();setTimeout(()=>showNotif('info','📧 Confirmación enviada',`Se envió confirmación a ${currentUser.email}. ¡Nos vemos en el Mundial!`),4000)}
-
 function showNotif(type,title,message){const container=document.getElementById('notifContainer'),icons={success:'fa-check',error:'fa-exclamation',info:'fa-info'};const notif=document.createElement('div');notif.className=`notif ${type}`;notif.innerHTML=`<div class="notif-icon"><i class="fas ${icons[type]}"></i></div><div class="notif-text"><h4>${title}</h4><p>${message}</p></div>`;container.appendChild(notif);setTimeout(()=>notif.remove(),5000)}
-
-// ===== CHATBOT AMPLIADO =====
+// ===== CHATBOT =====
 const chatResponses={
 fechas:'📅 El Mundial 2026 se disputará del <strong>11 de junio al 19 de julio de 2026</strong>. El partido inaugural será el 11 de junio en el Estadio Azteca (Ciudad de México) y la final el 19 de julio en el MetLife Stadium (Nueva Jersey).',
 sedes:'🏟️ Habrá <strong>16 estadios</strong> en 3 países: 11 en EE.UU. (MetLife, SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead, Levi\'s), 3 en México (Azteca, BBVA, Akron) y 2 en Canadá (BMO Field, BC Place).',
@@ -1070,7 +1029,6 @@ transporte:'🚌 Las ciudades sede ofrecen transporte público masivo. Se recomi
 clima:'🌤️ <strong>Clima por sede en junio-julio:</strong><br>🇲🇽 CDMX/Monterrey/GDL: 25-35°C, caluroso y húmedo<br>🇺🇸 Nueva York: 25-30°C, veraniego<br>🇺🇸 LA/Miami: 25-35°C<br>🇨🇦 Toronto/Vancouver: 20-28°C, más fresco<br>¡Prepara ropa ligera y protección solar!',
 seguridad:'🔒 Las autoridades de los 3 países implementarán operativos de seguridad masivos. Se recomienda: llegar temprano al estadio (2-3 hrs antes), no llevar objetos prohibidos, usar transporte oficial y mantener documentos de identidad siempre contigo.'
 };
-
 const chatKeywords=[
 {keys:['hola','hello','hi','hey','buenas','saludos','qué tal','que tal','buenos días','buenas tardes','buenas noches'],resp:'¡Hola! 👋 ¡Bienvenido al asistente del Mundial 2026! ¿En qué puedo ayudarte? Puedes preguntarme sobre fechas, sedes, entradas, equipos, la copa, el balón, la mascota y mucho más.'},
 {keys:['gracias','thanks','thank you','ty','thx','agradecido'],resp:'¡De nada! 😊 Estoy aquí para ayudarte con cualquier duda sobre el Mundial 2026. ¡No dudes en preguntar!'},
@@ -1100,18 +1058,12 @@ const chatKeywords=[
 {keys:['registrar','registro','cuenta','sign up','signup','crear cuenta'],resp:'📝 Para registrarte, haz clic en <strong>"Registrarse"</strong> en la barra superior. Solo necesitas nombre, correo, país y contraseña. Así podrás comprar entradas y guardar tu álbum.'},
 {keys:['carrito','compra','pagar','checkout'],resp:'🛒 Para comprar entradas, ve a la sección <strong>"Entradas"</strong>, agrega al carrito y haz clic en <strong>"Proceder al Pago"</strong>. Necesitas iniciar sesión primero.'}
 ];
-
 function chatOption(key){const msgs=document.getElementById('chatMessages');const labels={fechas:'📅 ¿Cuáles son las fechas?',sedes:'🏟️ ¿Dónde se juega?',formato:'⚽ ¿Cuál es el formato?',entradas:'🎫 ¿Dónde compro entradas?',equipos:'🌍 ¿Qué equipos clasifican?',inaugural:'🎯 ¿Dónde es el inaugural?',final:'🏆 ¿Dónde es la final?',visa:'🛂 ¿Necesito visa?',mascota:'🦅 ¿Cuál es la mascota?',balon:'⚽ ¿Cómo es el balón?',copa:'🏆 Cuéntame de la Copa',precios:'💰 Precios de entradas',transporte:'🚌 Transporte',clima:'🌤️ Clima en las sedes',seguridad:'🔒 Seguridad'};const u=document.createElement('div');u.className='chat-msg user';u.textContent=labels[key]||key;msgs.appendChild(u);setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=chatResponses[key];msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
-
 function sendChat(){const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;input.value='';const msgs=document.getElementById('chatMessages');const u=document.createElement('div');u.className='chat-msg user';u.textContent=text;msgs.appendChild(u);const lower=text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");let response=null;for(const entry of chatKeywords){if(entry.keys.some(k=>lower.includes(k))){response=entry.resp;break}}if(response){if(response.startsWith('chatResponses.')){const key=response.replace('chatResponses.','');response=chatResponses[key]}}if(!response){response='🤔 No estoy seguro de esa pregunta, pero puedo ayudarte con: <strong>fechas, sedes, formato, entradas, equipos, mascota, balón, copa, visa, transporte, clima, seguridad y más</strong>. ¡Pregúntame algo específico!'}setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=response;msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
-
 function toggleChat(){const cw=document.getElementById('chatWindow');cw.classList.toggle('open');const tt=document.getElementById('chatTooltip');if(cw.classList.contains('open')&&tt){tt.style.display='none'}}
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
-
 window.addEventListener('scroll',()=>{const scrollY=window.scrollY;const scrollTopBtn=document.getElementById('scrollTop');if(scrollY>600)scrollTopBtn.classList.add('show');else scrollTopBtn.classList.remove('show');const navbar=document.getElementById('navbar');if(scrollY>10)navbar.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)';else navbar.style.boxShadow='none';const sections=['inicio','historia','sedes','mascota','balon','copa','entradas'];sections.forEach(id=>{const section=document.getElementById(id);if(section){const rect=section.getBoundingClientRect();if(rect.top<=150&&rect.bottom>=150){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));const link=document.querySelector(`.nav-links a[href="#${id}"]`);if(link)link.classList.add('active')}}})});
-
 const worldCupFacts=['⚽ Dato: El Estadio Azteca será el primer estadio en albergar 3 mundiales (1970, 1986 y 2026).','🏆 Dato: La Copa Mundial pesa 6.1 kg de oro macizo de 18 quilates.','🌍 Dato: El Mundial 2026 tendrá 104 partidos, 40 más que Qatar 2022.','🇲🇽 Dato: México es el primer país en albergar 3 Copas del Mundo.','📊 Dato: Se estima que 5 mil millones de personas verán el Mundial 2026.','🏟️ Dato: El MetLife Stadium tendrá capacidad para 87,000 personas en la final.','⚽ Dato: 48 equipos competirán por primera vez en la historia del Mundial.','🎫 Dato: Se espera vender más de 5 millones de entradas en todo el torneo.'];let factIndex=0;function sendPeriodicFact(){if(currentUser&&currentUser.notif){showNotif('info','Dato del Mundial',worldCupFacts[factIndex%worldCupFacts.length]);factIndex++}}setInterval(sendPeriodicFact,45000);
-
 updateUserUI();renderCart();if(currentUser)setTimeout(()=>showNotif('info',`¡Hola, ${currentUser.name.split(' ')[0]}!`,'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!'),2000);
 </script>
 </body>
