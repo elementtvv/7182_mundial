@@ -200,6 +200,52 @@
             font-size: 16px; color: var(--gray-500); max-width: 600px;
             margin: 0 auto; font-weight: 300;
         }
+
+        /* ===== INTRODUCCIÓN ===== */
+        .intro {
+            background: var(--gray-900);
+            padding: 80px 24px;
+        }
+        .intro-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .intro-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .intro-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 12px;
+            color: var(--green-light);
+        }
+        .intro-title {
+            font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+            letter-spacing: -1px; color: var(--white); margin-bottom: 12px;
+        }
+        .intro-desc {
+            font-size: 16px; color: rgba(255,255,255,0.5); max-width: 600px;
+            margin: 0 auto; font-weight: 300;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            aspect-ratio: 16 / 9;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* ===== HISTORIA ===== */
         .history { background: var(--off-white); }
         .history-grid {
@@ -692,6 +738,9 @@
             .hero-stats { gap: 24px; }
             .hero-btns { flex-direction: column; align-items: center; }
             .chatbot-tooltip { display: none; }
+            .video-container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -704,6 +753,7 @@
         </a>
         <div class="nav-links">
             <a href="#inicio" class="active">Inicio</a>
+            <a href="#introduccion">Introducción</a>
             <a href="#historia">Historia</a>
             <a href="#sedes">Sedes</a>
             <a href="#mascota">Mascota</a>
@@ -735,6 +785,7 @@
 <!-- MENU MÓVIL -->
 <div class="mobile-menu" id="mobileMenu">
     <a href="#inicio" onclick="toggleMobile()">Inicio</a>
+    <a href="#introduccion" onclick="toggleMobile()">Introducción</a>
     <a href="#historia" onclick="toggleMobile()">Historia</a>
     <a href="#sedes" onclick="toggleMobile()">Sedes</a>
     <a href="#mascota" onclick="toggleMobile()">Mascota</a>
@@ -777,6 +828,28 @@
         </div>
     </div>
 </section>
+
+<!-- ===== INTRODUCCIÓN ===== -->
+<section class="intro" id="introduccion">
+    <div class="intro-inner">
+        <div class="intro-header">
+            <div class="intro-tag"><i class="fas fa-play-circle"></i> Introducción</div>
+            <h2 class="intro-title">Vive el Mundial 2026</h2>
+            <p class="intro-desc">Mira el video oficial y sumérgete en la emoción del torneo más grande del planeta.</p>
+        </div>
+        <div class="video-container">
+            <!-- VIDEO DE INTRODUCCIÓN -->
+            <iframe width="560" height="315" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="Video de introducción - Mundial 2026" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</section>
+
 <!-- ===== HISTORIA ===== -->
 <section class="section history" id="historia">
     <div class="section-inner">
@@ -941,7 +1014,7 @@
     <div class="footer-inner">
         <div class="footer-grid">
             <div class="footer-brand"><h3><i class="fas fa-futbol"></i> Mundial 2026</h3><p>Sitio informativo no oficial sobre la Copa Mundial de la FIFA 2026. Todos los derechos de marca pertenecen a la FIFA.<br><br>Hecho por elementt<br> Carné: 6190-26-7182</p></div>
-            <div class="footer-col"><h4>Navegación</h4><a href="#inicio">Inicio</a><a href="#historia">Historia</a><a href="#sedes">Sedes</a><a href="#entradas">Entradas</a></div>
+            <div class="footer-col"><h4>Navegación</h4><a href="#inicio">Inicio</a><a href="#introduccion">Introducción</a><a href="#historia">Historia</a><a href="#sedes">Sedes</a><a href="#entradas">Entradas</a></div>
             <div class="footer-col"><h4>Páginas</h4><a href="calendario.html">.</a><a href="album.html">Mi Álbum</a><a href="noticias.html">..</a><a href="FAQ.html">Preguntas Frecuentes</a></div>
             <div class="footer-col"><h4>Legal</h4><a href="#">Términos de Uso</a><a href="#">Política de Privacidad</a><a href="#">Cookies</a><a href="#">Contacto</a></div>
         </div>
@@ -1062,7 +1135,7 @@ function chatOption(key){const msgs=document.getElementById('chatMessages');cons
 function sendChat(){const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;input.value='';const msgs=document.getElementById('chatMessages');const u=document.createElement('div');u.className='chat-msg user';u.textContent=text;msgs.appendChild(u);const lower=text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");let response=null;for(const entry of chatKeywords){if(entry.keys.some(k=>lower.includes(k))){response=entry.resp;break}}if(response){if(response.startsWith('chatResponses.')){const key=response.replace('chatResponses.','');response=chatResponses[key]}}if(!response){response='🤔 No estoy seguro de esa pregunta, pero puedo ayudarte con: <strong>fechas, sedes, formato, entradas, equipos, mascota, balón, copa, visa, transporte, clima, seguridad y más</strong>. ¡Pregúntame algo específico!'}setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=response;msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
 function toggleChat(){const cw=document.getElementById('chatWindow');cw.classList.toggle('open');const tt=document.getElementById('chatTooltip');if(cw.classList.contains('open')&&tt){tt.style.display='none'}}
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
-window.addEventListener('scroll',()=>{const scrollY=window.scrollY;const scrollTopBtn=document.getElementById('scrollTop');if(scrollY>600)scrollTopBtn.classList.add('show');else scrollTopBtn.classList.remove('show');const navbar=document.getElementById('navbar');if(scrollY>10)navbar.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)';else navbar.style.boxShadow='none';const sections=['inicio','historia','sedes','mascota','balon','copa','entradas'];sections.forEach(id=>{const section=document.getElementById(id);if(section){const rect=section.getBoundingClientRect();if(rect.top<=150&&rect.bottom>=150){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));const link=document.querySelector(`.nav-links a[href="#${id}"]`);if(link)link.classList.add('active')}}})});
+window.addEventListener('scroll',()=>{const scrollY=window.scrollY;const scrollTopBtn=document.getElementById('scrollTop');if(scrollY>600)scrollTopBtn.classList.add('show');else scrollTopBtn.classList.remove('show');const navbar=document.getElementById('navbar');if(scrollY>10)navbar.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)';else navbar.style.boxShadow='none';const sections=['inicio','introduccion','historia','sedes','mascota','balon','copa','entradas'];sections.forEach(id=>{const section=document.getElementById(id);if(section){const rect=section.getBoundingClientRect();if(rect.top<=150&&rect.bottom>=150){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));const link=document.querySelector(`.nav-links a[href="#${id}"]`);if(link)link.classList.add('active')}}})});
 const worldCupFacts=['⚽ Dato: El Estadio Azteca será el primer estadio en albergar 3 mundiales (1970, 1986 y 2026).','🏆 Dato: La Copa Mundial pesa 6.1 kg de oro macizo de 18 quilates.','🌍 Dato: El Mundial 2026 tendrá 104 partidos, 40 más que Qatar 2022.','🇲🇽 Dato: México es el primer país en albergar 3 Copas del Mundo.','📊 Dato: Se estima que 5 mil millones de personas verán el Mundial 2026.','🏟️ Dato: El MetLife Stadium tendrá capacidad para 87,000 personas en la final.','⚽ Dato: 48 equipos competirán por primera vez en la historia del Mundial.','🎫 Dato: Se espera vender más de 5 millones de entradas en todo el torneo.'];let factIndex=0;function sendPeriodicFact(){if(currentUser&&currentUser.notif){showNotif('info','Dato del Mundial',worldCupFacts[factIndex%worldCupFacts.length]);factIndex++}}setInterval(sendPeriodicFact,45000);
 updateUserUI();renderCart();if(currentUser)setTimeout(()=>showNotif('info',`¡Hola, ${currentUser.name.split(' ')[0]}!`,'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!'),2000);
 </script>
