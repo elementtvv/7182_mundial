@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi Álbum Panini - Mundial 2026</title>
+<title>Mi Álbum - ELE Mundial 2026</title>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/jpeg" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
+    <link rel="apple-touch-icon" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{--g:#1B7A3D;--gl:#2EA050;--gd:#145C2E;--b:#1A3A6B;--bl:#264F8C;--bd:#0F2647;--r:#C41E3A;--rl:#E03050;--w:#FFF;--ow:#F5F5F5;--g100:#F0F0F0;--g200:#E0E0E0;--g300:#C0C0C0;--g500:#888;--g700:#444;--g900:#1A1A1A;--paper:#FFF9F0;--paperD:#EDE4D3;--gold:#C9A84C;--shadow:0 4px 16px rgba(0,0,0,.12);--shadow-lg:0 10px 40px rgba(0,0,0,.15);}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#6B5B45;color:var(--g900);line-height:1.6;min-height:100vh}
 a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;border:none;font-family:inherit}input{font-family:inherit}
-
 .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--bd);border-bottom:3px solid var(--g);height:70px;display:flex;align-items:center;padding:0 24px}
 .navbar-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px;font-weight:700}.nav-logo i{color:var(--gl);font-size:24px}
@@ -31,44 +34,35 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 .hamburger{display:none;color:#fff;font-size:24px;cursor:pointer;padding:4px}
 .mmenu{display:none;position:fixed;top:70px;left:0;right:0;background:var(--bd);padding:16px 24px;border-bottom:2px solid var(--g);z-index:999}
 .mmenu.open{display:block}.mmenu a{display:block;padding:12px 0;color:rgba(255,255,255,.8);font-size:15px;border-bottom:1px solid rgba(255,255,255,.06)}
-
 .topbar{position:fixed;top:70px;left:0;right:0;z-index:999;background:rgba(107,91,69,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.1);padding:10px 24px;display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
 .ptxt{color:#fff;font-size:13px;font-weight:600;white-space:nowrap}
 .ptrack{width:200px;height:10px;background:rgba(255,255,255,.15);border-radius:10px;overflow:hidden}
 .pfill{height:100%;background:linear-gradient(90deg,var(--g),var(--gl));border-radius:10px;transition:width .5s}
 .pcnt{color:rgba(255,255,255,.8);font-size:13px;white-space:nowrap}.pcnt b{color:var(--gl)}
 .btn-rst{background:var(--r);color:#fff;font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;transition:all .3s ease}.btn-rst:hover{background:var(--rl)}
-
 .book-area{padding:128px 16px 24px;display:flex;flex-direction:column;align-items:center;min-height:100vh}
 .tstrip{display:flex;gap:4px;padding:8px 0 16px;max-width:100%;overflow-x:auto;justify-content:center;flex-wrap:wrap}
 .tstrip::-webkit-scrollbar{height:4px}.tstrip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:4px}
 .tb{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);padding:5px 10px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;transition:all .3s ease;white-space:nowrap;display:flex;align-items:center;gap:4px}
 .tb:hover,.tb.on{background:var(--g);color:#fff;border-color:var(--g)}.tb .tf{font-size:14px}
-
 .bwrap{display:flex;align-items:center;gap:8px;width:100%;max-width:1060px;justify-content:center}
 .bnav{background:rgba(255,255,255,.08);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;flex-shrink:0}
 .bnav:hover{background:var(--g);transform:scale(1.1)}.bnav:disabled{opacity:.25;cursor:default;transform:none;background:rgba(255,255,255,.03)}
-
 .book{display:flex;background:var(--paperD);border-radius:8px;box-shadow:var(--shadow-lg),0 0 0 1px rgba(0,0,0,.05);overflow:hidden;flex:1;max-width:960px;min-height:580px;position:relative;transition:opacity .25s}.book.fade{opacity:0}
-
 .spine{width:28px;background:linear-gradient(to right,rgba(0,0,0,.1),rgba(0,0,0,.03) 35%,rgba(0,0,0,.01) 50%,rgba(0,0,0,.03) 65%,rgba(0,0,0,.1));flex-shrink:0;position:relative;z-index:2}
 .spine::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.015) 3px,rgba(0,0,0,.015) 4px)}
-
 .page{flex:1;padding:20px;display:flex;flex-direction:column;position:relative;background:var(--paper)}
 .page-l{box-shadow:inset -8px 0 16px -8px rgba(0,0,0,.07);border-right:1px solid rgba(0,0,0,.03)}
 .page-r{box-shadow:inset 8px 0 16px -8px rgba(0,0,0,.07);border-left:1px solid rgba(0,0,0,.03)}
 .page::before{content:'';position:absolute;inset:8px;border:1px solid rgba(0,0,0,.025);border-radius:3px;pointer-events:none}
-
 .sec-hdr{text-align:center;padding:8px 12px;margin-bottom:12px;border-radius:6px;font-size:14px;font-weight:700;color:#fff;letter-spacing:.5px}
 .sec-hdr.gold{background:linear-gradient(135deg,#8B6914,var(--gold),#8B6914)}
 .sec-hdr.red{background:linear-gradient(135deg,#8B0000,#C41E3A,#8B0000)}
 .sec-hdr.team-hdr{font-size:16px}
-
 .ph{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid rgba(0,0,0,.05)}
 .ph-l{justify-content:flex-start}.ph-r{justify-content:flex-end}
 .ph-f{font-size:24px}.ph-n{font-size:15px;font-weight:700}.ph-c{margin-left:auto;font-size:11px;font-weight:600;padding:4px 12px;border-radius:12px;color:#fff}
 .pnum{font-size:9px;color:var(--g500);text-align:center;padding-top:8px;border-top:1px solid rgba(0,0,0,.03);margin-top:auto}
-
 .g-team-l{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,1fr);gap:8px;flex:1}
 .g-team-r{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto 1fr 1fr 1fr 1fr;gap:8px;flex:1}
 .g-2v{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1}
@@ -78,39 +72,32 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 .g-7v{display:grid;grid-template-rows:repeat(7,1fr);gap:6px;flex:1}
 .g-pan-l{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .g-pan-r{display:grid;grid-template-columns:1fr;gap:8px}
-
 .sc{perspective:800px;cursor:pointer;position:relative}
 .si{position:relative;width:100%;height:100%;transition:transform .6s ease;transform-style:preserve-3d}
 .sc.on .si{transform:rotateY(180deg)}
 .sf,.sb{backface-visibility:hidden;position:absolute;inset:0;border-radius:6px;overflow:hidden}
 .sv .si{aspect-ratio:2/3}.sh .si{aspect-ratio:3/2}
-
 .sf{display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px dashed rgba(0,0,0,.12);background:rgba(0,0,0,.015);position:relative}
 .sf .sn{font-size:20px;font-weight:800;opacity:.18;line-height:1}
 .sf .si-icon{font-size:12px;opacity:.1;margin-bottom:2px}
 .sf::after{content:'';position:absolute;inset:4px;border:1px dotted rgba(0,0,0,.05);border-radius:3px}
-
 .sb{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;text-align:center;gap:3px;box-shadow:inset 0 0 12px rgba(0,0,0,.05);position:relative}
 .sb .pi{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
 .sb .pn{font-size:8px;font-weight:700;color:#fff;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.3)}
 .sb .pp{font-size:7px;font-weight:600;color:rgba(255,255,255,.8);background:rgba(0,0,0,.2);padding:1px 6px;border-radius:8px}
 .sb .pm{position:absolute;top:4px;right:6px;font-size:9px;font-weight:800;color:rgba(255,255,255,.3)}
-
 .sh .sb{flex-direction:row;gap:8px;padding:4px 10px}
 .sh .sb .pi{width:32px;height:32px;margin-bottom:0}
 .sh .sb .pinfo{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
 .sh .sb .pn{font-size:9px}
 .sh .sb .pp{font-size:7px}
-
 .cam-btn{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,.5);color:#fff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;cursor:pointer;opacity:.75;transition:all .2s;z-index:5;border:1px solid rgba(255,255,255,.2)}
 .cam-btn:hover{opacity:1;background:var(--g);transform:scale(1.2)}
 .sh .cam-btn{bottom:5px;right:8px;width:20px;height:20px;font-size:9px}
 .cam-btn.has-img{background:rgba(27,122,61,.65);border-color:rgba(255,255,255,.3)}
-
 .span2{grid-column:span 2}
 .crest{display:flex;align-items:center;justify-content:center;border:2px dashed rgba(0,0,0,.05);border-radius:6px;background:rgba(0,0,0,.008);flex-direction:column;gap:2px}
 .crest .cf{font-size:22px;opacity:.2}.crest .cl{font-size:7px;color:var(--g500);opacity:.3;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-
 .nc{position:fixed;top:80px;right:24px;z-index:1800;display:flex;flex-direction:column;gap:10px;pointer-events:none}
 .nf{background:#fff;border-radius:10px;padding:12px 16px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;min-width:260px;max-width:360px;border-left:4px solid var(--g);pointer-events:auto;animation:nI .3s ease,nO .3s ease 4.7s forwards}
 .nf.err{border-left-color:var(--r)}.nf.inf{border-left-color:var(--b)}
@@ -119,7 +106,6 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 .ni{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .nf .ni{background:rgba(27,122,61,.1);color:var(--g)}.nf.err .ni{background:rgba(196,30,58,.1);color:var(--r)}.nf.inf .ni{background:rgba(26,58,107,.1);color:var(--b)}
 .nt h4{font-size:12px;font-weight:600}.nt p{font-size:11px;color:var(--g500)}
-
 .mo{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
 .mo.on{display:flex}
 .md{background:#fff;border-radius:12px;width:100%;max-width:480px;padding:36px;box-shadow:var(--shadow-lg);position:relative;animation:mA .3s ease}
@@ -132,7 +118,6 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 .bf-g{background:var(--g);color:#fff}.bf-g:hover{background:var(--gl)}
 .bf-b{background:var(--b);color:#fff}.bf-b:hover{background:var(--bl)}
 .fs{text-align:center;margin-top:16px;font-size:13px;color:var(--g500)}.fs a{color:var(--g);font-weight:600;cursor:pointer}.fs a:hover{text-decoration:underline}
-
 @media(max-width:768px){
 .nav-links,.nav-actions .btn-nav{display:none}.hamburger{display:block}
 .book-area{padding:120px 8px 16px}
@@ -148,9 +133,8 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 </style>
 </head>
 <body>
-
 <nav class="navbar"><div class="navbar-inner">
-<a href="index.html" class="nav-logo"><i class="fas fa-futbol"></i> Mundial 2026</a>
+<a href="index.html" class="nav-logo"><i class="fas fa-futbol"></i> ELE Mundial 2026</a>
 <div class="nav-links">
 <a href="index.html">Inicio</a><a href="index.html#historia">Historia</a><a href="index.html#sedes">Sedes</a>
 <a href="index.html#mascota">Mascota</a><a href="index.html#copa">Copa</a><a href="index.html#entradas">Entradas</a>
@@ -166,14 +150,12 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 <a href="index.html">Inicio</a><a href="index.html#historia">Historia</a><a href="index.html#sedes">Sedes</a>
 <a href="index.html#entradas">Entradas</a><a href="album.html">Mi Álbum</a><a href="noticias.html">←</a>
 </div>
-
 <div class="topbar">
 <span class="ptxt">7182 -🏆 Mi Álbum</span>
 <div class="ptrack"><div class="pfill" id="pF" style="width:0%"></div></div>
 <span class="pcnt" id="pC">0/994 · <b>Faltan: 994</b></span>
 <button class="btn-rst" onclick="resetA()"><i class="fas fa-redo"></i> Reiniciar</button>
 </div>
-
 <div class="book-area">
 <div class="tstrip" id="ts"></div>
 <div class="mnav"><button onclick="prevP()"><i class="fas fa-chevron-left"></i> Anterior</button><button onclick="nextP()">Siguiente <i class="fas fa-chevron-right"></i></button></div>
@@ -183,14 +165,11 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 <button class="bnav" id="bNxt" onclick="nextP()"><i class="fas fa-chevron-right"></i></button>
 </div>
 </div>
-
 <div class="nc" id="nc"></div>
 <input type="file" id="imgUpl" accept="image/*" style="display:none">
 <canvas id="imgCvs" style="display:none"></canvas>
-
 <div class="mo" id="lgMo"><div class="md"><button class="mx" onclick="closeM('lg')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="ms">Accede a tu cuenta para coleccionar y guardar estampas</p><div class="fg"><label>Correo electrónico</label><input type="email" id="lE" placeholder="tucorreo@ejemplo.com"></div><div class="fg"><label>Contraseña</label><input type="password" id="lP" placeholder="Tu contraseña"></div><button class="bf bf-g" onclick="doLogin()">Iniciar Sesión</button><div class="fs">¿No tienes cuenta? <a onclick="swM('lg','rg')">Regístrate aquí</a></div></div></div>
 <div class="mo" id="rgMo"><div class="md"><button class="mx" onclick="closeM('rg')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="ms">Regístrate para coleccionar estampas del Mundial</p><div class="fg"><label>Nombre completo</label><input id="rN" placeholder="Tu nombre"></div><div class="fg"><label>Correo electrónico</label><input type="email" id="rE" placeholder="tucorreo@ejemplo.com"></div><div class="fg"><label>Contraseña</label><input type="password" id="rP" placeholder="Mínimo 6 caracteres"></div><button class="bf bf-b" onclick="doReg()">Crear Cuenta</button><div class="fs">¿Ya tienes cuenta? <a onclick="swM('rg','lg')">Inicia sesión</a></div></div></div>
-
 <script>
 const T=[
 {n:"México",f:"🇲🇽",c1:"#006847",c2:"#FFF",c3:"#CE1126",r:"latam"},
@@ -242,7 +221,6 @@ const T=[
 {n:"Ghana",f:"🇬🇭",c1:"#CE1126",c2:"#FCD116",c3:"#006B3F",r:"african"},
 {n:"Panamá",f:"🇵🇦",c1:"#005293",c2:"#FFF",c3:"#D21034",r:"latam"}
 ];
-
 const NP={
 latam:{f:["Carlos","Luis","Diego","Santiago","Andrés","Javier","Miguel","Raúl","Fernando","Óscar","Juan","Antonio","Daniel","Roberto","Eduardo","Alejandro","Ricardo","Marcos","Tomás","Gabriel"],l:["Rodríguez","García","Martínez","López","Hernández","González","Pérez","Sánchez","Ramírez","Torres","Flores","Rivera","Gómez","Díaz","Morales","Jiménez","Ruiz","Álvarez","Romero","Chávez"]},
 anglo:{f:["James","William","Oliver","Jack","Harry","Charlie","George","Thomas","Henry","Owen","Daniel","Lucas","Ryan","Tyler","Brandon","Kevin","Marcus","Ethan","Noah","Liam"],l:["Smith","Johnson","Williams","Brown","Jones","Davis","Wilson","Taylor","Anderson","Thomas","Moore","Jackson","Martin","Lee","Harris","Clark","Lewis","Young","Hall","Wright"]},
@@ -260,7 +238,6 @@ persian:{f:["Sardar","Mehdi","Alireza","Saman","Hossein","Karim","Ehsan","Ramin"
 caribbean:{f:["Johnny","Duckens","Wilde-Donald","Jeff","Frantz","Brian","Derrick","Kevin","Jean","Alex","Leandro","Jurgen","Brandley","Cuco","Elson","Gevaro","Gino","Henny","Michael","Dylan"],l:["Placide","Nazon","Jean-Baptiste","Morris","Pierre","Joseph","Louis","Alcénat","Gaspar","Martina","Narváez","Martis","Bernadina","Janga","Bas","Riberi","Trinidad","Felicia","Haps","Lake"]}
 };
 const POS=["POR","DFC","LI","LD","MCD","MC","MCO","MI","MD","EI","ED","DC","DEL","DFC","MC","MCO","MD","EI","DC","POR"];
-
 const SP_DATA={
 pan:[{l:"Mundial 2026",s:"pan1"},{l:"Colección Oficial",s:"pan2"},{l:"48 Selecciones",s:"pan3"},{l:"3 Naciones",s:"pan4"},{l:"Sticker Especial",s:"panspec"}],
 emb:[{l:"CONCACAF",s:"concacaf"},{l:"CONMEBOL",s:"conmebol"},{l:"UEFA",s:"uefa"},{l:"CAF",s:"caf"}],
@@ -268,10 +245,8 @@ h1:[{l:"Pelé",s:"leg-pele"},{l:"Maradona",s:"leg-maradona"},{l:"Zidane",s:"leg-
 h2:[{l:"Cruyff",s:"leg-cruyff"},{l:"Beckenbauer",s:"leg-becken"},{l:"Ronaldo Nazário",s:"leg-r9"},{l:"Kaká",s:"leg-kaka"},{l:"Ronaldinho",s:"leg-r10"},{l:"Di Stéfano",s:"leg-distefano"}],
 cc:[{l:"Fútbol y Alegría",s:"cc0"},{l:"Sostenibilidad",s:"cc1"},{l:"Afición Global",s:"cc2"},{l:"Diversidad",s:"cc3"},{l:"Unidos por el Fútbol",s:"cc4"},{l:"Fair Play",s:"cc5"},{l:"Cultura Local",s:"cc6"},{l:"Juego Limpio",s:"cc7"},{l:"Comunidad",s:"cc8"},{l:"Inclusión",s:"cc9"},{l:"Pasión",s:"cc10"},{l:"Respeto",s:"cc11"},{l:"Tradiciones",s:"cc12"},{l:"Legado 2026",s:"cc13"}]
 };
-
 function sR(s){let v=s;return()=>{v=(v*16807)%2147483647;return(v-1)/2147483646}}
 function gP(ti){const t=T[ti],p=NP[t.r],rng=sR(ti*1000+7),pl=[],u=new Set;for(let i=0;i<20;i++){let f,l,c,a=0;do{f=p.f[Math.floor(rng()*p.f.length)];l=p.l[Math.floor(rng()*p.l.length)];c=f+l;a++}while(u.has(c)&&a<50);u.add(c);pl.push({num:i+1,name:f+" "+l,pos:POS[i]})}return pl}
-
 // STATE
 let CU=JSON.parse(localStorage.getItem('wc2026_user'))||null;
 let col={};let cp=0;
@@ -279,29 +254,24 @@ const TS_TEAMS=T.length*20;
 const TS_SPECIAL=5+4+5+6+14;
 const TS=TS_TEAMS+TS_SPECIAL;
 const SP=T.length+5;
-
 function ldA(){if(CU&&CU.album)col=CU.album;else col={}}
 function svA(){if(!CU)return;CU.album=col;try{localStorage.setItem('wc2026_user',JSON.stringify(CU));const us=JSON.parse(localStorage.getItem('wc2026_users'))||[];const i=us.findIndex(u=>u.email===CU.email);if(i!==-1){us[i].album=col;localStorage.setItem('wc2026_users',JSON.stringify(us))}}catch(e){notif('err','Sin espacio','Tu navegador no puede guardar más datos. Prueba reiniciar el álbum.')}}
 function iC(k){const v=col[k];return v===true||(v&&v.c)}
 function gImg(k){const v=col[k];return(v&&v.img)?v.img:''}
 function cT(ti){let c=0;for(let i=1;i<=20;i++)if(iC(ti+'-'+i))c++;return c}
 function countCol(){let c=0;for(const k in col)if(iC(k))c++;return c}
-
 function hStamp(el,ti,sn){
 if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para coleccionar.');openM('lg');return}
 const key=ti+'-'+sn;if(iC(key))return;col[key]={c:true,img:''};svA();el.classList.add('on');uProg();
 const b=document.getElementById('tc-'+ti);if(b)b.textContent=cT(ti)+'/20'}
-
 function hSp(el,key){
 if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para coleccionar.');openM('lg');return}
 if(iC(key))return;col[key]={c:true,img:''};svA();el.classList.add('on');uProg()}
-
 // IMAGE UPLOAD
 let _aStamp=null;
 function trigUpload(key,btn){
 if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para subir imágenes.');openM('lg');return}
 _aStamp={key,el:btn.closest('.sc')};document.getElementById('imgUpl').click()}
-
 document.getElementById('imgUpl').addEventListener('change',function(e){
 if(!e.target.files[0]||!_aStamp)return;
 const reader=new FileReader();
@@ -317,17 +287,14 @@ const piEl=_aStamp.el.querySelector('.pi');if(piEl)piEl.src=base64;
 const camBtn=_aStamp.el.querySelector('.cam-btn');if(camBtn)camBtn.classList.add('has-img');
 notif('ok','¡Imagen guardada!','Foto agregada a la estampa');_aStamp=null};
 img.src=ev.target.result};reader.readAsDataURL(e.target.files[0]);e.target.value=''});
-
 function notif(t,h,m){const c=document.getElementById('nc'),ic={ok:'fa-check',err:'fa-exclamation',inf:'fa-info'};
 const n=document.createElement('div');n.className='nf'+(t==='err'?' err':t==='inf'?' inf':'');
 n.innerHTML=`<div class="ni"><i class="fas ${ic[t]}"></i></div><div class="nt"><h4>${h}</h4><p>${m}</p></div>`;
 c.appendChild(n);setTimeout(()=>n.remove(),5000)}
-
 function openM(id){document.getElementById(id+'Mo').classList.add('on')}
 function closeM(id){document.getElementById(id+'Mo').classList.remove('on')}
 function swM(a,b){closeM(a);setTimeout(()=>openM(b),200)}
 document.querySelectorAll('.mo').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('on')}));
-
 function doReg(){
 const nm=document.getElementById('rN').value.trim(),em=document.getElementById('rE').value.trim(),pw=document.getElementById('rP').value;
 if(!nm||!em||!pw){notif('err','Campos incompletos','Completa todos los campos');return}
@@ -337,7 +304,6 @@ const us=JSON.parse(localStorage.getItem('wc2026_users'))||[];
 if(us.find(u=>u.email===em)){notif('err','Email registrado','Ya existe cuenta con ese correo');return}
 const u={name:nm,email:em,password:pw,album:{}};us.push(u);localStorage.setItem('wc2026_users',JSON.stringify(us));
 localStorage.setItem('wc2026_user',JSON.stringify(u));CU=u;closeM('rg');uUI();ldA();goP(cp);uProg();notif('ok','¡Registro exitoso!',`Bienvenido, ${nm}`)}
-
 function doLogin(){
 const em=document.getElementById('lE').value.trim(),pw=document.getElementById('lP').value;
 if(!em||!pw){notif('err','Campos vacíos','Ingresa correo y contraseña');return}
@@ -345,23 +311,18 @@ const us=JSON.parse(localStorage.getItem('wc2026_users'))||[];
 const u=us.find(u=>u.email===em&&u.password===pw);
 if(!u){notif('err','Datos incorrectos','No se encontró esa cuenta');return}
 localStorage.setItem('wc2026_user',JSON.stringify(u));CU=u;closeM('lg');uUI();ldA();goP(cp);uProg();notif('ok','¡Bienvenido!',`${u.name}: ${countCol()} estampa(s)`)}
-
 function logout(){localStorage.removeItem('wc2026_user');CU=null;col={};uUI();goP(cp);uProg();notif('inf','Sesión cerrada','Tu álbum se guardó')}
-
 function uUI(){
 const lb=document.getElementById('btnL'),rb=document.getElementById('btnR'),ub=document.getElementById('ubar');
 if(CU){lb.style.display='none';rb.style.display='none';ub.classList.add('on');
 document.getElementById('uava').textContent=CU.name.charAt(0).toUpperCase();
 document.getElementById('unm').textContent=CU.name.split(' ')[0]}
 else{lb.style.display='';rb.style.display='';ub.classList.remove('on')}}
-
 function uProg(){
 const c=countCol(),m=TS-c,p=Math.round((c/TS)*100);
 document.getElementById('pF').style.width=p+'%';
 document.getElementById('pC').innerHTML=`${c}/${TS} · <b>Faltan: ${m}</b>`}
-
 function resetA(){if(!CU){notif('err','Inicia sesión','');return}if(confirm('¿Reiniciar álbum? Se perderán todas las estampas e imágenes.')){col={};svA();goP(cp);uProg();notif('inf','Álbum reiniciado','Tu álbum se ha reiniciado.')}}
-
 // STAMP RENDERING
 function rS(ti,sn,pl,hz){
 const t=T[ti],key=ti+'-'+sn,c=iC(key),imgSrc=gImg(key)||`https://picsum.photos/seed/p${ti*100+sn}/80/80.jpg`,cls=hz?'sh':'sv';
@@ -375,7 +336,6 @@ return `<div class="sc ${cls} ${c?'on':''}" onclick="hStamp(this,${ti},${sn})">
 <span class="pm">#${sn}</span>
 <div class="cam-btn ${hasImg}" onclick="event.stopPropagation();trigUpload('${key}',this)" title="Subir imagen"><i class="fas fa-camera"></i></div>
 </div></div></div>`}
-
 function rSp(key,label,seed,hz,bg1,bg2){
 const c=iC(key),imgSrc=gImg(key)||`https://picsum.photos/seed/${seed}/80/80.jpg`,cls=hz?'sh':'sv';
 const hasImg=gImg(key)?'has-img':'';
@@ -387,8 +347,7 @@ return `<div class="sc ${cls} ${c?'on':''}" onclick="hSp(this,'${key}')">
 <span class="pn">${label}</span><span class="pp">Especial</span>${hz?'</div>':''}
 <div class="cam-btn ${hasImg}" onclick="event.stopPropagation();trigUpload('${key}',this)" title="Subir imagen"><i class="fas fa-camera"></i></div>
 </div></div></div>`}
-
-// SECTIONS
+// SECCIONES
 function rPanini(){const d=SP_DATA.pan;
 return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-star"></i> PANINI</div>
 <div class="g-pan-l" style="flex:1">
@@ -401,7 +360,6 @@ return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-star
 <div class="page page-r"><div class="sec-hdr gold" style="opacity:.6;font-size:11px">PANINI — Sticker Especial</div>
 <div class="g-pan-r" style="flex:1">${rSp('sp-pan-4',d[4].l,d[4].s,false,'#8B6914','#C9A84C')}</div>
 <div class="pnum">Pág. 2</div></div>`}
-
 function rEmblema(){const d=SP_DATA.emb;
 return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-shield-alt"></i> EMBLEMA DE PAÍSES</div>
 <div class="g-2v" style="flex:1">
@@ -414,7 +372,6 @@ return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-shie
  ${rSp('sp-emb-2',d[2].l,d[2].s,false,'#002395','#264F8C')}
  ${rSp('sp-emb-3',d[3].l,d[3].s,false,'#006233','#1B7A3D')}
 </div><div class="pnum">Pág. 4</div></div>`}
-
 function rTeam(ti){const t=T[ti],pl=gP(ti),ct=cT(ti),pn=ti*2+5;
 let L='';for(let i=0;i<10;i++)L+=rS(ti,i+1,pl[i],false);
 let R='';R+=rS(ti,11,pl[10],false);R+=rS(ti,12,pl[11],false);
@@ -429,7 +386,6 @@ return `<div class="page page-l">
 <div class="page page-r">
 <div class="sec-hdr team-hdr" style="background:linear-gradient(135deg,${t.c1},${t.c3});opacity:.5;font-size:11px">${t.f} ${t.n} — Estampas 11-20</div>
 <div class="g-team-r">${R}</div><div class="pnum">Pág. ${pn+1}</div></div>`}
-
 function rHall1(){const d=SP_DATA.h1;
 return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-trophy"></i> HALL DE LA FAMA PT1</div>
 <div class="g-h2" style="flex:1">
@@ -443,7 +399,6 @@ return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-trop
  ${rSp('sp-0h-3',d[3].l,d[3].s,true,'#8B6914','#C9A84C')}
  ${rSp('sp-0h-4',d[4].l,d[4].s,true,'#8B6914','#C9A84C')}
 </div><div class="pnum">Pág. ${T.length*2+6}</div></div>`}
-
 function rHall2(){const d=SP_DATA.h2;
 return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-trophy"></i> HALL DE LA FAMA PT2</div>
 <div class="g-h2" style="flex:1">
@@ -458,7 +413,6 @@ return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-trop
  ${rSp('sp-1h-4',d[4].l,d[4].s,true,'#8B6914','#C9A84C')}
  ${rSp('sp-1h-5',d[5].l,d[5].s,true,'#8B6914','#C9A84C')}
 </div><div class="pnum">Pág. ${T.length*2+8}</div></div>`}
-
 function rCoca(){const d=SP_DATA.cc;
 let L='',R='';
 for(let i=0;i<7;i++)L+=rSp('sp-cc-'+i,d[i].l,d[i].s,false,'#8B0000','#C41E3A');
@@ -468,21 +422,18 @@ return `<div class="page page-l"><div class="sec-hdr red"><i class="fas fa-glass
 <div class="spine"></div>
 <div class="page page-r"><div class="sec-hdr red" style="opacity:.6">COCA-COLA</div>
 <div class="g-7v">${R}</div><div class="pnum">Pág. ${T.length*2+10}</div></div>`}
-
-// NAVIGATION
+// NAVEGACIÓN
 function renderP(){const bk=document.getElementById('book');bk.classList.add('fade');
 setTimeout(()=>{if(cp===0)bk.innerHTML=rPanini();else if(cp===1)bk.innerHTML=rEmblema();
 else if(cp>=2&&cp<=T.length+1)bk.innerHTML=rTeam(cp-2);
 else if(cp===T.length+2)bk.innerHTML=rHall1();
 else if(cp===T.length+3)bk.innerHTML=rHall2();
 else bk.innerHTML=rCoca();bk.classList.remove('fade');uNav();uStrip()},250)}
-
 function goP(p){cp=Math.max(0,Math.min(SP-1,p));renderP()}
 function prevP(){if(cp>0)goP(cp-1)}
 function nextP(){if(cp<SP-1)goP(cp+1)}
 function uNav(){document.getElementById('bPrv').disabled=cp===0;document.getElementById('bNxt').disabled=cp===SP-1}
 document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')prevP();if(e.key==='ArrowRight')nextP()});
-
 function rStrip(){const s=document.getElementById('ts');
 let h=`<button class="tb ${cp===0?'on':''}" onclick="goP(0)"><span class="tf">⭐</span>Panini</button>`;
 h+=`<button class="tb ${cp===1?'on':''}" onclick="goP(1)"><span class="tf">🛡️</span>Emblema</button>`;
@@ -493,7 +444,6 @@ h+=`<button class="tb ${cp===T.length+4?'on':''}" onclick="goP(${T.length+4})"><
 s.innerHTML=h}
 function uStrip(){document.querySelectorAll('.tb').forEach((b,i)=>{b.classList.toggle('on',i===cp)});
 const a=document.querySelector('.tb.on');if(a)a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})}
-
 ldA();uUI();uProg();rStrip();renderP();
 </script>
 </body>
