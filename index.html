@@ -470,11 +470,15 @@
         .btn-form {
             width: 100%; padding: 13px; border-radius: 8px; font-size: 15px;
             font-weight: 600; transition: var(--transition);
+            position: relative;
+        }
+        .btn-form:disabled {
+            opacity: 0.6; cursor: not-allowed;
         }
         .btn-form-green { background: var(--green); color: var(--white); }
-        .btn-form-green:hover { background: var(--green-light); }
+        .btn-form-green:hover:not(:disabled) { background: var(--green-light); }
         .btn-form-blue { background: var(--blue); color: var(--white); }
-        .btn-form-blue:hover { background: var(--blue-light); }
+        .btn-form-blue:hover:not(:disabled) { background: var(--blue-light); }
         .form-switch {
             text-align: center; margin-top: 16px; font-size: 13px; color: var(--gray-500);
         }
@@ -723,6 +727,19 @@
             position: fixed; top: 70px; left: 0; right: 0; z-index: 998;
         }
         .countdown-bar strong { font-size: 18px; margin: 0 4px; }
+        /* ===== SERVER STATUS INDICATOR ===== */
+        .server-status {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 10px; color: rgba(255,255,255,0.5);
+            margin-left: 8px;
+        }
+        .server-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--gray-500);
+            transition: var(--transition);
+        }
+        .server-dot.online { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
+        .server-dot.offline { background: var(--red); box-shadow: 0 0 6px rgba(196,30,58,0.5); }
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .tickets-grid { grid-template-columns: repeat(2, 1fr); }
@@ -750,6 +767,7 @@
     <div class="navbar-inner">
         <a href="#" class="nav-logo">
             <i class="fas fa-futbol"></i> ELE Mundial 2026
+            <span class="server-status"><span class="server-dot" id="serverDot"></span><span id="serverLabel">Verificando...</span></span>
         </a>
         <div class="nav-links">
             <a href="#inicio" class="active">Inicio</a>
@@ -838,12 +856,12 @@
             <p class="intro-desc">Mira el video oficial y sumérgete en la emoción del torneo más grande del planeta.</p>
         </div>
         <div class="video-container">
-            <!-- VIDEO DE INTRODUCCIÓN -->
-            <iframe width="560" height="315" 
+            <iframe 
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
                 title="Video de introducción - Mundial 2026" 
                 frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen>
             </iframe>
         </div>
@@ -858,7 +876,7 @@
             <h2 class="section-title">Un Mundial Sin Precedentes</h2>
             <p class="section-desc">La primera Copa del Mundo con 48 equipos y organizada en tres países simultáneamente.</p>
         </div>
-                <div class="history-grid">
+        <div class="history-grid">
             <div class="history-img">
                 <img src="https://eltablerodigital.com.ar/wp-content/uploads/2026/05/2026145-TR-S.jpg" alt="Historia del Mundial">
                 <span class="history-img-badge">Desde 1930</span>
@@ -1071,21 +1089,363 @@
     </div>
 </div>
 <!-- ===== LOGUEO ===== -->
-<div class="modal-overlay" id="loginModal"><div class="modal"><button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="modal-sub">Accede a tu cuenta para comprar entradas y recibir notificaciones</p><div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>Contraseña</label><input type="password" id="loginPassword" placeholder="Tu contraseña"></div><button class="btn-form btn-form-green" onclick="login()">Iniciar Sesión</button><div class="form-switch">¿No tienes cuenta? <a onclick="switchModal('login','register')">Regístrate aquí</a></div></div></div>
-<div class="modal-overlay" id="registerModal"><div class="modal"><button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="modal-sub">Regístrate para acceder a entradas, notificaciones y más</p><div class="form-group"><label>Nombre completo</label><input type="text" id="regName" placeholder="Tu nombre"></div><div class="form-group"><label>Correo electrónico</label><input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>País</label><select id="regCountry"><option value="">Selecciona tu país</option><option value="MX">México</option><option value="US">Estados Unidos</option><option value="CA">Canadá</option><option value="AR">Argentina</option><option value="BR">Brasil</option><option value="CO">Colombia</option><option value="ES">España</option><option value="OTRO">Otro</option></select></div><div class="form-group"><label>Contraseña</label><input type="password" id="regPassword" placeholder="Mínimo 6 caracteres"></div><div class="form-group"><label><input type="checkbox" id="regNotif" checked> Quiero recibir notificaciones sobre el Mundial 2026</label></div><button class="btn-form btn-form-blue" onclick="register()">Crear Cuenta</button><div class="form-switch">¿Ya tienes cuenta? <a onclick="switchModal('register','login')">Inicia sesión</a></div></div></div>
+<div class="modal-overlay" id="loginModal"><div class="modal"><button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="modal-sub">Accede a tu cuenta para comprar entradas y recibir notificaciones</p><div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>Contraseña</label><input type="password" id="loginPassword" placeholder="Tu contraseña"></div><button class="btn-form btn-form-green" id="btnLoginSubmit" onclick="login()">Iniciar Sesión</button><div class="form-switch">¿No tienes cuenta? <a onclick="switchModal('login','register')">Regístrate aquí</a></div></div></div>
+<div class="modal-overlay" id="registerModal"><div class="modal"><button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="modal-sub">Regístrate para acceder a entradas, notificaciones y más</p><div class="form-group"><label>Nombre completo</label><input type="text" id="regName" placeholder="Tu nombre"></div><div class="form-group"><label>Correo electrónico</label><input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>País</label><select id="regCountry"><option value="">Selecciona tu país</option><option value="MX">México</option><option value="US">Estados Unidos</option><option value="CA">Canadá</option><option value="AR">Argentina</option><option value="BR">Brasil</option><option value="CO">Colombia</option><option value="ES">España</option><option value="OTRO">Otro</option></select></div><div class="form-group"><label>Contraseña</label><input type="password" id="regPassword" placeholder="Mínimo 6 caracteres"></div><div class="form-group"><label><input type="checkbox" id="regNotif" checked> Quiero recibir notificaciones sobre el Mundial 2026</label></div><button class="btn-form btn-form-blue" id="btnRegisterSubmit" onclick="register()">Crear Cuenta</button><div class="form-switch">¿Ya tienes cuenta? <a onclick="switchModal('register','login')">Inicia sesión</a></div></div></div>
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
 <script>
-let currentUser=JSON.parse(localStorage.getItem('wc2026_user'))||null;let cart=JSON.parse(localStorage.getItem('wc2026_cart'))||[];
-function updateCountdown(){const target=new Date('2026-06-11T18:00:00');const now=new Date();const diff=target-now;if(diff<=0){document.getElementById('countdownBar').innerHTML='⚽ <strong>¡El Mundial 2026 está en marcha!</strong>';return}const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));const mins=Math.floor((diff%(1000*60*60))/(1000*60));document.getElementById('countDays').textContent=days;document.getElementById('countHours').textContent=hours;document.getElementById('countMins').textContent=mins}updateCountdown();setInterval(updateCountdown,60000);
-function register(){const name=document.getElementById('regName').value.trim(),email=document.getElementById('regEmail').value.trim(),country=document.getElementById('regCountry').value,password=document.getElementById('regPassword').value,notif=document.getElementById('regNotif').checked;if(!name||!email||!country||!password){showNotif('error','Campos incompletos','Por favor completa todos los campos.');return}if(password.length<6){showNotif('error','Contraseña débil','La contraseña debe tener al menos 6 caracteres.');return}if(!email.includes('@')){showNotif('error','Email inválido','Ingresa un correo electrónico válido.');return}const user={name,email,country,password,notif,registeredAt:new Date().toISOString()};const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];if(users.find(u=>u.email===email)){showNotif('error','Email ya registrado','Este correo electrónico ya tiene una cuenta.');return}users.push(user);localStorage.setItem('wc2026_users',JSON.stringify(users));localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;closeModal('register');updateUserUI();showNotif('success','¡Registro exitoso!',`Bienvenido/a, ${name}. ¡Ya eres parte del Mundial 2026!`);if(notif){setTimeout(()=>showNotif('info','🔔 Notificaciones activadas','Recibirás actualizaciones sobre partidos, entradas y novedades del Mundial 2026.'),3000);setTimeout(()=>showNotif('info','⚽ Dato del día','El Mundial 2026 será el primero con 48 selecciones. ¡Historia pura!'),12000)}}
-function login(){const email=document.getElementById('loginEmail').value.trim(),password=document.getElementById('loginPassword').value;if(!email||!password){showNotif('error','Campos vacíos','Ingresa tu correo y contraseña.');return}const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];const user=users.find(u=>u.email===email&&u.password===password);if(!user){showNotif('error','Datos incorrectos','No se encontró una cuenta con esos datos.');return}localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;closeModal('login');updateUserUI();showNotif('success','¡Bienvenido de vuelta!',`Hola, ${user.name}. Tu cuenta está lista.`)}
-function logout(){localStorage.removeItem('wc2026_user');currentUser=null;updateUserUI();showNotif('info','Sesión cerrada','Has cerrado sesión correctamente.')}
-function updateUserUI(){const loginBtn=document.getElementById('btnLogin'),registerBtn=document.getElementById('btnRegister'),userBar=document.getElementById('userBar'),userAvatar=document.getElementById('userAvatar'),userNameEl=document.getElementById('userName');if(currentUser){loginBtn.style.display='none';registerBtn.style.display='none';userBar.classList.add('active');userAvatar.textContent=currentUser.name.charAt(0).toUpperCase();userNameEl.textContent=currentUser.name.split(' ')[0]}else{loginBtn.style.display='';registerBtn.style.display='';userBar.classList.remove('active')}}
-function openModal(type){document.getElementById(type+'Modal').classList.add('active')}function closeModal(type){document.getElementById(type+'Modal').classList.remove('active')}function switchModal(from,to){closeModal(from);setTimeout(()=>openModal(to),200)}document.querySelectorAll('.modal-overlay').forEach(overlay=>{overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('active')})});
-function addToCart(name,price,icon){if(!currentUser){showNotif('error','Inicia sesión','Debes iniciar sesión para comprar entradas.');openModal('login');return}const existing=cart.find(item=>item.name===name);if(existing){existing.qty+=1}else{cart.push({name,price,icon,qty:1,id:Date.now()})}saveCart();renderCart();showNotif('success','Agregado al carrito',`${name} — $${price} USD`)}function removeFromCart(id){cart=cart.filter(item=>item.id!==id);saveCart();renderCart()}function saveCart(){localStorage.setItem('wc2026_cart',JSON.stringify(cart))}function renderCart(){const container=document.getElementById('cartItems'),badge=document.getElementById('cartBadge'),totalEl=document.getElementById('cartTotal');const totalQty=cart.reduce((sum,item)=>sum+item.qty,0),totalPrice=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);badge.textContent=totalQty;if(cart.length===0){container.innerHTML=`<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>`}else{container.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img">${item.icon}</div><div class="cart-item-info"><h4>${item.name} ${item.qty>1?'×'+item.qty:''}</h4><p>Entrada individual</p><div class="cart-item-price">$${item.price*item.qty} USD</div></div><button class="cart-item-remove" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button></div>`).join('')}totalEl.textContent='$'+totalPrice.toLocaleString()+' USD'}function toggleCart(){document.getElementById('cartSidebar').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('open')}function checkout(){if(!currentUser){showNotif('error','Inicia sesión','Debes iniciar sesión para proceder al pago.');openModal('login');return}if(cart.length===0){showNotif('error','Carrito vacío','Agrega entradas antes de pagar.');return}const total=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);showNotif('success','¡Compra procesada!',`Total: $${total.toLocaleString()} USD. Recibirás confirmación por email.`);const orders=JSON.parse(localStorage.getItem('wc2026_orders'))||[];orders.push({user:currentUser.email,items:[...cart],total,date:new Date().toISOString(),id:'ORD-'+Date.now()});localStorage.setItem('wc2026_orders',JSON.stringify(orders));cart=[];saveCart();renderCart();toggleCart();setTimeout(()=>showNotif('info','📧 Confirmación enviada',`Se envió confirmación a ${currentUser.email}. ¡Nos vemos en el Mundial!`),4000)}
-function showNotif(type,title,message){const container=document.getElementById('notifContainer'),icons={success:'fa-check',error:'fa-exclamation',info:'fa-info'};const notif=document.createElement('div');notif.className=`notif ${type}`;notif.innerHTML=`<div class="notif-icon"><i class="fas ${icons[type]}"></i></div><div class="notif-text"><h4>${title}</h4><p>${message}</p></div>`;container.appendChild(notif);setTimeout(()=>notif.remove(),5000)}
+// DESPUÉS (funciona en GitHub Pages + servidor local)
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000/api/auth'
+    : 'https://TU-BACKEND-URL.onrender.com/api/auth';
+
+let currentUser = null;
+let authToken = null;
+let serverOnline = false;
+let cart = JSON.parse(localStorage.getItem('wc2026_cart')) || [];
+
+// ===== VERIFICAR ESTADO DEL SERVIDOR =====
+async function checkServer() {
+    const dot = document.getElementById('serverDot');
+    const label = document.getElementById('serverLabel');
+    try {
+        const res = await fetch(API_URL.replace('/auth', '/health'), { signal: AbortSignal.timeout(3000) });
+        if (res.ok) {
+            serverOnline = true;
+            dot.className = 'server-dot online';
+            label.textContent = 'En línea';
+        } else {
+            throw new Error();
+        }
+    } catch (e) {
+        serverOnline = false;
+        dot.className = 'server-dot offline';
+        label.textContent = 'Sin servidor';
+    }
+}
+
+// ===== VERIFICAR SESIÓN GUARDADA AL CARGAR =====
+async function checkSession() {
+    const savedToken = localStorage.getItem('wc2026_token');
+    const savedUser = localStorage.getItem('wc2026_user');
+    if (savedToken && savedUser) {
+        authToken = savedToken;
+        currentUser = JSON.parse(savedUser);
+        updateUserUI();
+        // Verificar que el token siga siendo válido
+        if (serverOnline) {
+            try {
+                const res = await fetch(`${API_URL}/profile`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                if (!res.ok) {
+                    // Token expirado o inválido
+                    logout();
+                } else {
+                    // Actualizar datos del usuario desde el servidor
+                    const data = await res.json();
+                    currentUser = { id: data._id, name: data.name, email: data.email, country: data.country, notifications: data.notifications, role: data.role };
+                    localStorage.setItem('wc2026_user', JSON.stringify(currentUser));
+                    updateUserUI();
+                }
+            } catch (e) {
+                // Si no hay conexión, mantener sesión local
+                console.log('Sin conexión al servidor, sesión local activa');
+            }
+        }
+    }
+}
+
+// ===== REGISTRO CON BACKEND =====
+async function register() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value;
+    const password = document.getElementById('regPassword').value;
+    const notifications = document.getElementById('regNotif').checked;
+
+    if (!name || !email || !country || !password) {
+        showNotif('error', 'Campos incompletos', 'Por favor completa todos los campos.');
+        return;
+    }
+    if (password.length < 6) {
+        showNotif('error', 'Contraseña débil', 'La contraseña debe tener al menos 6 caracteres.');
+        return;
+    }
+    if (!email.includes('@')) {
+        showNotif('error', 'Email inválido', 'Ingresa un correo electrónico válido.');
+        return;
+    }
+
+    const btnSubmit = document.getElementById('btnRegisterSubmit');
+    const originalText = btnSubmit.textContent;
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Registrando...';
+
+    if (serverOnline) {
+        try {
+            const response = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, country, notifications })
+            });
+            const data = await response.json();
+
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = originalText;
+
+            if (!response.ok) {
+                showNotif('error', 'Error de registro', data.error);
+                return;
+            }
+
+            authToken = data.token;
+            currentUser = data.user;
+            localStorage.setItem('wc2026_token', authToken);
+            localStorage.setItem('wc2026_user', JSON.stringify(currentUser));
+
+            closeModal('register');
+            updateUserUI();
+            showNotif('success', '¡Registro exitoso!', `Bienvenido/a, ${name}. ¡Revisa tu correo!`);
+
+            if (notifications) {
+                setTimeout(() => showNotif('info', '📧 Correo enviado', `Se envió un correo de bienvenida a ${email}`), 3000);
+            }
+            return;
+        } catch (error) {
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = originalText;
+            showNotif('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intentando modo local...');
+            console.error(error);
+        }
+    }
+
+    // ===== MODO LOCAL (sin servidor) =====
+    const users = JSON.parse(localStorage.getItem('wc2026_users')) || [];
+    if (users.find(u => u.email === email)) {
+        showNotif('error', 'Email ya registrado', 'Este correo electrónico ya tiene una cuenta (modo local).');
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = originalText;
+        return;
+    }
+    const user = { name, email, country, notifications, registeredAt: new Date().toISOString() };
+    users.push(user);
+    localStorage.setItem('wc2026_users', JSON.stringify(users));
+    localStorage.setItem('wc2026_user', JSON.stringify(user));
+    currentUser = user;
+
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = originalText;
+    closeModal('register');
+    updateUserUI();
+    showNotif('success', '¡Registro exitoso!', `Bienvenido/a, ${name}. (Modo local — sin servidor)`);
+    if (notifications) {
+        setTimeout(() => showNotif('info', '🔔 Notificaciones activadas', 'Recibirás actualizaciones sobre el Mundial 2026.'), 3000);
+    }
+}
+
+// ===== INICIO DE SESIÓN CON BACKEND =====
+async function login() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if (!email || !password) {
+        showNotif('error', 'Campos vacíos', 'Ingresa tu correo y contraseña.');
+        return;
+    }
+
+    const btnSubmit = document.getElementById('btnLoginSubmit');
+    const originalText = btnSubmit.textContent;
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Ingresando...';
+
+    if (serverOnline) {
+        try {
+            const response = await fetch(`${API_URL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = originalText;
+
+            if (!response.ok) {
+                showNotif('error', 'Datos incorrectos', data.error);
+                return;
+            }
+
+            authToken = data.token;
+            currentUser = data.user;
+            localStorage.setItem('wc2026_token', authToken);
+            localStorage.setItem('wc2026_user', JSON.stringify(currentUser));
+
+            closeModal('login');
+            updateUserUI();
+            showNotif('success', '¡Bienvenido de vuelta!', `Hola, ${data.user.name}. Tu cuenta está lista.`);
+            return;
+        } catch (error) {
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = originalText;
+            showNotif('error', 'Error de conexión', 'No se pudo conectar con el servidor. Intentando modo local...');
+            console.error(error);
+        }
+    }
+
+    // ===== MODO LOCAL (sin servidor) =====
+    const users = JSON.parse(localStorage.getItem('wc2026_users')) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+    if (!user) {
+        showNotif('error', 'Datos incorrectos', 'No se encontró una cuenta con esos datos.');
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = originalText;
+        return;
+    }
+    localStorage.setItem('wc2026_user', JSON.stringify(user));
+    currentUser = user;
+
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = originalText;
+    closeModal('login');
+    updateUserUI();
+    showNotif('success', '¡Bienvenido de vuelta!', `Hola, ${user.name}. (Modo local)`);
+}
+
+// ===== CERRAR SESIÓN =====
+function logout() {
+    localStorage.removeItem('wc2026_token');
+    localStorage.removeItem('wc2026_user');
+    authToken = null;
+    currentUser = null;
+    updateUserUI();
+    showNotif('info', 'Sesión cerrada', 'Has cerrado sesión correctamente.');
+}
+
+// ===== ACTUALIZAR UI DE USUARIO =====
+function updateUserUI() {
+    const loginBtn = document.getElementById('btnLogin');
+    const registerBtn = document.getElementById('btnRegister');
+    const userBar = document.getElementById('userBar');
+    const userAvatar = document.getElementById('userAvatar');
+    const userNameEl = document.getElementById('userName');
+    if (currentUser) {
+        loginBtn.style.display = 'none';
+        registerBtn.style.display = 'none';
+        userBar.classList.add('active');
+        userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+        userNameEl.textContent = currentUser.name.split(' ')[0];
+    } else {
+        loginBtn.style.display = '';
+        registerBtn.style.display = '';
+        userBar.classList.remove('active');
+    }
+}
+
+// ===== MODALES =====
+function openModal(type) { document.getElementById(type + 'Modal').classList.add('active'); }
+function closeModal(type) { document.getElementById(type + 'Modal').classList.remove('active'); }
+function switchModal(from, to) { closeModal(from); setTimeout(() => openModal(to), 200); }
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('active'); });
+});
+
+// ===== CARRITO =====
+function addToCart(name, price, icon) {
+    if (!currentUser) {
+        showNotif('error', 'Inicia sesión', 'Debes iniciar sesión para comprar entradas.');
+        openModal('login');
+        return;
+    }
+    const existing = cart.find(item => item.name === name);
+    if (existing) { existing.qty += 1; }
+    else { cart.push({ name, price, icon, qty: 1, id: Date.now() }); }
+    saveCart(); renderCart();
+    showNotif('success', 'Agregado al carrito', `${name} — $${price} USD`);
+}
+function removeFromCart(id) { cart = cart.filter(item => item.id !== id); saveCart(); renderCart(); }
+function saveCart() { localStorage.setItem('wc2026_cart', JSON.stringify(cart)); }
+function renderCart() {
+    const container = document.getElementById('cartItems'), badge = document.getElementById('cartBadge'), totalEl = document.getElementById('cartTotal');
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0), totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    badge.textContent = totalQty;
+    if (cart.length === 0) { container.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>'; }
+    else { container.innerHTML = cart.map(item => `<div class="cart-item"><div class="cart-item-img">${item.icon}</div><div class="cart-item-info"><h4>${item.name} ${item.qty > 1 ? '×' + item.qty : ''}</h4><p>Entrada individual</p><div class="cart-item-price">$${item.price * item.qty} USD</div></div><button class="cart-item-remove" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button></div>`).join(''); }
+    totalEl.textContent = '$' + totalPrice.toLocaleString() + ' USD';
+}
+function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('open'); }
+
+// ===== CHECKOUT CON BACKEND =====
+async function checkout() {
+    if (!currentUser) { showNotif('error', 'Inicia sesión', 'Debes iniciar sesión para proceder al pago.'); openModal('login'); return; }
+    if (cart.length === 0) { showNotif('error', 'Carrito vacío', 'Agrega entradas antes de pagar.'); return; }
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+    if (serverOnline && authToken) {
+        const items = cart.map(item => ({ name: item.name, price: item.price, qty: item.qty }));
+        try {
+            const response = await fetch(`${API_URL}/purchase`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({ items })
+            });
+            const data = await response.json();
+
+            if (!response.ok) {
+                showNotif('error', 'Error', data.error);
+                return;
+            }
+
+            showNotif('success', '¡Compra procesada!', `Total: $${total.toLocaleString()} USD. Orden: ${data.order.orderId}`);
+            cart = []; saveCart(); renderCart(); toggleCart();
+            setTimeout(() => showNotif('info', '📧 Confirmación enviada', `Se envió un correo a ${currentUser.email} con los detalles de tu compra.`), 3000);
+            return;
+        } catch (error) {
+            showNotif('error', 'Error de conexión', 'No se pudo procesar en el servidor. Guardando localmente...');
+            console.error(error);
+        }
+    }
+
+    // ===== MODO LOCAL =====
+    showNotif('success', '¡Compra procesada!', `Total: $${total.toLocaleString()} USD. (Modo local)`);
+    const orders = JSON.parse(localStorage.getItem('wc2026_orders')) || [];
+    orders.push({ user: currentUser.email, items: [...cart], total, date: new Date().toISOString(), id: 'ORD-' + Date.now() });
+    localStorage.setItem('wc2026_orders', JSON.stringify(orders));
+    cart = []; saveCart(); renderCart(); toggleCart();
+    setTimeout(() => showNotif('info', '📧 Confirmación', `Se enviaría confirmación a ${currentUser.email}. ¡Nos vemos en el Mundial!`), 4000);
+}
+
+// ===== NOTIFICACIONES =====
+function showNotif(type, title, message) {
+    const container = document.getElementById('notifContainer'), icons = { success: 'fa-check', error: 'fa-exclamation', info: 'fa-info' };
+    const notif = document.createElement('div');
+    notif.className = `notif ${type}`;
+    notif.innerHTML = `<div class="notif-icon"><i class="fas ${icons[type]}"></i></div><div class="notif-text"><h4>${title}</h4><p>${message}</p></div>`;
+    container.appendChild(notif);
+    setTimeout(() => notif.remove(), 5000);
+}
+
+// ===== COUNTDOWN =====
+function updateCountdown() {
+    const target = new Date('2026-06-11T18:00:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) { document.getElementById('countdownBar').innerHTML = '⚽ <strong>¡El Mundial 2026 está en marcha!</strong>'; return; }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById('countDays').textContent = days;
+    document.getElementById('countHours').textContent = hours;
+    document.getElementById('countMins').textContent = mins;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
 // ===== CHATBOT =====
-const chatResponses={
+const chatResponses = {
 fechas:'📅 El Mundial 2026 se disputará del <strong>11 de junio al 19 de julio de 2026</strong>. El partido inaugural será el 11 de junio en el Estadio Azteca (Ciudad de México) y la final el 19 de julio en el MetLife Stadium (Nueva Jersey).',
 sedes:'🏟️ Habrá <strong>16 estadios</strong> en 3 países: 11 en EE.UU. (MetLife, SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead, Levi\'s), 3 en México (Azteca, BBVA, Akron) y 2 en Canadá (BMO Field, BC Place).',
 formato:'⚽ El formato es completamente nuevo: <strong>48 equipos</strong> divididos en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros de cada grupo y los <strong>8 mejores terceros</strong> (32 equipos a eliminatorias). Se jugarán <strong>104 partidos</strong> en total, 40 más que en Qatar 2022.',
@@ -1131,13 +1491,64 @@ const chatKeywords=[
 {keys:['registrar','registro','cuenta','sign up','signup','crear cuenta'],resp:'📝 Para registrarte, haz clic en <strong>"Registrarse"</strong> en la barra superior. Solo necesitas nombre, correo, país y contraseña. Así podrás comprar entradas y guardar tu álbum.'},
 {keys:['carrito','compra','pagar','checkout'],resp:'🛒 Para comprar entradas, ve a la sección <strong>"Entradas"</strong>, agrega al carrito y haz clic en <strong>"Proceder al Pago"</strong>. Necesitas iniciar sesión primero.'}
 ];
-function chatOption(key){const msgs=document.getElementById('chatMessages');const labels={fechas:'📅 ¿Cuáles son las fechas?',sedes:'🏟️ ¿Dónde se juega?',formato:'⚽ ¿Cuál es el formato?',entradas:'🎫 ¿Dónde compro entradas?',equipos:'🌍 ¿Qué equipos clasifican?',inaugural:'🎯 ¿Dónde es el inaugural?',final:'🏆 ¿Dónde es la final?',visa:'🛂 ¿Necesito visa?',mascota:'🦅 ¿Cuál es la mascota?',balon:'⚽ ¿Cómo es el balón?',copa:'🏆 Cuéntame de la Copa',precios:'💰 Precios de entradas',transporte:'🚌 Transporte',clima:'🌤️ Clima en las sedes',seguridad:'🔒 Seguridad'};const u=document.createElement('div');u.className='chat-msg user';u.textContent=labels[key]||key;msgs.appendChild(u);setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=chatResponses[key];msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
-function sendChat(){const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;input.value='';const msgs=document.getElementById('chatMessages');const u=document.createElement('div');u.className='chat-msg user';u.textContent=text;msgs.appendChild(u);const lower=text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");let response=null;for(const entry of chatKeywords){if(entry.keys.some(k=>lower.includes(k))){response=entry.resp;break}}if(response){if(response.startsWith('chatResponses.')){const key=response.replace('chatResponses.','');response=chatResponses[key]}}if(!response){response='🤔 No estoy seguro de esa pregunta, pero puedo ayudarte con: <strong>fechas, sedes, formato, entradas, equipos, mascota, balón, copa, visa, transporte, clima, seguridad y más</strong>. ¡Pregúntame algo específico!'}setTimeout(()=>{const b=document.createElement('div');b.className='chat-msg bot';b.innerHTML=response;msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight},600);msgs.scrollTop=msgs.scrollHeight}
-function toggleChat(){const cw=document.getElementById('chatWindow');cw.classList.toggle('open');const tt=document.getElementById('chatTooltip');if(cw.classList.contains('open')&&tt){tt.style.display='none'}}
-function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
-window.addEventListener('scroll',()=>{const scrollY=window.scrollY;const scrollTopBtn=document.getElementById('scrollTop');if(scrollY>600)scrollTopBtn.classList.add('show');else scrollTopBtn.classList.remove('show');const navbar=document.getElementById('navbar');if(scrollY>10)navbar.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)';else navbar.style.boxShadow='none';const sections=['inicio','introduccion','historia','sedes','mascota','balon','copa','entradas'];sections.forEach(id=>{const section=document.getElementById(id);if(section){const rect=section.getBoundingClientRect();if(rect.top<=150&&rect.bottom>=150){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));const link=document.querySelector(`.nav-links a[href="#${id}"]`);if(link)link.classList.add('active')}}})});
-const worldCupFacts=['⚽ Dato: El Estadio Azteca será el primer estadio en albergar 3 mundiales (1970, 1986 y 2026).','🏆 Dato: La Copa Mundial pesa 6.1 kg de oro macizo de 18 quilates.','🌍 Dato: El Mundial 2026 tendrá 104 partidos, 40 más que Qatar 2022.','🇲🇽 Dato: México es el primer país en albergar 3 Copas del Mundo.','📊 Dato: Se estima que 5 mil millones de personas verán el Mundial 2026.','🏟️ Dato: El MetLife Stadium tendrá capacidad para 87,000 personas en la final.','⚽ Dato: 48 equipos competirán por primera vez en la historia del Mundial.','🎫 Dato: Se espera vender más de 5 millones de entradas en todo el torneo.'];let factIndex=0;function sendPeriodicFact(){if(currentUser&&currentUser.notif){showNotif('info','Dato del Mundial',worldCupFacts[factIndex%worldCupFacts.length]);factIndex++}}setInterval(sendPeriodicFact,45000);
-updateUserUI();renderCart();if(currentUser)setTimeout(()=>showNotif('info',`¡Hola, ${currentUser.name.split(' ')[0]}!`,'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!'),2000);
+function chatOption(key) {
+    const msgs = document.getElementById('chatMessages');
+    const labels = { fechas: '📅 ¿Cuáles son las fechas?', sedes: '🏟️ ¿Dónde se juega?', formato: '⚽ ¿Cuál es el formato?', entradas: '🎫 ¿Dónde compro entradas?', equipos: '🌍 ¿Qué equipos clasifican?', inaugural: '🎯 ¿Dónde es el inaugural?', final: '🏆 ¿Dónde es la final?', visa: '🛂 ¿Necesito visa?', mascota: '🦅 ¿Cuál es la mascota?', balon: '⚽ ¿Cómo es el balón?', copa: '🏆 Cuéntame de la Copa', precios: '💰 Precios de entradas', transporte: '🚌 Transporte', clima: '🌤️ Clima en las sedes', seguridad: '🔒 Seguridad' };
+    const u = document.createElement('div'); u.className = 'chat-msg user'; u.textContent = labels[key] || key; msgs.appendChild(u);
+    setTimeout(() => { const b = document.createElement('div'); b.className = 'chat-msg bot'; b.innerHTML = chatResponses[key]; msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; }, 600);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+function sendChat() {
+    const input = document.getElementById('chatInput'); const text = input.value.trim(); if (!text) return; input.value = '';
+    const msgs = document.getElementById('chatMessages'); const u = document.createElement('div'); u.className = 'chat-msg user'; u.textContent = text; msgs.appendChild(u);
+    const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let response = null;
+    for (const entry of chatKeywords) { if (entry.keys.some(k => lower.includes(k))) { response = entry.resp; break; } }
+    if (response) { if (response.startsWith('chatResponses.')) { const key = response.replace('chatResponses.', ''); response = chatResponses[key]; } }
+    if (!response) { response = '🤔 No estoy seguro de esa pregunta, pero puedo ayudarte con: <strong>fechas, sedes, formato, entradas, equipos, mascota, balón, copa, visa, transporte, clima, seguridad y más</strong>. ¡Pregúntame algo específico!'; }
+    setTimeout(() => { const b = document.createElement('div'); b.className = 'chat-msg bot'; b.innerHTML = response; msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; }, 600);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+function toggleChat() { const cw = document.getElementById('chatWindow'); cw.classList.toggle('open'); const tt = document.getElementById('chatTooltip'); if (cw.classList.contains('open') && tt) { tt.style.display = 'none'; } }
+function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+// ===== SCROLL =====
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const scrollTopBtn = document.getElementById('scrollTop');
+    if (scrollY > 600) scrollTopBtn.classList.add('show'); else scrollTopBtn.classList.remove('show');
+    const navbar = document.getElementById('navbar');
+    if (scrollY > 10) navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)'; else navbar.style.boxShadow = 'none';
+    const sections = ['inicio', 'introduccion', 'historia', 'sedes', 'mascota', 'balon', 'copa', 'entradas'];
+    sections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 150 && rect.bottom >= 150) {
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (link) link.classList.add('active');
+            }
+        }
+    });
+});
+
+// ===== DATOS PERIÓDICOS =====
+const worldCupFacts = ['⚽ Dato: El Estadio Azteca será el primer estadio en albergar 3 mundiales (1970, 1986 y 2026).', '🏆 Dato: La Copa Mundial pesa 6.1 kg de oro macizo de 18 quilates.', '🌍 Dato: El Mundial 2026 tendrá 104 partidos, 40 más que Qatar 2022.', '🇲🇽 Dato: México es el primer país en albergar 3 Copas del Mundo.', '📊 Dato: Se estima que 5 mil millones de personas verán el Mundial 2026.', '🏟️ Dato: El MetLife Stadium tendrá capacidad para 87,000 personas en la final.', '⚽ Dato: 48 equipos competirán por primera vez en la historia del Mundial.', '🎫 Dato: Se espera vender más de 5 millones de entradas en todo el torneo.'];
+let factIndex = 0;
+function sendPeriodicFact() { if (currentUser && currentUser.notifications) { showNotif('info', 'Dato del Mundial', worldCupFacts[factIndex % worldCupFacts.length]); factIndex++; } }
+setInterval(sendPeriodicFact, 45000);
+
+// ===== INICIALIZACIÓN =====
+async function init() {
+    await checkServer();
+    await checkSession();
+    renderCart();
+    if (currentUser) {
+        setTimeout(() => showNotif('info', `¡Hola, ${currentUser.name.split(' ')[0]}!`, 'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!'), 2000);
+    }
+}
+init();
 </script>
 </body>
 </html>
