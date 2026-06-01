@@ -1954,6 +1954,7 @@ async function init() {
     await checkServer();
     await checkSession();
     renderCart();
+    showChatOptions(chatTree._root);
     if (currentUser) {
         setTimeout(() => showNotif('info', `¡Hola, ${currentUser.name.split(' ')[0]}!`, 'Tu sesión está activa. ¡No te pierdas las novedades del Mundial 2026!'), 2000);
     }
