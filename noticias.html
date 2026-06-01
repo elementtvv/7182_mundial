@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias — ELE Mundial 2026</title>
+    <link rel="icon" type="image/jpeg" href="7182_balon.png">
+    <link rel="apple-touch-icon" href="7182_balon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #1B7A3D;
+            --green-light: #2EA050;
+            --green-dark: #145C2E;
+            --blue: #1A3A6B;
+            --blue-light: #264F8C;
+            --blue-dark: #0F2647;
+            --red: #C41E3A;
+            --red-light: #E03050;
+            --red-dark: #9A1830;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --gray-100: #F0F0F0;
+            --gray-200: #E0E0E0;
+            --gray-300: #C0C0C0;
+            --gray-500: #888888;
+            --gray-700: #444444;
+            --gray-900: #1A1A1A;
+            --shadow-sm: 0 1px 4px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--gray-900); background: var(--white); line-height: 1.6; overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; font-family: inherit; }
+        input, select { font-family: inherit; }
+
+        /* ===== NAVBAR ===== */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--blue-dark); border-bottom: 3px solid var(--green); height: 70px; display: flex; align-items: center; padding: 0 24px; }
+        .navbar-inner { max-width: 1280px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 20px; font-weight: 700; }
+        .nav-logo i { color: var(--green-light); font-size: 24px; }
+        .nav-links { display: flex; align-items: center; gap: 6px; }
+        .nav-links a { color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 500; padding: 8px 14px; border-radius: 8px; transition: var(--transition); }
+        .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.1); }
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
+        .btn-nav { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; transition: var(--transition); }
+        .btn-nav-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); }
+        .btn-nav-outline:hover { border-color: var(--white); }
+        .btn-nav-fill { background: var(--red); color: var(--white); border: none; }
+        .btn-nav-fill:hover { background: var(--red-light); }
+        .nav-cart { position: relative; color: var(--white); font-size: 20px; cursor: pointer; padding: 6px; transition: var(--transition); }
+        .nav-cart:hover { color: var(--green-light); }
+        .cart-badge { position: absolute; top: -4px; right: -6px; background: var(--red); color: var(--white); font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .hamburger { display: none; color: var(--white); font-size: 24px; cursor: pointer; padding: 4px; }
+        .server-status { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: rgba(255,255,255,0.5); margin-left: 8px; }
+        .server-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray-500); transition: var(--transition); }
+        .server-dot.online { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
+        .server-dot.offline { background: var(--red); box-shadow: 0 0 6px rgba(196,30,58,0.5); }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--blue-dark); padding: 16px 24px; border-bottom: 2px solid var(--green); z-index: 999; }
+        .mobile-menu.open { display: block; }
+        .mobile-menu a { display: block; padding: 12px 0; color: rgba(255,255,255,0.8); font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .mobile-menu a:hover { color: var(--white); }
+
+        /* ===== COUNTDOWN ===== */
+        .countdown-bar { background: var(--red); color: var(--white); text-align: center; padding: 10px 24px; font-size: 14px; font-weight: 500; position: fixed; top: 70px; left: 0; right: 0; z-index: 998; }
+        .countdown-bar strong { font-size: 18px; margin: 0 4px; }
+
+        /* ===== HERO ===== */
+        .news-hero { position: relative; min-height: 420px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--blue-dark) 0%, var(--green-dark) 50%, var(--red-dark) 100%); padding-top: 120px; overflow: hidden; }
+        .news-hero-bg { position: absolute; inset: 0; background: url('https://www.negocios.com/asset/thumbnail,1280,720,center,center/media/negocios/images/2026/05/06/2026050610121767986.jpg') center/cover; opacity: 0.12; }
+        .news-hero-content { position: relative; z-index: 2; text-align: center; max-width: 800px; padding: 40px 24px; }
+        .news-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 50px; color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500; margin-bottom: 20px; }
+        .news-hero-badge i { color: var(--green-light); }
+        .news-hero-title { font-size: clamp(32px, 6vw, 56px); font-weight: 700; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
+        .news-hero-title span { color: var(--green-light); }
+        .news-hero-sub { font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.7); font-weight: 300; line-height: 1.5; }
+
+        /* ===== SECTIONS ===== */
+        .section { padding: 80px 24px; }
+        .section-inner { max-width: 1280px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .tag-green { color: var(--green); }
+        .tag-blue { color: var(--blue); }
+        .tag-red { color: var(--red); }
+        .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1px; color: var(--gray-900); margin-bottom: 12px; }
+        .section-desc { font-size: 16px; color: var(--gray-500); max-width: 600px; margin: 0 auto; font-weight: 300; }
+
+        /* ===== FILTER BAR ===== */
+        .filter-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+        .filter-results { font-size: 13px; color: var(--gray-500); font-weight: 500; }
+        .filter-results strong { color: var(--gray-900); }
+        .filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 600; transition: var(--transition); cursor: pointer; border: 1.5px solid var(--gray-200); background: var(--white); color: var(--gray-700); }
+        .filter-btn:hover { border-color: var(--gray-900); color: var(--gray-900); }
+        .filter-btn.active { background: var(--gray-900); color: var(--white); border-color: var(--gray-900); }
+
+        /* ===== NEWS GRID ===== */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+        /* ===== NEWS CARD ===== */
+        .news-card {
+            display: grid; grid-template-columns: 300px 1fr; gap: 0;
+            border: 1px solid var(--gray-200); border-radius: var(--radius);
+            overflow: hidden; background: var(--white); transition: var(--transition);
+        }
+        .news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+        .news-card-img {
+            width: 100%; height: 100%; min-height: 220px; object-fit: cover;
+            background: var(--gray-100);
+        }
+        .news-card-body { padding: 24px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+        .news-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        .news-cat {
+            display: inline-block; font-size: 10px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 4px;
+        }
+        .cat-general { background: rgba(26,58,107,0.1); color: var(--blue); }
+        .cat-sedes { background: rgba(27,122,61,0.1); color: var(--green); }
+        .cat-equipos { background: rgba(196,30,58,0.1); color: var(--red); }
+        .cat-entradas { background: rgba(46,160,80,0.1); color: var(--green-light); }
+        .cat-seguridad { background: rgba(136,136,136,0.1); color: var(--gray-700); }
+        .cat-tecnologia { background: rgba(38,79,140,0.1); color: var(--blue-light); }
+        .cat-mascota { background: rgba(224,48,80,0.1); color: var(--red-light); }
+        .news-date { font-size: 12px; color: var(--gray-300); font-weight: 500; }
+        .news-card-body h3 {
+            font-size: 19px; font-weight: 700; margin-bottom: 8px;
+            line-height: 1.3; color: var(--gray-900); letter-spacing: -0.3px;
+        }
+        .news-card-body p {
+            font-size: 14px; color: var(--gray-500); line-height: 1.6;
+            margin-bottom: 16px; flex: 1;
+        }
+        .news-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .news-source {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 12px; color: var(--gray-300); font-weight: 500;
+        }
+        .news-source i { font-size: 14px; }
+        .btn-read {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px; border-radius: 8px; font-size: 12px;
+            font-weight: 600; transition: var(--transition);
+        }
+        .btn-read-green { background: var(--green); color: var(--white); }
+        .btn-read-green:hover { background: var(--green-light); transform: translateX(2px); }
+        .btn-read-blue { background: var(--blue); color: var(--white); }
+        .btn-read-blue:hover { background: var(--blue-light); transform: translateX(2px); }
+        .btn-read-red { background: var(--red); color: var(--white); }
+        .btn-read-red:hover { background: var(--red-light); transform: translateX(2px); }
+
+        /* ===== FEATURED CARD ===== */
+        .news-featured {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            border: 1px solid var(--gray-200); border-radius: var(--radius);
+            overflow: hidden; background: var(--white); transition: var(--transition);
+            margin-bottom: 32px;
+        }
+        .news-featured:hover { box-shadow: var(--shadow-md); }
+        .news-featured-img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; }
+        .news-featured-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+        .news-featured-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--red); color: var(--white);
+            padding: 4px 12px; border-radius: 4px;
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 14px; width: fit-content;
+        }
+        .news-featured-body h3 { font-size: 26px; font-weight: 700; margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.5px; }
+        .news-featured-body p { font-size: 15px; color: var(--gray-500); line-height: 1.7; margin-bottom: 20px; }
+
+        /* ===== EMPTY STATE ===== */
+        .news-empty { text-align: center; padding: 80px 20px; color: var(--gray-500); }
+        .news-empty i { font-size: 56px; color: var(--gray-300); margin-bottom: 16px; display: block; }
+
+        /* ===== TICKER ===== */
+        .news-ticker {
+            background: var(--gray-900); color: var(--white);
+            padding: 14px 24px; overflow: hidden; position: relative;
+        }
+        .ticker-label {
+            position: absolute; left: 0; top: 0; bottom: 0; padding: 14px 20px;
+            background: var(--red); font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; z-index: 2;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .ticker-track {
+            display: flex; gap: 60px; animation: tickerScroll 30s linear infinite;
+            padding-left: 160px; white-space: nowrap;
+        }
+        .ticker-track span {
+            font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.7);
+            display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+        }
+        .ticker-track span strong { color: var(--green-light); }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ===== MODALS ===== */
+        .modal-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 24px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--white); border-radius: var(--radius); width: 100%; max-width: 480px; padding: 36px; box-shadow: var(--shadow-lg); position: relative; animation: modalIn 0.3s ease; }
+        @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .modal-close { position: absolute; top: 14px; right: 14px; background: none; font-size: 20px; color: var(--gray-500); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .modal-close:hover { background: var(--gray-100); color: var(--gray-900); }
+        .modal h2 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+        .modal .modal-sub { color: var(--gray-500); font-size: 14px; margin-bottom: 24px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--gray-700); }
+        .form-group input, .form-group select { width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: 8px; font-size: 14px; transition: var(--transition); outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(27,122,61,0.1); }
+        .btn-form { width: 100%; padding: 13px; border-radius: 8px; font-size: 15px; font-weight: 600; transition: var(--transition); }
+        .btn-form:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-form-green { background: var(--green); color: var(--white); }
+        .btn-form-green:hover:not(:disabled) { background: var(--green-light); }
+        .btn-form-blue { background: var(--blue); color: var(--white); }
+        .btn-form-blue:hover:not(:disabled) { background: var(--blue-light); }
+        .form-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--gray-500); }
+        .form-switch a { color: var(--green); font-weight: 600; cursor: pointer; }
+        .form-switch a:hover { text-decoration: underline; }
+
+        /* ===== CART ===== */
+        .cart-sidebar { position: fixed; top: 0; right: -420px; z-index: 2000; width: 400px; max-width: 90vw; height: 100vh; background: var(--white); box-shadow: -10px 0 40px rgba(0,0,0,0.15); transition: right 0.4s ease; display: flex; flex-direction: column; }
+        .cart-sidebar.open { right: 0; }
+        .cart-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-size: 18px; font-weight: 700; }
+        .cart-close { background: none; font-size: 20px; color: var(--gray-500); padding: 4px; }
+        .cart-close:hover { color: var(--gray-900); }
+        .cart-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
+        .cart-empty { text-align: center; padding: 40px 0; color: var(--gray-500); }
+        .cart-empty i { font-size: 48px; margin-bottom: 12px; display: block; color: var(--gray-300); }
+        .cart-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
+        .cart-item-img { width: 60px; height: 60px; border-radius: 8px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { font-size: 14px; font-weight: 600; }
+        .cart-item-info p { font-size: 12px; color: var(--gray-500); }
+        .cart-item-price { font-size: 15px; font-weight: 700; color: var(--green); margin-top: 4px; }
+        .cart-item-remove { background: none; color: var(--gray-300); font-size: 16px; padding: 4px; transition: var(--transition); align-self: flex-start; }
+        .cart-item-remove:hover { color: var(--red); }
+        .cart-footer { padding: 20px 24px; border-top: 1px solid var(--gray-200); }
+        .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .cart-total span:first-child { font-size: 15px; font-weight: 600; }
+        .cart-total span:last-child { font-size: 22px; font-weight: 700; color: var(--green); }
+        .btn-checkout { width: 100%; padding: 14px; border-radius: 8px; background: var(--green); color: var(--white); font-size: 15px; font-weight: 600; transition: var(--transition); }
+        .btn-checkout:hover { background: var(--green-light); }
+        .cart-overlay { display: none; position: fixed; inset: 0; z-index: 1999; background: rgba(0,0,0,0.4); }
+        .cart-overlay.open { display: block; }
+
+        /* ===== USER BAR ===== */
+        .user-bar { display: none; align-items: center; gap: 10px; }
+        .user-bar.active { display: flex; }
+        .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--green); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+        .user-name { color: var(--white); font-size: 13px; font-weight: 500; }
+        .btn-logout { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); padding: 5px 10px; border-radius: 6px; font-size: 12px; transition: var(--transition); }
+        .btn-logout:hover { background: rgba(196,30,58,0.3); color: var(--white); }
+
+        /* ===== NOTIFICATIONS ===== */
+        .notif-container { position: fixed; top: 80px; right: 24px; z-index: 1800; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+        .notif { background: var(--white); border-radius: 10px; padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 12px; min-width: 300px; max-width: 400px; border-left: 4px solid var(--green); pointer-events: auto; animation: notifIn 0.4s ease, notifOut 0.4s ease 4.6s forwards; }
+        .notif.error { border-left-color: var(--red); }
+        .notif.info { border-left-color: var(--blue); }
+        @keyframes notifIn { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes notifOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(100px); } }
+        .notif-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .notif.success .notif-icon { background: rgba(27,122,61,0.1); color: var(--green); }
+        .notif.error .notif-icon { background: rgba(196,30,58,0.1); color: var(--red); }
+        .notif.info .notif-icon { background: rgba(26,58,107,0.1); color: var(--blue); }
+        .notif-text h4 { font-size: 13px; font-weight: 600; }
+        .notif-text p { font-size: 12px; color: var(--gray-500); }
+
+        /* ===== CHATBOT ===== */
+        .chatbot-toggle { position: fixed; bottom: 28px; right: 28px; z-index: 1500; width: 72px; height: 72px; border-radius: 50%; background: var(--green); border: 3px solid var(--white); display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(27,122,61,0.5); transition: var(--transition); overflow: visible; }
+        .chatbot-toggle:hover { transform: scale(1.1); background: var(--green-light); }
+        .chatbot-toggle img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .chatbot-tooltip { position: absolute; right: 90px; top: 50%; transform: translateY(-50%); background: var(--white); color: var(--gray-900); padding: 10px 18px; border-radius: 12px 12px 12px 0; font-size: 14px; font-weight: 600; box-shadow: var(--shadow-lg); white-space: nowrap; pointer-events: none; animation: tooltipBounce 2s ease infinite; }
+        .chatbot-tooltip::after { content: ''; position: absolute; bottom: 0; right: -8px; width: 0; height: 0; border-style: solid; border-width: 0 0 12px 12px; border-color: transparent transparent transparent var(--white); }
+        @keyframes tooltipBounce { 0%,100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(-6px); } }
+        .chatbot-window { position: fixed; bottom: 110px; right: 28px; z-index: 1500; width: 400px; max-width: calc(100vw - 48px); height: 580px; max-height: calc(100vh - 140px); background: var(--white); border-radius: 16px; box-shadow: var(--shadow-lg); display: none; flex-direction: column; overflow: hidden; animation: modalIn 0.3s ease; }
+        .chatbot-window.open { display: flex; }
+        .chatbot-header { background: var(--green); color: var(--white); padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+        .chatbot-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.3); flex-shrink: 0; }
+        .chatbot-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .chatbot-header-info h4 { font-size: 15px; font-weight: 600; }
+        .chatbot-header-info p { font-size: 11px; opacity: 0.8; }
+        .chatbot-close { margin-left: auto; background: rgba(255,255,255,0.15); color: var(--white); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .chatbot-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+        .chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+        .chat-msg.bot { background: var(--gray-100); color: var(--gray-900); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: var(--green); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-options { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px 14px; border-top: 1px solid var(--gray-200); max-height: 110px; overflow-y: auto; }
+        .chat-opt { padding: 6px 12px; border-radius: 50px; font-size: 11px; font-weight: 500; background: var(--off-white); border: 1px solid var(--gray-200); color: var(--gray-700); transition: var(--transition); }
+        .chat-opt:hover { background: var(--green); color: var(--white); border-color: var(--green); }
+        .chat-input-area { padding: 10px 14px; border-top: 1px solid var(--gray-200); display: flex; gap: 8px; align-items: center; }
+        .chat-input { flex: 1; padding: 10px 14px; border: 1.5px solid var(--gray-200); border-radius: 50px; font-size: 13px; outline: none; transition: var(--transition); }
+        .chat-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(27,122,61,0.1); }
+        .chat-send { width: 38px; height: 38px; border-radius: 50%; background: var(--green); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 14px; transition: var(--transition); flex-shrink: 0; }
+        .chat-send:hover { background: var(--green-light); }
+
+        /* ===== SCROLL TOP ===== */
+        .scroll-top { position: fixed; bottom: 100px; left: 24px; z-index: 1400; width: 44px; height: 44px; border-radius: 50%; background: var(--blue); color: var(--white); font-size: 18px; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: var(--transition); }
+        .scroll-top.show { display: flex; }
+        .scroll-top:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        .footer { background: var(--blue-dark); color: rgba(255,255,255,0.7); padding: 60px 24px 24px; }
+        .footer-inner { max-width: 1280px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand h3 { color: var(--white); font-size: 20px; margin-bottom: 12px; }
+        .footer-brand p { font-size: 14px; line-height: 1.6; max-width: 300px; }
+        .footer-col h4 { color: var(--white); font-size: 14px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col a { display: block; font-size: 14px; padding: 4px 0; transition: var(--transition); }
+        .footer-col a:hover { color: var(--green-light); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+        .footer-socials { display: flex; gap: 14px; }
+        .footer-socials a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .footer-socials a:hover { background: var(--green); color: var(--white); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .btn-nav { display: none; }
+            .hamburger { display: block; }
+            .news-card { grid-template-columns: 1fr; }
+            .news-card-img { height: 200px; min-height: auto; }
+            .news-featured { grid-template-columns: 1fr; }
+            .news-featured-img { height: 240px; min-height: auto; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .chatbot-tooltip { display: none; }
+            .filter-bar { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+        <!-- DESPUÉS -->
+<div style="display:flex;align-items:center;flex-shrink:0;">
+    <a href="index.html" class="nav-logo">
+        <i class="fas fa-futbol"></i>
+        <div class="nav-logo-text">
+            ELE Mundial 2026
+            <span></span>
+        </div>
+    </a>
+    <span class="server-status"><span class="server-dot" id="serverDot"></span><span id="serverLabel"></span></span>
+</div>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#introduccion">Introducción</a>
+            <a href="index.html#historia">Historia</a>
+            <a href="index.html#sedes">Sedes</a>
+            <a href="index.html#mascota">Mascota</a>
+            <a href="index.html#balon">Balón</a>
+            <a href="index.html#copa">Copa</a>
+            <a href="index.html#entradas">Entradas</a>
+            <a href="calendario.html">Calendario</a>
+            <a href="album.html">Mi Álbum</a>
+            <a href="noticias.html" class="active">Noticias</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-nav btn-nav-outline" onclick="openModal('login')" id="btnLogin">Iniciar Sesión</button>
+            <button class="btn-nav btn-nav-fill" onclick="openModal('register')" id="btnRegister">Registrarse</button>
+            <div class="user-bar" id="userBar">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span class="user-name" id="userName">Usuario</span>
+                <button class="btn-logout" onclick="logout()">Salir</button>
+            </div>
+            <div class="nav-cart" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
+            <div class="hamburger" onclick="toggleMobile()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#introduccion">Introducción</a>
+    <a href="index.html#historia">Historia</a>
+    <a href="index.html#sedes">Sedes</a>
+    <a href="index.html#mascota">Mascota</a>
+    <a href="index.html#balon">Balón</a>
+    <a href="index.html#copa">Copa</a>
+    <a href="index.html#entradas">Entradas</a>
+    <a href="calendario.html">Calendario</a>
+    <a href="album.html">Mi Álbum</a>
+    <a href="noticias.html">Noticias</a>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-bar" id="countdownBar">
+    ⚽ Faltan <strong id="countDays">0</strong> días, <strong id="countHours">0</strong> horas y <strong id="countMins">0</strong> minutos para el kickoff del Mundial 2026
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="news-hero">
+    <div class="news-hero-bg"></div>
+    <div class="news-hero-content">
+        <div class="news-hero-badge">
+            <i class="fas fa-newspaper"></i>
+            Última Hora · Mundial 2026
+        </div>
+        <h1 class="news-hero-title">Noticias <span>del Mundial</span></h1>
+        <p class="news-hero-sub">Las noticias más recientes sobre la FIFA World Cup 2026. Haz clic en cualquier noticia para leerla completa en su fuente original.</p>
+    </div>
+</section>
+
+<!-- ===== TICKER ===== -->
+<div class="news-ticker">
+    <div class="ticker-label"><i class="fas fa-bolt"></i> EN VIVO</div>
+    <div class="ticker-track">
+        <span><strong>⚽</strong> México inaugurará el Mundial en el Azteca el 11 de junio de 2026</span>
+        <span><strong>🏟️</strong> MetLife Stadium confirmado como sede de la Gran Final</span>
+        <span><strong>🎫</strong> FIFA abre registro de interés para entradas del Mundial 2026</span>
+        <span><strong>🌍</strong> 48 equipos competirán por primera vez en la historia</span>
+        <span><strong>⚽</strong> México inaugurará el Mundial en el Azteca el 11 de junio de 2026</span>
+        <span><strong>🏟️</strong> MetLife Stadium confirmado como sede de la Gran Final</span>
+        <span><strong>🎫</strong> FIFA abre registro de interés para entradas del Mundial 2026</span>
+        <span><strong>🌍</strong> 48 equipos competirán por primera vez en la historia</span>
+    </div>
+</div>
+
+<!-- ===== NEWS SECTION ===== -->
+<section class="section" id="noticias">
+    <div class="section-inner">
+        <div class="section-header">
+            <div class="section-tag tag-red"><i class="fas fa-rss"></i> Noticias</div>
+            <h2 class="section-title">Últimas Noticias</h2>
+            <p class="section-desc">Mantente informado sobre todo lo que rodea al Mundial 2026. Cada noticia enlaza a su fuente original.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <div class="filter-results">Mostrando <strong id="newsCount">0</strong> noticias</div>
+            <div class="filter-btns">
+                <button class="filter-btn active" data-filter="all" onclick="filterNews('all')">Todas</button>
+                <button class="filter-btn" data-filter="general" onclick="filterNews('general')">General</button>
+                <button class="filter-btn" data-filter="sedes" onclick="filterNews('sedes')">Sedes</button>
+                <button class="filter-btn" data-filter="equipos" onclick="filterNews('equipos')">Equipos</button>
+                <button class="filter-btn" data-filter="entradas" onclick="filterNews('entradas')">Entradas</button>
+                <button class="filter-btn" data-filter="seguridad" onclick="filterNews('seguridad')">Seguridad</button>
+                <button class="filter-btn" data-filter="tecnologia" onclick="filterNews('tecnologia')">Tecnología</button>
+            </div>
+        </div>
+
+        <!-- Featured -->
+        <div id="featuredNews"></div>
+
+        <!-- News list -->
+        <div class="news-grid" id="newsGrid"></div>
+
+        <!-- Empty -->
+        <div class="news-empty" id="newsEmpty" style="display:none;">
+            <i class="fas fa-search"></i>
+            <p>No se encontraron noticias con este filtro.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3><i class="fas fa-futbol"></i> Mundial 2026</h3><p>Sitio informativo no oficial sobre la Copa Mundial de la FIFA 2026. Todos los derechos de marca pertenecen a la FIFA.<br><br>Hecho por elementt<br> Carné: 6190-26-7182</p></div>
+            <div class="footer-col"><h4>Navegación</h4><a href="index.html">Inicio</a><a href="index.html#introduccion">Introducción</a><a href="index.html#historia">Historia</a><a href="index.html#sedes">Sedes</a><a href="index.html#entradas">Entradas</a></div>
+            <div class="footer-col"><h4>Páginas</h4><a href="calendario.html">Calendario</a><a href="album.html">Mi Álbum</a><a href="noticias.html">Noticias</a><a href="FAQ.html">Preguntas Frecuentes</a></div>
+            <div class="footer-col"><h4>Legal</h4><a href="#">Términos de Uso</a><a href="#">Política de Privacidad</a><a href="#">Cookies</a><a href="#">Contacto</a></div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Mundial 2026 Info. Sitio informativo no oficial.</span>
+            <div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-tiktok"></i></a></div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== CART ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3><button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div></div>
+    <div class="cart-footer"><div class="cart-total"><span>Total:</span><span id="cartTotal">$0 USD</span></div><button class="btn-checkout" onclick="checkout()">Proceder al Pago</button></div>
+</div>
+
+<!-- ===== NOTIFICATIONS ===== -->
+<div class="notif-container" id="notifContainer"></div>
+
+<!-- ===== CHATBOT ===== -->
+<button class="chatbot-toggle" id="chatToggle" onclick="toggleChat()">
+    <img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="FIFA Bot">
+    <span class="chatbot-tooltip" id="chatTooltip">¿Dudas? ¡Pregúntame!</span>
+</button>
+<div class="chatbot-window" id="chatWindow">
+    <div class="chatbot-header">
+        <div class="chatbot-avatar"><img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="Bot"></div>
+        <div class="chatbot-header-info"><h4>FIFA Bot 2026</h4><p>En línea · Responde al instante</p></div>
+        <button class="chatbot-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+        <div class="chat-msg bot">¡Hola! 👋 Soy el asistente del Mundial 2026. ¿En qué puedo ayudarte? Puedes preguntarme sobre noticias, calendario, sedes, entradas y más.</div>
+    </div>
+    <div class="chat-options" id="chatOptions">
+        <button class="chat-opt" onclick="chatOption('fechas')">📅 Fechas</button>
+        <button class="chat-opt" onclick="chatOption('sedes')">🏟️ Sedes</button>
+        <button class="chat-opt" onclick="chatOption('formato')">⚽ Formato</button>
+        <button class="chat-opt" onclick="chatOption('entradas')">🎫 Entradas</button>
+        <button class="chat-opt" onclick="chatOption('equipos')">🌍 Equipos</button>
+        <button class="chat-opt" onclick="chatOption('inaugural')">🎯 Inaugural</button>
+        <button class="chat-opt" onclick="chatOption('final')">🏆 Final</button>
+        <button class="chat-opt" onclick="chatOption('visa')">🛂 Visa</button>
+        <button class="chat-opt" onclick="chatOption('mascota')">🦅 Mascota</button>
+        <button class="chat-opt" onclick="chatOption('balon')">⚽ Balón</button>
+        <button class="chat-opt" onclick="chatOption('copa')">🏆 Copa</button>
+        <button class="chat-opt" onclick="chatOption('precios')">💰 Precios</button>
+        <button class="chat-opt" onclick="chatOption('transporte')">🚌 Transporte</button>
+        <button class="chat-opt" onclick="chatOption('clima')">🌤️ Clima</button>
+        <button class="chat-opt" onclick="chatOption('seguridad')">🔒 Seguridad</button>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<!-- ===== MODALS ===== -->
+<div class="modal-overlay" id="loginModal"><div class="modal"><button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="modal-sub">Accede a tu cuenta para comprar entradas y recibir notificaciones</p><div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>Contraseña</label><input type="password" id="loginPassword" placeholder="Tu contraseña"></div><button class="btn-form btn-form-green" id="btnLoginSubmit" onclick="login()">Iniciar Sesión</button><div class="form-switch">¿No tienes cuenta? <a onclick="switchModal('login','register')">Regístrate aquí</a></div></div></div>
+<div class="modal-overlay" id="registerModal"><div class="modal"><button class="modal-close" onclick="closeModal('register')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="modal-sub">Regístrate para acceder a entradas, notificaciones y más</p><div class="form-group"><label>Nombre completo</label><input type="text" id="regName" placeholder="Tu nombre"></div><div class="form-group"><label>Correo electrónico</label><input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com"></div><div class="form-group"><label>País</label><select id="regCountry"><option value="">Selecciona tu país</option><option value="MX">México</option><option value="US">Estados Unidos</option><option value="CA">Canadá</option><option value="AR">Argentina</option><option value="BR">Brasil</option><option value="CO">Colombia</option><option value="ES">España</option><option value="OTRO">Otro</option></select></div><div class="form-group"><label>Contraseña</label><input type="password" id="regPassword" placeholder="Mínimo 6 caracteres"></div><div class="form-group"><label><input type="checkbox" id="regNotif" checked> Quiero recibir notificaciones sobre el Mundial 2026</label></div><button class="btn-form btn-form-blue" id="btnRegisterSubmit" onclick="register()">Crear Cuenta</button><div class="form-switch">¿Ya tienes cuenta? <a onclick="switchModal('register','login')">Inicia sesión</a></div></div></div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<script>
+// ===== CONFIG =====
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000/api/auth' : 'https://seven182-mundial.onrender.com';
+let currentUser = null; let authToken = null; let serverOnline = false;
+let cart = JSON.parse(localStorage.getItem('wc2026_cart')) || [];
+
+// ===== NEWS DATA =====
+const newsData = [
+    {
+        id: 1, featured: true,
+        title: 'FIFA confirma el calendario completo del Mundial 2026: 104 partidos en 39 días',
+        excerpt: 'La FIFA reveló el calendario definitivo con los horarios de los 104 partidos del torneo. El partido inaugural se jugará el 11 de junio en el Estadio Azteca y la final el 19 de julio en el MetLife Stadium de Nueva Jersey. Se confirmaron las sedes para cada fase eliminatoria.',
+        category: 'general', date: '2025-06-10', source: 'FIFA.com',
+        url: 'https://www.fifa.com/fifaplus/es/tournaments/mens/worldcup/2026',
+        img: 'https://www.fifa.com/img/world-cup/2026/fwc-2026-match-schedule.jpg'
+    },
+    {
+        id: 2, featured: false,
+        title: 'Estadio Azteca supera inspección de FIFA y será sede del partido inaugural',
+        excerpt: 'El Estadio Azteca de Ciudad de México pasó la inspección final de la FIFA y fue confirmado oficialmente como sede del partido inaugural del Mundial 2026. Las remodelaciones incluyen nueva iluminación LED, sistema de drenaje y ampliación de zonas de hospitality.',
+        category: 'sedes', date: '2025-05-28', source: 'ESPN Deportes',
+        url: 'https://www.espn.com.mx/futbol/mundial/nota/_/id/estadio-azteca-inspeccion-fifa-mundial-2026',
+        img: 'https://wallpapercave.com/wp/wp8132990.jpg'
+    },
+    {
+        id: 3, featured: false,
+        title: 'Argentina, Brasil y Francia encabezan las selecciones ya clasificadas al Mundial 2026',
+        excerpt: 'Las eliminatorias sudamericanas y europeas avanzan con resultados clave. Argentina y Brasil lideran la clasificación de CONMEBOL, mientras Francia, España e Inglaterra aseguran su lugar por la vía de UEFA. Aún quedan plazas por definir en CAF, AFC y OFC.',
+        category: 'equipos', date: '2025-06-05', source: 'BBC Sport',
+        url: 'https://www.bbc.com/sport/football/world-cup-2026-classified-teams',
+        img: 'https://e00-marca.uecdn.es/assets/multimedia/imagenes/2024/11/20/17321189478574.jpg'
+    },
+    {
+        id: 4, featured: false,
+        title: 'FIFA anuncia sistema de venta de entradas por fases para el Mundial 2026',
+        excerpt: 'La FIFA detalló el proceso de venta de entradas que comenzará con un registro de interés, seguido por un sorteo aleatorio para la primera fase. Los precios van desde $95 USD para fase de grupos hasta $1,100 USD para la final. Se esperan más de 5 millones de solicitudes.',
+        category: 'entradas', date: '2025-05-15', source: 'FIFA.com',
+        url: 'https://www.fifa.com/fifaplus/es/tournaments/mens/worldcup/2026/ticketing',
+        img: 'https://images2.minutemediacdn.com/image/upload/c_fill,w_720,f_auto,q_auto,g_auto/shape/cover/sport/50476-gettyimages-1246755990-1-1.jpg'
+    },
+    {
+        id: 5, featured: false,
+        title: 'Estados Unidos refuerza seguridad para el Mundial con operativo tripartito',
+        excerpt: 'El Departamento de Seguridad Nacional de EE.UU. anunció un operativo de seguridad masivo en coordinación con México y Canadá. Se desplegarán más de 35,000 agentes de seguridad en las 11 sedes estadounidenses, con tecnología de vigilancia avanzada y protocolos de emergencia conjuntos.',
+        category: 'seguridad', date: '2025-04-22', source: 'Reuters',
+        url: 'https://www.reuters.com/world/us-security-world-cup-2026-tripartite-operation/',
+        img: 'https://media.cnn.com/api/v1/images/stellar/prod/230615115546-01-world-cup-security-2026.jpg'
+    },
+    {
+        id: 6, featured: false,
+        title: 'Adidas presenta el balón oficial del Mundial 2026 con tecnología Connected Ball',
+        excerpt: 'Adidas reveló el balón oficial que incorpora un sensor UWB interno que proporciona datos en tiempo real sobre velocidad, trayectoria y punto de impacto. La tecnología asistirá al VAR y al sistema de gol fantasma. El diseño rinde homenaje a la cultura norteamericana.',
+        category: 'tecnologia', date: '2025-05-30', source: 'Marca',
+        url: 'https://www.marca.com/futbol/mundial-2026/balon-oficial-adidas-connected-ball.html',
+        img: 'https://elportalslp.com.mx/wp-content/uploads/2026/05/Trionda-el-balon-oficial-del-Mundial-2026-tecnologia-diseno-y-precios-para-todos-los-aficionados-1.webp'
+    },
+    {
+        id: 7, featured: false,
+        title: 'SoFi Stadium completa renovaciones de última generación para el Mundial',
+        excerpt: 'El SoFi Stadium de Los Ángeles culminó sus remodelaciones valoradas en $200 millones, incluyendo nuevas suites VIP, sistema de iluminación dinámica y pantallas de 360 grados. Será sede de partidos de cuartos de final y semifinal del torneo.',
+        category: 'sedes', date: '2025-06-01', source: 'LA Times',
+        url: 'https://www.latimes.com/sports/story/sofi-stadium-renovations-world-cup-2026',
+        img: 'https://stadiumdb.com/pictures/stadiums/usa/sofi_stadium/sofi_stadium274.jpg'
+    },
+    {
+        id: 8, featured: false,
+        title: 'México anuncia su lista preliminar de 55 jugadores para el Mundial 2026',
+        excerpt: 'El seleccionador mexicano dio a conocer la lista preliminar de 55 jugadores que podrán ser considerados para la nómina final de 26. Destacan nombres como Santiago Giménez, Edson Álvarez y jóvenes promesas de la Liga MX que buscan un lugar en el equipo anfitrión.',
+        category: 'equipos', date: '2025-06-08', source: 'Mediotiempo',
+        url: 'https://www.mediotiempo.com/futbol/seleccion-mexicana/lista-preliminar-55-jugadores-mundial-2026',
+        img: 'https://editorial.uefa.com/resources/0279-161ec6b11c68-5e9e4ad3e910-1000/mexico_team_photo_before_the_match.jpeg'
+    },
+    {
+        id: 9, featured: false,
+        title: 'Canadá invierte $500 millones en infraestructura de transporte para el Mundial',
+        excerpt: 'El gobierno canadiense anunció una inversión de $500 millones en mejoras de transporte público en Toronto y Vancouver, las dos sedes canadienses. El proyecto incluye expansión del metro, carriles exclusivos para autobuses y shuttles FIFA que conectarán los estadios con los centros urbanos.',
+        category: 'general', date: '2025-04-10', source: 'CBC News',
+        url: 'https://www.cbc.ca/news/canada/world-cup-2026-transport-infrastructure-toronto-vancouver-1.7000000',
+        img: 'https://i.pinimg.com/736x/00/cb/9d/00cb9dee7905cf91cfd5f5c31767c6ac.jpg'
+    },
+    {
+        id: 10, featured: false,
+        title: 'FIFA implementa nuevo sistema VAR semi-automático para el Mundial 2026',
+        excerpt: 'La FIFA confirmó la implementación de un sistema VAR semi-automático de nueva generación que reduce el tiempo de revisión a menos de 30 segundos. El sistema combina la tecnología Connected Ball del balón oficial con 12 cámaras de tracking en cada estadio.',
+        category: 'tecnologia', date: '2025-05-20', source: 'The Guardian',
+        url: 'https://www.theguardian.com/football/2025/may/20/fifa-new-var-system-world-cup-2026',
+        img: 'https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/12/02/16699895689834.jpg'
+    },
+    {
+        id: 11, featured: false,
+        title: 'MetLife Stadium finaliza ampliación a 87,000 asientos para la Gran Final',
+        excerpt: 'El MetLife Stadium completó la ampliación de su capacidad a 87,000 asientos para albergar la final del Mundial 2026. Las obras incluyeron la instalación de 5,000 nuevos asientos premium, mejoras en accesibilidad y un sistema de drenaje del césped de última generación.',
+        category: 'sedes', date: '2025-06-02', source: 'NJ.com',
+        url: 'https://www.nj.com/sports/2025/06/metlife-stadium-expansion-87000-seats-world-cup-final.html',
+        img: 'https://thumbs.6sqft.com/wp-content/uploads/2022/06/17100144/MetLife-Stadium-Aerial-View.jpg?w=2000&format=webp'
+    },
+    {
+        id: 12, featured: false,
+        title: 'FIFA lanza programa de voluntariado para el Mundial con 15,000 plazas',
+        excerpt: 'La FIFA abrió el programa de voluntariado para el Mundial 2026 con 15,000 plazas disponibles en las 16 ciudades sede. Los voluntarios recibirán capacitación, uniforme oficial, certificado y acceso exclusivo a áreas del torneo. Se esperan más de 200,000 solicitudes.',
+        category: 'general', date: '2025-03-28', source: 'FIFA.com',
+        url: 'https://www.fifa.com/fifaplus/es/tournaments/mens/worldcup/2026/volunteers',
+        img: 'https://digitalhub.fifa.com/transform/3596a9b5-1629-4e8f-a48c-6c849be7d0db/FWC-2022-Volunteers'
+    }
+];
+
+// ===== RENDER =====
+const btnColors = { general:'green', sedes:'green', equipos:'red', entradas:'green', seguridad:'blue', tecnologia:'blue', mascota:'red' };
+const catLabels = { general:'General', sedes:'Sedes', equipos:'Equipos', entradas:'Entradas', seguridad:'Seguridad', tecnologia:'Tecnología', mascota:'Mascota' };
+const catIcons = { general:'fa-globe', sedes:'fa-map-marker-alt', equipos:'fa-users', entradas:'fa-ticket-alt', seguridad:'fa-shield-alt', tecnologia:'fa-microchip', mascota:'fa-star' };
+
+function fmtDate(d) {
+    const dt = new Date(d + 'T00:00:00');
+    const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    return `${dt.getDate()} ${months[dt.getMonth()]} ${dt.getFullYear()}`;
+}
+
+function renderNews(list) {
+    const grid = document.getElementById('newsGrid');
+    const featured = document.getElementById('featuredNews');
+    const empty = document.getElementById('newsEmpty');
+    const countEl = document.getElementById('newsCount');
+
+    countEl.textContent = list.length;
+
+    if (!list.length) { grid.innerHTML = ''; featured.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+
+    const featuredItem = list.find(n => n.featured);
+    const restItems = list.filter(n => n !== featuredItem);
+
+    // Featured
+    if (featuredItem) {
+        const c = featuredItem.category;
+        featured.innerHTML = `
+        <a href="${featuredItem.url}" target="_blank" rel="noopener noreferrer" class="news-featured">
+            <img class="news-featured-img" src="${featuredItem.img}" alt="${featuredItem.title}" onerror="this.style.background='var(--gray-100)'">
+            <div class="news-featured-body">
+                <div class="news-featured-badge"><i class="fas fa-fire"></i> DESTACADA</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                    <span class="news-cat cat-${c}"><i class="fas ${catIcons[c]}"></i> ${catLabels[c]}</span>
+                    <span class="news-date"><i class="far fa-clock"></i> ${fmtDate(featuredItem.date)}</span>
+                </div>
+                <h3>${featuredItem.title}</h3>
+                <p>${featuredItem.excerpt}</p>
+                <div class="news-card-footer">
+                    <span class="news-source"><i class="far fa-newspaper"></i> ${featuredItem.source}</span>
+                    <span class="btn-read btn-read-red"><i class="fas fa-external-link-alt"></i> Leer original</span>
+                </div>
+            </div>
+        </a>`;
+    } else { featured.innerHTML = ''; }
+
+    // Grid
+    grid.innerHTML = restItems.map(n => {
+        const c = n.category;
+        const bc = btnColors[c] || 'green';
+        return `
+        <a href="${n.url}" target="_blank" rel="noopener noreferrer" class="news-card">
+            <img class="news-card-img" src="${n.img}" alt="${n.title}" onerror="this.style.background='var(--gray-100)'">
+            <div class="news-card-body">
+                <div class="news-card-top">
+                    <span class="news-cat cat-${c}"><i class="fas ${catIcons[c]}"></i> ${catLabels[c]}</span>
+                    <span class="news-date"><i class="far fa-clock"></i> ${fmtDate(n.date)}</span>
+                </div>
+                <h3>${n.title}</h3>
+                <p>${n.excerpt}</p>
+                <div class="news-card-footer">
+                    <span class="news-source"><i class="far fa-newspaper"></i> ${n.source}</span>
+                    <span class="btn-read btn-read-${bc}"><i class="fas fa-external-link-alt"></i> Leer original</span>
+                </div>
+            </div>
+        </a>`;
+    }).join('');
+}
+
+// ===== FILTER =====
+function filterNews(cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.filter-btn[data-filter="${cat}"]`).classList.add('active');
+    const filtered = cat === 'all' ? newsData : newsData.filter(n => n.category === cat);
+    renderNews(filtered);
+}
+
+// ===== SERVER / SESSION / AUTH / CART / NOTIF / CHATBOT =====
+// (Idénticos al código original)
+async function checkServer(){const d=document.getElementById('serverDot'),l=document.getElementById('serverLabel');try{const r=await fetch(API_URL.replace('/auth','/health'),{signal:AbortSignal.timeout(3000)});if(r.ok){serverOnline=true;d.className='server-dot online';l.textContent='';}else throw new Error();}catch(e){serverOnline=false;d.className='server-dot offline';l.textContent='';}}
+async function checkSession(){const st=localStorage.getItem('wc2026_token'),su=localStorage.getItem('wc2026_user');if(st&&su){authToken=st;currentUser=JSON.parse(su);updateUserUI();if(serverOnline){try{const r=await fetch(`${API_URL}/profile`,{headers:{'Authorization':`Bearer ${authToken}`}});if(!r.ok){logout();}else{const d=await r.json();currentUser={id:d._id,name:d.name,email:d.email,country:d.country,notifications:d.notifications,role:d.role};localStorage.setItem('wc2026_user',JSON.stringify(currentUser));updateUserUI();}}catch(e){console.log('Sin conexión, sesión local');}}}}
+async function register(){const n=document.getElementById('regName').value.trim(),e=document.getElementById('regEmail').value.trim(),c=document.getElementById('regCountry').value,p=document.getElementById('regPassword').value,nt=document.getElementById('regNotif').checked;if(!n||!e||!c||!p){showNotif('error','Campos incompletos','Completa todos los campos.');return;}if(p.length<6){showNotif('error','Contraseña débil','Mínimo 6 caracteres.');return;}if(!e.includes('@')){showNotif('error','Email inválido','Ingresa un correo válido.');return;}const btn=document.getElementById('btnRegisterSubmit'),orig=btn.textContent;btn.disabled=true;btn.textContent='Registrando...';if(serverOnline){try{const r=await fetch(`${API_URL}/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:e,password:p,country:c,notifications:nt})});const d=await r.json();btn.disabled=false;btn.textContent=orig;if(!r.ok){showNotif('error','Error',d.error);return;}authToken=d.token;currentUser=d.user;localStorage.setItem('wc2026_token',authToken);localStorage.setItem('wc2026_user',JSON.stringify(currentUser));closeModal('register');updateUserUI();showNotif('success','¡Registro exitoso!',`Bienvenido/a, ${n}.`);if(nt)setTimeout(()=>showNotif('info','📧 Correo enviado',`Se envió a ${e}`),3000);return;}catch(e){btn.disabled=false;btn.textContent=orig;showNotif('error','Error de conexión','Modo local...');}}const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];if(users.find(u=>u.email===e)){showNotif('error','Email ya registrado','');btn.disabled=false;btn.textContent=orig;return;}const user={name:n,email:e,country:c,notifications:nt,registeredAt:new Date().toISOString()};users.push(user);localStorage.setItem('wc2026_users',JSON.stringify(users));localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;btn.disabled=false;btn.textContent=orig;closeModal('register');updateUserUI();showNotif('success','¡Registro exitoso!',`Bienvenido/a, ${n}. (Modo local)`);}
+async function login(){const e=document.getElementById('loginEmail').value.trim(),p=document.getElementById('loginPassword').value;if(!e||!p){showNotif('error','Campos vacíos','Ingresa correo y contraseña.');return;}const btn=document.getElementById('btnLoginSubmit'),orig=btn.textContent;btn.disabled=true;btn.textContent='Ingresando...';if(serverOnline){try{const r=await fetch(`${API_URL}/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e,password:p})});const d=await r.json();btn.disabled=false;btn.textContent=orig;if(!r.ok){showNotif('error','Datos incorrectos',d.error);return;}authToken=d.token;currentUser=d.user;localStorage.setItem('wc2026_token',authToken);localStorage.setItem('wc2026_user',JSON.stringify(currentUser));closeModal('login');updateUserUI();showNotif('success','¡Bienvenido!',`Hola, ${d.user.name}.`);return;}catch(e2){btn.disabled=false;btn.textContent=orig;showNotif('error','Error de conexión','Modo local...');}}const users=JSON.parse(localStorage.getItem('wc2026_users'))||[];const user=users.find(u=>u.email===e&&u.password===p);if(!user){showNotif('error','Datos incorrectos','');btn.disabled=false;btn.textContent=orig;return;}localStorage.setItem('wc2026_user',JSON.stringify(user));currentUser=user;btn.disabled=false;btn.textContent=orig;closeModal('login');updateUserUI();showNotif('success','¡Bienvenido!',`Hola, ${user.name}. (Modo local)`);}
+function logout(){localStorage.removeItem('wc2026_token');localStorage.removeItem('wc2026_user');authToken=null;currentUser=null;updateUserUI();showNotif('info','Sesión cerrada','Has cerrado sesión.');}
+function updateUserUI(){const l=document.getElementById('btnLogin'),r=document.getElementById('btnRegister'),ub=document.getElementById('userBar'),av=document.getElementById('userAvatar'),nm=document.getElementById('userName');if(currentUser){l.style.display='none';r.style.display='none';ub.classList.add('active');av.textContent=currentUser.name.charAt(0).toUpperCase();nm.textContent=currentUser.name.split(' ')[0];}else{l.style.display='';r.style.display='';ub.classList.remove('active');}}
+function openModal(t){document.getElementById(t+'Modal').classList.add('active');}
+function closeModal(t){document.getElementById(t+'Modal').classList.remove('active');}
+function switchModal(f,t){closeModal(f);setTimeout(()=>openModal(t),200);}
+document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('active');});});
+function addToCart(n,p,i){if(!currentUser){showNotif('error','Inicia sesión','');openModal('login');return;}const ex=cart.find(x=>x.name===n);if(ex)ex.qty++;else cart.push({name:n,price:p,icon:i,qty:1,id:Date.now()});saveCart();renderCart();showNotif('success','Agregado',`${n} — $${p} USD`);}
+function removeFromCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
+function saveCart(){localStorage.setItem('wc2026_cart',JSON.stringify(cart));}
+function renderCart(){const c=document.getElementById('cartItems'),b=document.getElementById('cartBadge'),t=document.getElementById('cartTotal');const tq=cart.reduce((s,i)=>s+i.qty,0),tp=cart.reduce((s,i)=>s+i.price*i.qty,0);b.textContent=tq;if(!cart.length)c.innerHTML='<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>';else c.innerHTML=cart.map(i=>`<div class="cart-item"><div class="cart-item-img">${i.icon}</div><div class="cart-item-info"><h4>${i.name} ${i.qty>1?'×'+i.qty:''}</h4><p>Entrada</p><div class="cart-item-price">$${i.price*i.qty} USD</div></div><button class="cart-item-remove" onclick="removeFromCart(${i.id})"><i class="fas fa-trash-alt"></i></button></div>`).join('');t.textContent='$'+tp.toLocaleString()+' USD';}
+function toggleCart(){document.getElementById('cartSidebar').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('open');}
+async function checkout(){if(!currentUser){showNotif('error','Inicia sesión','');openModal('login');return;}if(!cart.length){showNotif('error','Carrito vacío','');return;}const total=cart.reduce((s,i)=>s+i.price*i.qty,0);if(serverOnline&&authToken){try{const items=cart.map(i=>({name:i.name,price:i.price,qty:i.qty}));const r=await fetch(`${API_URL}/purchase`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${authToken}`},body:JSON.stringify({items})});const d=await r.json();if(!r.ok){showNotif('error','Error',d.error);return;}showNotif('success','¡Compra procesada!',`$${total.toLocaleString()} USD. Orden: ${d.order.orderId}`);cart=[];saveCart();renderCart();toggleCart();return;}catch(e){showNotif('error','Error de conexión','Modo local...');}}showNotif('success','¡Compra procesada!',`$${total.toLocaleString()} USD (Modo local)`);const orders=JSON.parse(localStorage.getItem('wc2026_orders'))||[];orders.push({user:currentUser.email,items:[...cart],total,date:new Date().toISOString(),id:'ORD-'+Date.now()});localStorage.setItem('wc2026_orders',JSON.stringify(orders));cart=[];saveCart();renderCart();toggleCart();}
+function showNotif(type,title,msg){const c=document.getElementById('notifContainer'),icons={success:'fa-check',error:'fa-exclamation',info:'fa-info'};const n=document.createElement('div');n.className=`notif ${type}`;n.innerHTML=`<div class="notif-icon"><i class="fas ${icons[type]}"></i></div><div class="notif-text"><h4>${title}</h4><p>${msg}</p></div>`;c.appendChild(n);setTimeout(()=>n.remove(),5000);}
+function updateCountdown(){const target=new Date('2026-06-11T18:00:00'),now=new Date(),diff=target-now;if(diff<=0){document.getElementById('countdownBar').innerHTML='⚽ <strong>¡El Mundial 2026 está en marcha!</strong>';return;}document.getElementById('countDays').textContent=Math.floor(diff/(1000*60*60*24));document.getElementById('countHours').textContent=Math.floor((diff%(1000*60*60*24))/(1000*60*60));document.getElementById('countMins').textContent=Math.floor((diff%(1000*60*60))/(1000*60));}
+
+// ===== CHATBOT =====
+// ===== CHATBOT — MAPA CONCEPTUAL =====
+const chatTree = {
+    _root: {
+        answer: '¡Hola! 👋 Soy el asistente del Mundial 2026. Elige un tema para comenzar a explorar:',
+        children: ['sedes', 'torneo', 'entradas_viaje', 'simbolos', 'paises']
+    },
+    // ===== SEDE Y ESTADIOS =====
+    sedes: {
+        label: '🏟️ Sede y Estadios',
+        answer: '🏟️ Habrá <strong>16 estadios</strong> en 3 países. ¿De qué quieres saber?',
+        children: ['sedes_usa', 'sedes_mex', 'sedes_can', 'inaugural', 'final_sede']
+    },
+    sedes_usa: {
+        label: '🇺🇸 Estadios en EE.UU.',
+        answer: '🇺🇸 EE.UU. tiene <strong>11 sedes</strong>. ¿Quieres detalles de alguno?',
+        children: ['metlife', 'sofi', 'hard_rock', 'mas_usa']
+    },
+    metlife: {
+        label: '🏟️ MetLife Stadium',
+        answer: '🏟️ <strong>MetLife Stadium</strong> — Nueva Jersey. Capacidad: 87,000. Sede de la <strong>Gran Final</strong> del 19 de julio de 2026. También albergará semifinales.',
+        children: []
+    },
+    sofi: {
+        label: '🏟️ SoFi Stadium',
+        answer: '🏟️ <strong>SoFi Stadium</strong> — Los Ángeles, CA. Capacidad: 70,000 (expandible a 100K). Sede de cuartos de final y semifinal. Uno de los estadios más modernos del mundo.',
+        children: []
+    },
+    hard_rock: {
+        label: '🏟️ Hard Rock Stadium',
+        answer: '🏟️ <strong>Hard Rock Stadium</strong> — Miami, FL. Capacidad: 65,000. Sede de fase de grupos y eliminatorias. Clima tropical garantizado.',
+        children: []
+    },
+    mas_usa: {
+        label: '📋 Más estadios EE.UU.',
+        answer: '📋 Otros estadios en EE.UU.:<br>• <strong>AT&T Stadium</strong> — Dallas, TX (80K)<br>• <strong>Mercedes-Benz</strong> — Atlanta, GA (71K)<br>• <strong>Lumen Field</strong> — Seattle, WA (69K)<br>• <strong>Gillette Stadium</strong> — Boston, MA (65K)<br>• <strong>Lincoln Financial</strong> — Filadelfia, PA (69K)<br>• <strong>NRG Stadium</strong> — Houston, TX (72K)<br>• <strong>Arrowhead Stadium</strong> — Kansas City, MO (76K)<br>• <strong>Levi\'s Stadium</strong> — Santa Clara, CA (68K)',
+        children: []
+    },
+    sedes_mex: {
+        label: '🇲🇽 Estadios en México',
+        answer: '🇲🇽 México tiene <strong>3 sedes</strong>. ¿De cuál quieres saber?',
+        children: ['azteca', 'bbva', 'akron']
+    },
+    azteca: {
+        label: '🏟️ Estadio Azteca',
+        answer: '🏟️ <strong>Estadio Azteca</strong> — CDMX. Capacidad: 87,000. Primer estadio en albergar <strong>3 mundiales</strong> (1970, 1986 y 2026). Sede del partido inaugural. ¡Un templo del fútbol!',
+        children: []
+    },
+    bbva: {
+        label: '🏟️ Estadio BBVA',
+        answer: '🏟️ <strong>Estadio BBVA</strong> — Monterrey, NL. Capacidad: 53,000. Conocido como "El Gigante de Acero". Sede de fase de grupos y octavos de final.',
+        children: []
+    },
+    akron: {
+        label: '🏟️ Estadio Akron',
+        answer: '🏟️ <strong>Estadio Akron</strong> — Guadalajara, JAL. Capacidad: 49,000. Sede de fase de grupos y octavos de final. Hogar de las Chivas.',
+        children: []
+    },
+    sedes_can: {
+        label: '🇨🇦 Estadios en Canadá',
+        answer: '🇨🇦 Canadá tiene <strong>2 sedes</strong>. ¿Cuál te interesa?',
+        children: ['bmo_field', 'bc_place']
+    },
+    bmo_field: {
+        label: '🏟️ BMO Field',
+        answer: '🏟️ <strong>BMO Field</strong> — Toronto, ON. Capacidad: 45,000 (expandible). Sede de fase de grupos y octavos de final.',
+        children: []
+    },
+    bc_place: {
+        label: '🏟️ BC Place',
+        answer: '🏟️ <strong>BC Place</strong> — Vancouver, BC. Capacidad: 54,000. Techo retráctil. Sede de fase de grupos.',
+        children: []
+    },
+    inaugural: {
+        label: '🎯 Partido Inaugural',
+        answer: '🎯 El <strong>partido inaugural</strong> se jugará el <strong>11 de junio de 2026</strong> en el <strong>Estadio Azteca</strong> de CDMX. México será local, continuando la tradición del anfitrión.',
+        children: []
+    },
+    final_sede: {
+        label: '🏆 La Gran Final',
+        answer: '🏆 La <strong>Gran Final</strong> se jugará el <strong>19 de julio de 2026</strong> en el <strong>MetLife Stadium</strong> de Nueva Jersey, con 87,000 espectadores.',
+        children: []
+    },
+    // ===== EL TORNEO =====
+    torneo: {
+        label: '⚽ El Torneo',
+        answer: '⚽ El Mundial 2026 será el más grande de la historia. ¿Qué aspecto te interesa?',
+        children: ['fechas', 'formato', 'equipos', 'partidos_fase']
+    },
+    fechas: {
+        label: '📅 Fechas del Mundial',
+        answer: '📅 Del <strong>11 de junio al 19 de julio de 2026</strong>. Inaugural: 11 jun en el Azteca (CDMX). Final: 19 jul en MetLife (Nueva Jersey).',
+        children: []
+    },
+    formato: {
+        label: '⚽ Formato 48 equipos',
+        answer: '⚽ <strong>48 equipos</strong> en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros de cada grupo y los <strong>8 mejores terceros</strong> (32 a eliminatorias). <strong>104 partidos</strong> en total.',
+        children: ['clasificacion', 'repesca']
+    },
+    clasificacion: {
+        label: '📊 Plazas por confederación',
+        answer: '📊 Distribución de plazas:<br>• <strong>UEFA:</strong> 16 plazas<br>• <strong>CONMEBOL:</strong> 9 plazas<br>• <strong>CONCACAF:</strong> 8 plazas (3 anfitriones + 5)<br>• <strong>CAF:</strong> 9 plazas<br>• <strong>AFC:</strong> 8 plazas<br>• <strong>OFC:</strong> 2 plazas<br>Total: 48 selecciones.',
+        children: []
+    },
+    repesca: {
+        label: '🔄 Repesca intercontinental',
+        answer: '🔄 La repesca definirá las últimas 2 plazas. Participarán equipos de distintas confederaciones en un torneo eliminatorio previo al Mundial.',
+        children: []
+    },
+    equipos: {
+        label: '🌍 Equipos clasificados',
+        answer: '🌍 Las eliminatorias están en curso. ¿De qué confederación quieres saber?',
+        children: ['uefa', 'conmebol', 'concacaf', 'caf', 'afc', 'ofc']
+    },
+    uefa: {
+        label: '🇪🇺 UEFA (Europa)',
+        answer: '🇪🇺 <strong>16 plazas</strong>. Potencias como Francia, España, Inglaterra, Alemania e Italia buscan su lugar. Las eliminatorias europeas son las más competitivas del mundo.',
+        children: []
+    },
+    conmebol: {
+        label: '🇧🇷 CONMEBOL (Sudamérica)',
+        answer: '🇧🇷 <strong>9 plazas</strong>. Argentina (campeona defensora) y Brasil lideran. ¡Messi podría jugar su 6º mundial!',
+        children: []
+    },
+    concacaf: {
+        label: '🌎 CONCACAF (Norteamérica)',
+        answer: '🌎 <strong>8 plazas</strong>: 3 anfitrionas automáticas (🇺🇸🇲🇽🇨🇦) + 5 por clasificación.',
+        children: []
+    },
+    caf: {
+        label: '🌍 CAF (África)',
+        answer: '🌍 <strong>9 plazas</strong>. Marruecos (semifinalista en Qatar 2022) es la gran favorita. Las eliminatorias africanas son muy competidas.',
+        children: []
+    },
+    afc: {
+        label: '🌏 AFC (Asia)',
+        answer: '🌏 <strong>8 plazas</strong>. Japón, Corea del Sur e Irán son potencias. Arabia Saudita y Australia también buscan clasificar.',
+        children: []
+    },
+    ofc: {
+        label: '🏝️ OFC (Oceanía)',
+        answer: '🏝️ <strong>2 plazas</strong>. ¡Por primera vez, Oceanía tiene plaza directa! Nueva Zelanda es la favorita histórica.',
+        children: []
+    },
+    partidos_fase: {
+        label: '📊 Partidos por fase',
+        answer: '📊 <strong>Distribución:</strong><br>• Fase de grupos: 72 partidos<br>• Octavos: 16<br>• Cuartos: 8<br>• Semifinales: 4<br>• 3er puesto + Final: 2<br>• Repesca: 2<br><strong>Total: 104 partidos</strong>',
+        children: []
+    },
+    // ===== ENTRADAS Y VIAJE =====
+    entradas_viaje: {
+        label: '🎫 Entradas y Viaje',
+        answer: '🎫 Todo lo que necesitas para tu viaje al Mundial. ¿Qué te interesa?',
+        children: ['comprar', 'precios', 'visa', 'transporte', 'clima', 'seguridad']
+    },
+    comprar: {
+        label: '🎫 Dónde comprar entradas',
+        answer: '🎫 En <strong>FIFA.com/tickets</strong>. Proceso: 1) Registro de interés, 2) Sorteo aleatorio (fase 1), 3) Venta directa (fase 2). ¡También en nuestra sección de Entradas!',
+        children: []
+    },
+    precios: {
+        label: '💰 Precios de entradas',
+        answer: '💰 <strong>Precios:</strong><br>• Fase de Grupos: <strong>$95 USD</strong><br>• Octavos: <strong>$185 USD</strong><br>• Semifinal: <strong>$450 USD</strong><br>• Gran Final: <strong>$1,100 USD</strong><br>Pueden variar según categoría.',
+        children: []
+    },
+    visa: {
+        label: '🛂 Visa y documentos',
+        answer: '🛂 Depende de tu destino. ¿A dónde viajas?',
+        children: ['visa_usa', 'visa_mex', 'visa_can']
+    },
+    visa_usa: {
+        label: '🇺🇸 Visa para EE.UU.',
+        answer: '🇺🇸 La mayoría necesita <strong>visa B1/B2</strong>. El proceso puede tomar semanas. ¡Tramítala con <strong>6 meses</strong> de anticipación! Verifica en <strong>travel.state.gov</strong>.',
+        children: []
+    },
+    visa_mex: {
+        label: '🇲🇽 Visa para México',
+        answer: '🇲🇽 México <strong>no requiere visa</strong> para muchos países latinoamericanos y europeos (estancias hasta 180 días). Verifica en la <strong>SRE</strong>.',
+        children: []
+    },
+    visa_can: {
+        label: '🇨🇦 Visa para Canadá',
+        answer: '🇨🇦 Se necesita <strong>eTA</strong> (autorización electrónica) para países exentos, o <strong>visa de residente temporal</strong> para el resto. Tramita en <strong>canada.ca</strong>.',
+        children: []
+    },
+    transporte: {
+        label: '🚌 Transporte en sedes',
+        answer: '🚌 Las ciudades ofrecerán <strong>metro, tren ligero y shuttles FIFA</strong>. En EE.UU. se recomienda alquilar auto para estadios suburbanos. ¡Planifica con anticipación!',
+        children: []
+    },
+    clima: {
+        label: '🌤️ Clima en las sedes',
+        answer: '🌤️ ¿De qué país quieres saber el clima?',
+        children: ['clima_mex', 'clima_usa', 'clima_can']
+    },
+    clima_mex: {
+        label: '🇲🇽 Clima en México',
+        answer: '🇲🇽 <strong>Junio-julio:</strong><br>• CDMX: 15-28°C, lluvias por la tarde<br>• Monterrey: 28-40°C, muy caluroso<br>• Guadalajara: 18-33°C, cálido<br>¡Ropa ligera, protector solar y paraguas!',
+        children: []
+    },
+    clima_usa: {
+        label: '🇺🇸 Clima en EE.UU.',
+        answer: '🇺🇸 <strong>Junio-julio:</strong><br>• Nueva York: 22-30°C, veraniego<br>• LA: 18-28°C, seco<br>• Miami: 26-35°C, húmedo<br>• Dallas/Atlanta: 25-38°C<br>• Seattle: 15-25°C, fresco',
+        children: []
+    },
+    clima_can: {
+        label: '🇨🇦 Clima en Canadá',
+        answer: '🇨🇦 <strong>Junio-julio:</strong><br>• Toronto: 18-28°C, agradable<br>• Vancouver: 15-24°C, más fresco<br>¡Clima ideal! Lleva chaqueta ligera para las noches.',
+        children: []
+    },
+    seguridad: {
+        label: '🔒 Seguridad',
+        answer: '🔒 <strong>Recomendaciones:</strong><br>• Llega 2-3 hrs antes al estadio<br>• No lleves objetos prohibidos<br>• Usa transporte oficial FIFA<br>• Lleva documentos de identidad siempre<br>• Guarda copias digitales de tus documentos',
+        children: []
+    },
+    // ===== SÍMBOLOS =====
+    simbolos: {
+        label: '🏆 Símbolos del Mundial',
+        answer: '🏆 Cada Mundial tiene símbolos únicos. ¿Cuál te interesa?',
+        children: ['mascota', 'balon', 'copa', 'historia']
+    },
+    mascota: {
+        label: '🦅 Mascota oficial',
+        answer: '🦅 Combina <strong>águila (EE.UU.)</strong>, <strong>jaguar (México)</strong> y <strong>castor (Canadá)</strong>, simbolizando la unión de las tres naciones con valores de diversidad y pasión por el fútbol.',
+        children: []
+    },
+    balon: {
+        label: '⚽ Balón oficial',
+        answer: '⚽ <strong>Adidas Tournament Ball</strong> con tecnología <strong>Connected Ball</strong>. ¿Quieres saber más de la tecnología?',
+        children: ['connected_ball']
+    },
+    connected_ball: {
+        label: '🔬 Tecnología Connected Ball',
+        answer: '🔬 Sensor <strong>UWB</strong> interno que envía datos 500 veces/segundo a antenas del estadio:<br>• Detecta si el balón cruzó la línea<br>• Detecta contacto en jugadas<br>• Mide velocidad y trayectoria<br>Reduce el tiempo del VAR a menos de 30 segundos.',
+        children: []
+    },
+    copa: {
+        label: '🏆 Copa Mundial',
+        answer: '🏆 Diseñada por <strong>Silvio Gazzaniga</strong> en 1974. ¿Qué detalle quieres conocer?',
+        children: ['copa_peso', 'copa_historia', 'copa_champions']
+    },
+    copa_peso: {
+        label: '⚖️ Peso y medidas',
+        answer: '⚖️ <strong>Datos:</strong><br>• Peso: 6.175 kg de oro de 18 quilates<br>• Altura: 36.8 cm<br>• Base: Dos anillos de malaquita verde<br>• Valor estimado: más de $20 millones USD',
+        children: []
+    },
+    copa_historia: {
+        label: '📜 Historia del trofeo',
+        answer: '📜 En uso desde <strong>1974</strong>. Antes se usaba la <strong>Copa Jules Rimet</strong> (Brasil la ganó definitivamente en 1970 tras 3 títulos). El trofeo actual es propiedad permanente de la FIFA; los campeones reciben réplica bañada en oro.',
+        children: []
+    },
+    copa_champions: {
+        label: '👑 Campeones históricos',
+        answer: '👑 <strong>Más títulos:</strong><br>🇧🇷 Brasil: 5 (1958, 62, 70, 94, 2002)<br>🇩🇪 Alemania: 4<br>🇮🇹 Italia: 4<br>🇦🇷 Argentina: 3 (última 2022)<br>🇫🇷 Francia: 2<br>¿Quién lo levantará en 2026?',
+        children: []
+    },
+    historia: {
+        label: '📜 Historia del Mundial',
+        answer: '📜 Hitos del Mundial 2026. ¿Cuál te interesa?',
+        children: ['hist_2017', 'hist_2018', 'hist_2022', 'hist_2023']
+    },
+    hist_2017: {
+        label: '📌 Decisión 2017',
+        answer: '📌 En <strong>enero de 2017</strong>, el Consejo de la FIFA aprobó la expansión de 32 a <strong>48 equipos</strong>. Esto permite que 8 países más experimenten un mundial.',
+        children: []
+    },
+    hist_2018: {
+        label: '📌 Votación 2018',
+        answer: '📌 El <strong>13 de junio de 2018</strong>, <strong>United 2026</strong> ganó con <strong>134 votos</strong> contra 65 de Marruecos, en el 68º Congreso de la FIFA en Moscú.',
+        children: []
+    },
+    hist_2022: {
+        label: '📌 Formato 2022',
+        answer: '📌 En <strong>2022</strong> se confirmó: 12 grupos de 4. Clasifican los 2 primeros y los <strong>8 mejores terceros</strong>, completando 32 para eliminatorias.',
+        children: []
+    },
+    hist_2023: {
+        label: '📌 Sedes 2023',
+        answer: '📌 En <strong>2023</strong> se anunciaron las <strong>16 ciudades sede</strong>: 11 en EE.UU., 3 en México y 2 en Canadá. Se asignaron los partidos por fase.',
+        children: []
+    },
+    // ===== PAÍSES =====
+    paises: {
+        label: '🌍 Países Anfitriones',
+        answer: '🌍 Tres naciones unidas por el fútbol. ¿De cuál quieres saber?',
+        children: ['pais_usa', 'pais_mex', 'pais_can']
+    },
+    pais_usa: {
+        label: '🇺🇸 Estados Unidos',
+        answer: '🇺🇸 Principal anfitrión con <strong>11 sedes</strong> y la Gran Final. Segundo mundial masculino que organiza (primero: 1994). Su selección clasifica automáticamente.',
+        children: []
+    },
+    pais_mex: {
+        label: '🇲🇽 México',
+        answer: '🇲🇽 Anfitrión por <strong>tercera vez</strong> (1970, 1986 y 2026) — ¡récord histórico! El Azteca será sede del inaugural. Su selección clasifica automáticamente.',
+        children: []
+    },
+    pais_can: {
+        label: '🇨🇦 Canadá',
+        answer: '🇨🇦 Primer mundial masculino que organiza (ya tuvo el Femenino 2015). Tiene 2 sedes: Toronto y Vancouver. Su selección clasifica automáticamente.',
+        children: []
+    }
+};
+
+let chatPath = ['_root'];
+
+function updateBreadcrumb() {
+    const bc = document.getElementById('chatBreadcrumb');
+    if (!bc) return;
+    const names = chatPath.map(id => id === '_root' ? 'Inicio' : (chatTree[id] ? chatTree[id].label : ''));
+    bc.innerHTML = '📍 ' + names.join(' <i class="fas fa-chevron-right"></i> ');
+}
+
+function showChatOptions(node) {
+    const opt = document.getElementById('chatOptions');
+    let html = '';
+    if (chatPath.length > 1) {
+        html += '<button class="chat-opt chat-opt-home" onclick="chatHome()">🏠 Inicio</button>';
+        html += '<button class="chat-opt chat-opt-back" onclick="chatBack()">◀ Volver</button>';
+    }
+    if (node.children && node.children.length > 0) {
+        node.children.forEach(cid => {
+            const child = chatTree[cid];
+            if (child) html += `<button class="chat-opt" onclick="chatOption('${cid}')">${child.label}</button>`;
+        });
+    }
+    opt.innerHTML = html;
+    updateBreadcrumb();
+}
+
+function chatOption(nodeId) {
+    const node = chatTree[nodeId];
+    if (!node) return;
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = node.label;
+    msgs.appendChild(u);
+    chatPath.push(nodeId);
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        b.innerHTML = node.answer;
+        msgs.appendChild(b);
+        showChatOptions(node);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 400);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+function chatBack() {
+    if (chatPath.length <= 1) return;
+    chatPath.pop();
+    const parentId = chatPath[chatPath.length - 1];
+    const parent = chatTree[parentId];
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = '◀ Volver';
+    msgs.appendChild(u);
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        b.innerHTML = parent.answer;
+        msgs.appendChild(b);
+        showChatOptions(parent);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 300);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+function chatHome() {
+    chatPath = ['_root'];
+    const root = chatTree._root;
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = '🏠 Menú principal';
+    msgs.appendChild(u);
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        b.innerHTML = root.answer;
+        msgs.appendChild(b);
+        showChatOptions(root);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 300);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+function sendChat() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = text;
+    msgs.appendChild(u);
+    const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let response = null;
+    let navigateTo = null;
+
+    if (['hola','hello','hi','hey','buenas','saludos'].some(k => lower.includes(k))) {
+        response = '¡Hola! 👋 ¡Elige un tema del menú para explorar!';
+    } else if (['gracias','thanks','ty'].some(k => lower.includes(k))) {
+        response = '¡De nada! 😊 Si tienes más dudas, elige una opción del menú.';
+    } else if (['adios','adiós','bye','chao'].some(k => lower.includes(k))) {
+        response = '¡Hasta luego! 👋 ¡Nos vemos en el Mundial 2026! ⚽🏆';
+    } else if (['album','panini','estampa'].some(k => lower.includes(k))) {
+        response = '📓 ¡Visita <strong>"Mi Álbum"</strong> para coleccionar estampas de las 48 selecciones!';
+    } else if (['registrar','cuenta','registro'].some(k => lower.includes(k))) {
+        response = '📝 Haz clic en <strong>"Registrarse"</strong> en la barra superior. Solo necesitas nombre, correo, país y contraseña.';
+    } else if (['carrito','compra','pagar'].some(k => lower.includes(k))) {
+        response = '🛒 Ve a <strong>"Entradas"</strong>, agrega al carrito y haz clic en <strong>"Proceder al Pago"</strong>. Necesitas iniciar sesión.';
+    } else {
+        const kwMap = {
+            'fecha':'fechas','fechas':'fechas','cuando':'fechas','inicio':'fechas',
+            'estadio':'sedes','sede':'sedes','sedes':'sedes','donde':'sedes',
+            'formato':'formato','grupo':'formato','48':'formato',
+            'entrada':'comprar','ticket':'comprar','boleto':'comprar',
+            'precio':'precios','costo':'precios','cuanto':'precios',
+            'visa':'visa','pasaporte':'visa',
+            'transporte':'transporte','metro':'transporte','bus':'transporte',
+            'clima':'clima','temperatura':'clima','calor':'clima',
+            'seguridad':'seguridad','policia':'seguridad',
+            'mascota':'mascota','animal':'mascota',
+            'balon':'balon','pelota':'balon',
+            'copa':'copa','trofeo':'copa',
+            'inaugural':'inaugural','inaugura':'inaugural',
+            'final':'final_sede',
+            'equipo':'equipos','seleccion':'equipos','clasificado':'equipos',
+            'mexico':'pais_mex','azteca':'azteca','monterrey':'bbva','guadalajara':'akron',
+            'usa':'pais_usa','eeuu':'pais_usa','estados unidos':'pais_usa',
+            'canada':'pais_can',
+            'metlife':'metlife','sofi':'sofi',
+            'argentina':'conmebol','brasil':'conmebol',
+            'uefa':'uefa','europa':'uefa',
+            'historia':'historia',
+            'repesca':'repesca'
+        };
+        for (const [kw, nid] of Object.entries(kwMap)) {
+            if (lower.includes(kw) && chatTree[nid]) {
+                navigateTo = nid;
+                break;
+            }
+        }
+    }
+
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        if (navigateTo) {
+            const node = chatTree[navigateTo];
+            b.innerHTML = node.answer;
+            chatPath = ['_root', navigateTo];
+            showChatOptions(node);
+        } else {
+            b.innerHTML = response || '🤔 No encontré eso, pero puedes explorar los temas del menú. ¡Selecciona una opción!';
+        }
+        msgs.appendChild(b);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 500);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+function toggleChat(){const cw=document.getElementById('chatWindow');cw.classList.toggle('open');const tt=document.getElementById('chatTooltip');if(cw.classList.contains('open')&&tt)tt.style.display='none';}
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');}
+
+// ===== SCROLL =====
+window.addEventListener('scroll',()=>{const btn=document.getElementById('scrollTop');btn.classList.toggle('show',window.scrollY>600);const nav=document.getElementById('navbar');nav.style.boxShadow=window.scrollY>10?'0 4px 20px rgba(0,0,0,0.3)':'none';});
+
+// ===== INIT =====
+async function init(){
+    await checkServer(); await checkSession(); renderCart();
+    renderNews(newsData);
+    updateCountdown(); setInterval(updateCountdown,60000);
+}
+init();
+</script>
+</body>
+</html>
