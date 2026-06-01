@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELE Mundial 2026</title>
     <!-- FAVICON -->
-    <link rel="icon" type="image/jpeg" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
-    <link rel="apple-touch-icon" href="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1">
+    <link rel="icon" type="image/jpeg" href="7182_balon.png">
+    <link rel="apple-touch-icon" href="7182_balon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* ===== VARIABLES ===== */
@@ -765,10 +765,17 @@
 <!-- ===== BARRA DE NAVEGACIÓN ===== -->
 <nav class="navbar" id="navbar">
     <div class="navbar-inner">
-        <a href="#" class="nav-logo">
-            <i class="fas fa-futbol"></i> ELE Mundial 2026
-            <span class="server-status"><span class="server-dot" id="serverDot"></span><span id="serverLabel">Verificando...</span></span>
-        </a>
+        <!-- DESPUÉS -->
+<div style="display:flex;align-items:center;flex-shrink:0;">
+    <a href="index.html" class="nav-logo">
+        <i class="fas fa-futbol"></i>
+        <div class="nav-logo-text">
+            ELE Mundial 2026
+            <span></span>
+        </div>
+    </a>
+    <span class="server-status"><span class="server-dot" id="serverDot"></span><span id="serverLabel"></span></span>
+</div>
         <div class="nav-links">
             <a href="#inicio" class="active">Inicio</a>
             <a href="#introduccion">Introducción</a>
@@ -778,9 +785,9 @@
             <a href="#balon">Balón</a>
             <a href="#copa">Copa</a>
             <a href="#entradas">Entradas</a>
-            <a href="calendario.html">→</a>
+            <a href="calendario.html">Calendario</a>
             <a href="album.html">Mi Álbum</a>
-            <a href="noticias.html">←</a>
+            <a href="noticias.html">Noticias</a>
         </div>
         <div class="nav-actions">
             <button class="btn-nav btn-nav-outline" onclick="openModal('login')" id="btnLogin">Iniciar Sesión</button>
@@ -810,9 +817,9 @@
     <a href="#balon" onclick="toggleMobile()">Balón</a>
     <a href="#copa" onclick="toggleMobile()">Copa</a>
     <a href="#entradas" onclick="toggleMobile()">Entradas</a>
-    <a href="calendario.html">→</a>
+    <a href="calendario.html">Calendario</a>
     <a href="album.html">Mi Álbum</a>
-    <a href="noticias.html">←</a>
+    <a href="noticias.html">Noticias</a>
 </div>
 <!-- CONTADOR -->
 <div class="countdown-bar" id="countdownBar">
@@ -1033,7 +1040,7 @@
         <div class="footer-grid">
             <div class="footer-brand"><h3><i class="fas fa-futbol"></i> Mundial 2026</h3><p>Sitio informativo no oficial sobre la Copa Mundial de la FIFA 2026. Todos los derechos de marca pertenecen a la FIFA.<br><br>Hecho por elementt<br> Carné: 6190-26-7182</p></div>
             <div class="footer-col"><h4>Navegación</h4><a href="#inicio">Inicio</a><a href="#introduccion">Introducción</a><a href="#historia">Historia</a><a href="#sedes">Sedes</a><a href="#entradas">Entradas</a></div>
-            <div class="footer-col"><h4>Páginas</h4><a href="calendario.html">.</a><a href="album.html">Mi Álbum</a><a href="noticias.html">..</a><a href="FAQ.html">Preguntas Frecuentes</a></div>
+            <div class="footer-col"><h4>Páginas</h4><a href="calendario.html">Calendario</a><a href="album.html">Mi Álbum</a><a href="noticias.html">Noticias</a><a href="FAQ.html">Preguntas Frecuentes</a></div>
             <div class="footer-col"><h4>Legal</h4><a href="#">Términos de Uso</a><a href="#">Política de Privacidad</a><a href="#">Cookies</a><a href="#">Contacto</a></div>
         </div>
         <div class="footer-bottom">
@@ -1095,9 +1102,10 @@
 <script>
 // ===== CONFIGURACIÓN DE LA API =====
 // Detecta automáticamente si estás en local o en GitHub Pages
+// ===== CONFIGURACIÓN DE LA API =====
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:3000/api/auth'  // Local: apunta a tu servidor local
-    : 'https://seven182-mundial.onrender.com';  // GitHub Pages: apunta a Render
+    ? 'http://localhost:3000/api/auth'
+    : 'https://7182-mundial.onrender.com/api/auth';
 
 let currentUser = null;
 let authToken = null;
@@ -1113,14 +1121,14 @@ async function checkServer() {
         if (res.ok) {
             serverOnline = true;
             dot.className = 'server-dot online';
-            label.textContent = 'En línea';
+            label.textContent = '';
         } else {
             throw new Error();
         }
     } catch (e) {
         serverOnline = false;
         dot.className = 'server-dot offline';
-        label.textContent = 'Sin servidor';
+        label.textContent = '';
     }
 }
 
@@ -1446,68 +1454,469 @@ updateCountdown();
 setInterval(updateCountdown, 60000);
 
 // ===== CHATBOT =====
-const chatResponses = {
-fechas:'📅 El Mundial 2026 se disputará del <strong>11 de junio al 19 de julio de 2026</strong>. El partido inaugural será el 11 de junio en el Estadio Azteca (Ciudad de México) y la final el 19 de julio en el MetLife Stadium (Nueva Jersey).',
-sedes:'🏟️ Habrá <strong>16 estadios</strong> en 3 países: 11 en EE.UU. (MetLife, SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead, Levi\'s), 3 en México (Azteca, BBVA, Akron) y 2 en Canadá (BMO Field, BC Place).',
-formato:'⚽ El formato es completamente nuevo: <strong>48 equipos</strong> divididos en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros de cada grupo y los <strong>8 mejores terceros</strong> (32 equipos a eliminatorias). Se jugarán <strong>104 partidos</strong> en total, 40 más que en Qatar 2022.',
-entradas:'🎫 Las entradas se venden a través de <strong>FIFA.com/tickets</strong>. Hay categorías para Fase de Grupos, Octavos, Semifinal y Final. ¡También puedes comprarlas aquí en nuestra sección de Entradas! Te recomendamos registrarte para acceder a la venta.',
-equipos:'🌍 Clasifican <strong>48 selecciones</strong>: 8 de CONCACAF (3 anfitriones + 5), 16 de UEFA, 9 de CONMEBOL, 9 de CAF, 8 de AFC y 2 de OFC. Las eliminatorias están en curso. ¡La repesca intercontinental definirá las últimas 2 plazas!',
-inaugural:'🎯 El <strong>partido inaugural</strong> se jugará el <strong>11 de junio de 2026</strong> en el <strong>Estadio Azteca</strong> de Ciudad de México. México será el equipo local, continuando la tradición de que el anfitrión juega el primer partido.',
-final:'🏆 La <strong>Gran Final</strong> del Mundial 2026 se jugará el <strong>19 de julio de 2026</strong> en el <strong>MetLife Stadium</strong> de East Rutherford, Nueva Jersey (EE.UU.), con capacidad para 87,000 espectadores.',
-visa:'🛂 Depende de tu país. <strong>México</strong> no requiere visa para muchos países latinoamericanos. <strong>EE.UU. y Canadá</strong> pueden requerir visa turística. Te recomendamos tramitarla con al menos 6 meses de anticipación. Consulta con las embajadas correspondientes.',
-mascota:'🦅 La mascota combina elementos del <strong>águila (EE.UU.)</strong>, el <strong>jaguar (México)</strong> y el <strong>castor (Canadá)</strong>, simbolizando la unión de las tres naciones con valores de diversidad y pasión por el fútbol.',
-balon:'⚽ El balón oficial incorpora tecnología <strong>Connected Ball</strong> con sensor interno para datos en tiempo real sobre velocidad, trayectoria e impacto, ayudando al VAR y al sistema de gol fantasma.',
-copa:'🏆 La Copa Mundial pesa <strong>6.1 kg de oro de 18 quilates</strong>, mide 36.8 cm y fue diseñada por Silvio Gazzaniga en 1974. Los campeones reciben una réplica bañada en oro; el original es propiedad de la FIFA.',
-precios:'💰 <strong>Precios de entradas:</strong><br>• Fase de Grupos: $95 USD<br>• Octavos de Final: $185 USD<br>• Semifinal: $450 USD<br>• Gran Final: $1,100 USD<br>Los precios pueden variar según categoría y ubicación.',
-transporte:'🚌 Las ciudades sede ofrecen transporte público masivo. Se recomienda usar <strong>metro, tren ligero y shuttles oficiales FIFA</strong>. En EE.UU. es recomendable alquilar auto para estadios suburbanos.',
-clima:'🌤️ <strong>Clima por sede en junio-julio:</strong><br>🇲🇽 CDMX/Monterrey/GDL: 25-35°C, caluroso y húmedo<br>🇺🇸 Nueva York: 25-30°C, veraniego<br>🇺🇸 LA/Miami: 25-35°C<br>🇨🇦 Toronto/Vancouver: 20-28°C, más fresco<br>¡Prepara ropa ligera y protección solar!',
-seguridad:'🔒 Las autoridades de los 3 países implementarán operativos de seguridad masivos. Se recomienda: llegar temprano al estadio (2-3 hrs antes), no llevar objetos prohibidos, usar transporte oficial y mantener documentos de identidad siempre contigo.'
+// ===== CHATBOT — MAPA CONCEPTUAL =====
+const chatTree = {
+    _root: {
+        answer: '¡Hola! 👋 Soy el asistente del Mundial 2026. Elige un tema para comenzar a explorar:',
+        children: ['sedes', 'torneo', 'entradas_viaje', 'simbolos', 'paises']
+    },
+    // ===== SEDE Y ESTADIOS =====
+    sedes: {
+        label: '🏟️ Sede y Estadios',
+        answer: '🏟️ Habrá <strong>16 estadios</strong> en 3 países. ¿De qué quieres saber?',
+        children: ['sedes_usa', 'sedes_mex', 'sedes_can', 'inaugural', 'final_sede']
+    },
+    sedes_usa: {
+        label: '🇺🇸 Estadios en EE.UU.',
+        answer: '🇺🇸 EE.UU. tiene <strong>11 sedes</strong>. ¿Quieres detalles de alguno?',
+        children: ['metlife', 'sofi', 'hard_rock', 'mas_usa']
+    },
+    metlife: {
+        label: '🏟️ MetLife Stadium',
+        answer: '🏟️ <strong>MetLife Stadium</strong> — Nueva Jersey. Capacidad: 87,000. Sede de la <strong>Gran Final</strong> del 19 de julio de 2026. También albergará semifinales.',
+        children: []
+    },
+    sofi: {
+        label: '🏟️ SoFi Stadium',
+        answer: '🏟️ <strong>SoFi Stadium</strong> — Los Ángeles, CA. Capacidad: 70,000 (expandible a 100K). Sede de cuartos de final y semifinal. Uno de los estadios más modernos del mundo.',
+        children: []
+    },
+    hard_rock: {
+        label: '🏟️ Hard Rock Stadium',
+        answer: '🏟️ <strong>Hard Rock Stadium</strong> — Miami, FL. Capacidad: 65,000. Sede de fase de grupos y eliminatorias. Clima tropical garantizado.',
+        children: []
+    },
+    mas_usa: {
+        label: '📋 Más estadios EE.UU.',
+        answer: '📋 Otros estadios en EE.UU.:<br>• <strong>AT&T Stadium</strong> — Dallas, TX (80K)<br>• <strong>Mercedes-Benz</strong> — Atlanta, GA (71K)<br>• <strong>Lumen Field</strong> — Seattle, WA (69K)<br>• <strong>Gillette Stadium</strong> — Boston, MA (65K)<br>• <strong>Lincoln Financial</strong> — Filadelfia, PA (69K)<br>• <strong>NRG Stadium</strong> — Houston, TX (72K)<br>• <strong>Arrowhead Stadium</strong> — Kansas City, MO (76K)<br>• <strong>Levi\'s Stadium</strong> — Santa Clara, CA (68K)',
+        children: []
+    },
+    sedes_mex: {
+        label: '🇲🇽 Estadios en México',
+        answer: '🇲🇽 México tiene <strong>3 sedes</strong>. ¿De cuál quieres saber?',
+        children: ['azteca', 'bbva', 'akron']
+    },
+    azteca: {
+        label: '🏟️ Estadio Azteca',
+        answer: '🏟️ <strong>Estadio Azteca</strong> — CDMX. Capacidad: 87,000. Primer estadio en albergar <strong>3 mundiales</strong> (1970, 1986 y 2026). Sede del partido inaugural. ¡Un templo del fútbol!',
+        children: []
+    },
+    bbva: {
+        label: '🏟️ Estadio BBVA',
+        answer: '🏟️ <strong>Estadio BBVA</strong> — Monterrey, NL. Capacidad: 53,000. Conocido como "El Gigante de Acero". Sede de fase de grupos y octavos de final.',
+        children: []
+    },
+    akron: {
+        label: '🏟️ Estadio Akron',
+        answer: '🏟️ <strong>Estadio Akron</strong> — Guadalajara, JAL. Capacidad: 49,000. Sede de fase de grupos y octavos de final. Hogar de las Chivas.',
+        children: []
+    },
+    sedes_can: {
+        label: '🇨🇦 Estadios en Canadá',
+        answer: '🇨🇦 Canadá tiene <strong>2 sedes</strong>. ¿Cuál te interesa?',
+        children: ['bmo_field', 'bc_place']
+    },
+    bmo_field: {
+        label: '🏟️ BMO Field',
+        answer: '🏟️ <strong>BMO Field</strong> — Toronto, ON. Capacidad: 45,000 (expandible). Sede de fase de grupos y octavos de final.',
+        children: []
+    },
+    bc_place: {
+        label: '🏟️ BC Place',
+        answer: '🏟️ <strong>BC Place</strong> — Vancouver, BC. Capacidad: 54,000. Techo retráctil. Sede de fase de grupos.',
+        children: []
+    },
+    inaugural: {
+        label: '🎯 Partido Inaugural',
+        answer: '🎯 El <strong>partido inaugural</strong> se jugará el <strong>11 de junio de 2026</strong> en el <strong>Estadio Azteca</strong> de CDMX. México será local, continuando la tradición del anfitrión.',
+        children: []
+    },
+    final_sede: {
+        label: '🏆 La Gran Final',
+        answer: '🏆 La <strong>Gran Final</strong> se jugará el <strong>19 de julio de 2026</strong> en el <strong>MetLife Stadium</strong> de Nueva Jersey, con 87,000 espectadores.',
+        children: []
+    },
+    // ===== EL TORNEO =====
+    torneo: {
+        label: '⚽ El Torneo',
+        answer: '⚽ El Mundial 2026 será el más grande de la historia. ¿Qué aspecto te interesa?',
+        children: ['fechas', 'formato', 'equipos', 'partidos_fase']
+    },
+    fechas: {
+        label: '📅 Fechas del Mundial',
+        answer: '📅 Del <strong>11 de junio al 19 de julio de 2026</strong>. Inaugural: 11 jun en el Azteca (CDMX). Final: 19 jul en MetLife (Nueva Jersey).',
+        children: []
+    },
+    formato: {
+        label: '⚽ Formato 48 equipos',
+        answer: '⚽ <strong>48 equipos</strong> en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros de cada grupo y los <strong>8 mejores terceros</strong> (32 a eliminatorias). <strong>104 partidos</strong> en total.',
+        children: ['clasificacion', 'repesca']
+    },
+    clasificacion: {
+        label: '📊 Plazas por confederación',
+        answer: '📊 Distribución de plazas:<br>• <strong>UEFA:</strong> 16 plazas<br>• <strong>CONMEBOL:</strong> 9 plazas<br>• <strong>CONCACAF:</strong> 8 plazas (3 anfitriones + 5)<br>• <strong>CAF:</strong> 9 plazas<br>• <strong>AFC:</strong> 8 plazas<br>• <strong>OFC:</strong> 2 plazas<br>Total: 48 selecciones.',
+        children: []
+    },
+    repesca: {
+        label: '🔄 Repesca intercontinental',
+        answer: '🔄 La repesca definirá las últimas 2 plazas. Participarán equipos de distintas confederaciones en un torneo eliminatorio previo al Mundial.',
+        children: []
+    },
+    equipos: {
+        label: '🌍 Equipos clasificados',
+        answer: '🌍 Las eliminatorias están en curso. ¿De qué confederación quieres saber?',
+        children: ['uefa', 'conmebol', 'concacaf', 'caf', 'afc', 'ofc']
+    },
+    uefa: {
+        label: '🇪🇺 UEFA (Europa)',
+        answer: '🇪🇺 <strong>16 plazas</strong>. Potencias como Francia, España, Inglaterra, Alemania e Italia buscan su lugar. Las eliminatorias europeas son las más competitivas del mundo.',
+        children: []
+    },
+    conmebol: {
+        label: '🇧🇷 CONMEBOL (Sudamérica)',
+        answer: '🇧🇷 <strong>9 plazas</strong>. Argentina (campeona defensora) y Brasil lideran. ¡Messi podría jugar su 6º mundial!',
+        children: []
+    },
+    concacaf: {
+        label: '🌎 CONCACAF (Norteamérica)',
+        answer: '🌎 <strong>8 plazas</strong>: 3 anfitrionas automáticas (🇺🇸🇲🇽🇨🇦) + 5 por clasificación.',
+        children: []
+    },
+    caf: {
+        label: '🌍 CAF (África)',
+        answer: '🌍 <strong>9 plazas</strong>. Marruecos (semifinalista en Qatar 2022) es la gran favorita. Las eliminatorias africanas son muy competidas.',
+        children: []
+    },
+    afc: {
+        label: '🌏 AFC (Asia)',
+        answer: '🌏 <strong>8 plazas</strong>. Japón, Corea del Sur e Irán son potencias. Arabia Saudita y Australia también buscan clasificar.',
+        children: []
+    },
+    ofc: {
+        label: '🏝️ OFC (Oceanía)',
+        answer: '🏝️ <strong>2 plazas</strong>. ¡Por primera vez, Oceanía tiene plaza directa! Nueva Zelanda es la favorita histórica.',
+        children: []
+    },
+    partidos_fase: {
+        label: '📊 Partidos por fase',
+        answer: '📊 <strong>Distribución:</strong><br>• Fase de grupos: 72 partidos<br>• Octavos: 16<br>• Cuartos: 8<br>• Semifinales: 4<br>• 3er puesto + Final: 2<br>• Repesca: 2<br><strong>Total: 104 partidos</strong>',
+        children: []
+    },
+    // ===== ENTRADAS Y VIAJE =====
+    entradas_viaje: {
+        label: '🎫 Entradas y Viaje',
+        answer: '🎫 Todo lo que necesitas para tu viaje al Mundial. ¿Qué te interesa?',
+        children: ['comprar', 'precios', 'visa', 'transporte', 'clima', 'seguridad']
+    },
+    comprar: {
+        label: '🎫 Dónde comprar entradas',
+        answer: '🎫 En <strong>FIFA.com/tickets</strong>. Proceso: 1) Registro de interés, 2) Sorteo aleatorio (fase 1), 3) Venta directa (fase 2). ¡También en nuestra sección de Entradas!',
+        children: []
+    },
+    precios: {
+        label: '💰 Precios de entradas',
+        answer: '💰 <strong>Precios:</strong><br>• Fase de Grupos: <strong>$95 USD</strong><br>• Octavos: <strong>$185 USD</strong><br>• Semifinal: <strong>$450 USD</strong><br>• Gran Final: <strong>$1,100 USD</strong><br>Pueden variar según categoría.',
+        children: []
+    },
+    visa: {
+        label: '🛂 Visa y documentos',
+        answer: '🛂 Depende de tu destino. ¿A dónde viajas?',
+        children: ['visa_usa', 'visa_mex', 'visa_can']
+    },
+    visa_usa: {
+        label: '🇺🇸 Visa para EE.UU.',
+        answer: '🇺🇸 La mayoría necesita <strong>visa B1/B2</strong>. El proceso puede tomar semanas. ¡Tramítala con <strong>6 meses</strong> de anticipación! Verifica en <strong>travel.state.gov</strong>.',
+        children: []
+    },
+    visa_mex: {
+        label: '🇲🇽 Visa para México',
+        answer: '🇲🇽 México <strong>no requiere visa</strong> para muchos países latinoamericanos y europeos (estancias hasta 180 días). Verifica en la <strong>SRE</strong>.',
+        children: []
+    },
+    visa_can: {
+        label: '🇨🇦 Visa para Canadá',
+        answer: '🇨🇦 Se necesita <strong>eTA</strong> (autorización electrónica) para países exentos, o <strong>visa de residente temporal</strong> para el resto. Tramita en <strong>canada.ca</strong>.',
+        children: []
+    },
+    transporte: {
+        label: '🚌 Transporte en sedes',
+        answer: '🚌 Las ciudades ofrecerán <strong>metro, tren ligero y shuttles FIFA</strong>. En EE.UU. se recomienda alquilar auto para estadios suburbanos. ¡Planifica con anticipación!',
+        children: []
+    },
+    clima: {
+        label: '🌤️ Clima en las sedes',
+        answer: '🌤️ ¿De qué país quieres saber el clima?',
+        children: ['clima_mex', 'clima_usa', 'clima_can']
+    },
+    clima_mex: {
+        label: '🇲🇽 Clima en México',
+        answer: '🇲🇽 <strong>Junio-julio:</strong><br>• CDMX: 15-28°C, lluvias por la tarde<br>• Monterrey: 28-40°C, muy caluroso<br>• Guadalajara: 18-33°C, cálido<br>¡Ropa ligera, protector solar y paraguas!',
+        children: []
+    },
+    clima_usa: {
+        label: '🇺🇸 Clima en EE.UU.',
+        answer: '🇺🇸 <strong>Junio-julio:</strong><br>• Nueva York: 22-30°C, veraniego<br>• LA: 18-28°C, seco<br>• Miami: 26-35°C, húmedo<br>• Dallas/Atlanta: 25-38°C<br>• Seattle: 15-25°C, fresco',
+        children: []
+    },
+    clima_can: {
+        label: '🇨🇦 Clima en Canadá',
+        answer: '🇨🇦 <strong>Junio-julio:</strong><br>• Toronto: 18-28°C, agradable<br>• Vancouver: 15-24°C, más fresco<br>¡Clima ideal! Lleva chaqueta ligera para las noches.',
+        children: []
+    },
+    seguridad: {
+        label: '🔒 Seguridad',
+        answer: '🔒 <strong>Recomendaciones:</strong><br>• Llega 2-3 hrs antes al estadio<br>• No lleves objetos prohibidos<br>• Usa transporte oficial FIFA<br>• Lleva documentos de identidad siempre<br>• Guarda copias digitales de tus documentos',
+        children: []
+    },
+    // ===== SÍMBOLOS =====
+    simbolos: {
+        label: '🏆 Símbolos del Mundial',
+        answer: '🏆 Cada Mundial tiene símbolos únicos. ¿Cuál te interesa?',
+        children: ['mascota', 'balon', 'copa', 'historia']
+    },
+    mascota: {
+        label: '🦅 Mascota oficial',
+        answer: '🦅 Combina <strong>águila (EE.UU.)</strong>, <strong>jaguar (México)</strong> y <strong>castor (Canadá)</strong>, simbolizando la unión de las tres naciones con valores de diversidad y pasión por el fútbol.',
+        children: []
+    },
+    balon: {
+        label: '⚽ Balón oficial',
+        answer: '⚽ <strong>Adidas Tournament Ball</strong> con tecnología <strong>Connected Ball</strong>. ¿Quieres saber más de la tecnología?',
+        children: ['connected_ball']
+    },
+    connected_ball: {
+        label: '🔬 Tecnología Connected Ball',
+        answer: '🔬 Sensor <strong>UWB</strong> interno que envía datos 500 veces/segundo a antenas del estadio:<br>• Detecta si el balón cruzó la línea<br>• Detecta contacto en jugadas<br>• Mide velocidad y trayectoria<br>Reduce el tiempo del VAR a menos de 30 segundos.',
+        children: []
+    },
+    copa: {
+        label: '🏆 Copa Mundial',
+        answer: '🏆 Diseñada por <strong>Silvio Gazzaniga</strong> en 1974. ¿Qué detalle quieres conocer?',
+        children: ['copa_peso', 'copa_historia', 'copa_champions']
+    },
+    copa_peso: {
+        label: '⚖️ Peso y medidas',
+        answer: '⚖️ <strong>Datos:</strong><br>• Peso: 6.175 kg de oro de 18 quilates<br>• Altura: 36.8 cm<br>• Base: Dos anillos de malaquita verde<br>• Valor estimado: más de $20 millones USD',
+        children: []
+    },
+    copa_historia: {
+        label: '📜 Historia del trofeo',
+        answer: '📜 En uso desde <strong>1974</strong>. Antes se usaba la <strong>Copa Jules Rimet</strong> (Brasil la ganó definitivamente en 1970 tras 3 títulos). El trofeo actual es propiedad permanente de la FIFA; los campeones reciben réplica bañada en oro.',
+        children: []
+    },
+    copa_champions: {
+        label: '👑 Campeones históricos',
+        answer: '👑 <strong>Más títulos:</strong><br>🇧🇷 Brasil: 5 (1958, 62, 70, 94, 2002)<br>🇩🇪 Alemania: 4<br>🇮🇹 Italia: 4<br>🇦🇷 Argentina: 3 (última 2022)<br>🇫🇷 Francia: 2<br>¿Quién lo levantará en 2026?',
+        children: []
+    },
+    historia: {
+        label: '📜 Historia del Mundial',
+        answer: '📜 Hitos del Mundial 2026. ¿Cuál te interesa?',
+        children: ['hist_2017', 'hist_2018', 'hist_2022', 'hist_2023']
+    },
+    hist_2017: {
+        label: '📌 Decisión 2017',
+        answer: '📌 En <strong>enero de 2017</strong>, el Consejo de la FIFA aprobó la expansión de 32 a <strong>48 equipos</strong>. Esto permite que 8 países más experimenten un mundial.',
+        children: []
+    },
+    hist_2018: {
+        label: '📌 Votación 2018',
+        answer: '📌 El <strong>13 de junio de 2018</strong>, <strong>United 2026</strong> ganó con <strong>134 votos</strong> contra 65 de Marruecos, en el 68º Congreso de la FIFA en Moscú.',
+        children: []
+    },
+    hist_2022: {
+        label: '📌 Formato 2022',
+        answer: '📌 En <strong>2022</strong> se confirmó: 12 grupos de 4. Clasifican los 2 primeros y los <strong>8 mejores terceros</strong>, completando 32 para eliminatorias.',
+        children: []
+    },
+    hist_2023: {
+        label: '📌 Sedes 2023',
+        answer: '📌 En <strong>2023</strong> se anunciaron las <strong>16 ciudades sede</strong>: 11 en EE.UU., 3 en México y 2 en Canadá. Se asignaron los partidos por fase.',
+        children: []
+    },
+    // ===== PAÍSES =====
+    paises: {
+        label: '🌍 Países Anfitriones',
+        answer: '🌍 Tres naciones unidas por el fútbol. ¿De cuál quieres saber?',
+        children: ['pais_usa', 'pais_mex', 'pais_can']
+    },
+    pais_usa: {
+        label: '🇺🇸 Estados Unidos',
+        answer: '🇺🇸 Principal anfitrión con <strong>11 sedes</strong> y la Gran Final. Segundo mundial masculino que organiza (primero: 1994). Su selección clasifica automáticamente.',
+        children: []
+    },
+    pais_mex: {
+        label: '🇲🇽 México',
+        answer: '🇲🇽 Anfitrión por <strong>tercera vez</strong> (1970, 1986 y 2026) — ¡récord histórico! El Azteca será sede del inaugural. Su selección clasifica automáticamente.',
+        children: []
+    },
+    pais_can: {
+        label: '🇨🇦 Canadá',
+        answer: '🇨🇦 Primer mundial masculino que organiza (ya tuvo el Femenino 2015). Tiene 2 sedes: Toronto y Vancouver. Su selección clasifica automáticamente.',
+        children: []
+    }
 };
-const chatKeywords=[
-{keys:['hola','hello','hi','hey','buenas','saludos','qué tal','que tal','buenos días','buenas tardes','buenas noches'],resp:'¡Hola! 👋 ¡Bienvenido al asistente del Mundial 2026! ¿En qué puedo ayudarte? Puedes preguntarme sobre fechas, sedes, entradas, equipos, la copa, el balón, la mascota y mucho más.'},
-{keys:['gracias','thanks','thank you','ty','thx','agradecido'],resp:'¡De nada! 😊 Estoy aquí para ayudarte con cualquier duda sobre el Mundial 2026. ¡No dudes en preguntar!'},
-{keys:['adiós','adios','bye','chao','hasta luego','nos vemos','me voy'],resp:'¡Hasta luego! 👋 Fue un placer ayudarte. ¡Nos vemos en el Mundial 2026! ⚽🏆'},
-{keys:['cuándo','cuando','fecha','fechas','día','dia','inicio','empieza','comienza','cuando es'],resp:'chatResponses.fechas'},
-{keys:['dónde','donde','estadio','estadios','sede','sedes','lugar','ciudad','ciudades','donde se juega'],resp:'chatResponses.sedes'},
-{keys:['formato','cómo','como','cuántos equipos','cuantos equipos','grupos','eliminatoria','fase'],resp:'chatResponses.formato'},
-{keys:['entrada','entradas','ticket','tickets','boleto','boletos','comprar','precio','precios','costo','cuánto cuesta','cuanto cuesta','venta'],resp:'chatResponses.entradas'},
-{keys:['equipo','equipos','selección','seleccion','selecciones','clasificado','clasificados','país','pais','países','paises'],resp:'chatResponses.equipos'},
-{keys:['inaugural','inauguración','inauguracion','primer partido','inaugura','apertura'],resp:'chatResponses.inaugural'},
-{keys:['final','último partido','ultimo partido','campeón','campeon','la gran final'],resp:'chatResponses.final'},
-{keys:['visa','visado','pasaporte','viaje','viajar','documento','turista','migración','migracion'],resp:'chatResponses.visa'},
-{keys:['mascota','personaje','animal','símbolo','simbolo','icono'],resp:'chatResponses.mascota'},
-{keys:['balón','balon','pelota','pelota oficial','balon oficial','technology','tecnología','tecnologia'],resp:'chatResponses.balon'},
-{keys:['copa','trofeo','trophy','premio','campeonato'],resp:'chatResponses.copa'},
-{keys:['historia','origen','pasado','antes','antecedente'],resp:'📜 La FIFA aprobó 48 equipos en <strong>2017</strong>. En <strong>2018</strong>, United 2026 ganó con 134 votos vs 65 de Marruecos. En <strong>2022</strong> se confirmó el formato y en <strong>2023</strong> las sedes. Será el primer mundial en 3 países y el primero con 48 selecciones.'},
-{keys:['transporte','cómo llegar','como llegar','metro','autobús','autobus','bus','shuttle','tren','estacionamiento','parking'],resp:'chatResponses.transporte'},
-{keys:['clima','tiempo','temperatura','lluvia','sol','calor','frío','frio'],resp:'chatResponses.clima'},
-{keys:['seguridad','policía','policia','prohibido','restricción','restriccion','seguro','peligro'],resp:'chatResponses.seguridad'},
-{keys:['méxico','mexico','azteca','cdmx','monterrey','guadalajara'],resp:'🇲🇽 México tiene <strong>3 sedes</strong>: Estadio Azteca (CDMX, inaugural), Estadio BBVA (Monterrey) y Estadio Akron (Guadalajara). México será anfitrión por tercera vez tras 1970 y 1986.'},
-{keys:['estados unidos','usa','eeuu','ee.uu','united states','américa','america'],resp:'🇺🇸 EE.UU. tiene <strong>11 sedes</strong>: MetLife (final), SoFi, AT&T, Mercedes-Benz, Hard Rock, Lumen Field, Gillette, Lincoln Financial, NRG, Arrowhead y Levi\'s Stadium.'},
-{keys:['canadá','canada'],resp:'🇨🇦 Canadá tiene <strong>2 sedes</strong>: BMO Field (Toronto) y BC Place (Vancouver). Es la segunda vez que Canadá alberga un mundial de fútbol (primera: Femenino 2015).'},
-{keys:['argentina','messi','albiceleste'],resp:'🇦🇷 Argentina es la <strong>campeona defensora</strong> (Qatar 2022). Lionel Messi podría disputar su 6º mundial. Clasificó 1ª en las eliminatorias sudamericanas.'},
-{keys:['brasil','brazil','verdeamarela','canarinha'],resp:'🇧🇷 Brasil es el mayor campeón mundial con <strong>5 títulos</strong> (1958, 1962, 1970, 1994, 2002). Viene de cuartos de final en Qatar 2022.'},
-{keys:['48','cuarenta y ocho','expandió','expansion'],resp:'La expansión a 48 equipos fue aprobada por la FIFA en enero de 2017. Esto permite que <strong>8 países más</strong> experimenten un mundial, aumentando la representación de todas las confederaciones.'},
-{keys:['álbum','album','panini','estampas','stickers'],resp:'📓 ¡Tenemos un <strong>Álbum Panini Digital</strong> en nuestro sitio! Ve a la página <strong>"Mi Álbum"</strong> para coleccionar estampas de las 48 selecciones y subir tus propias fotos.'},
-{keys:['registrar','registro','cuenta','sign up','signup','crear cuenta'],resp:'📝 Para registrarte, haz clic en <strong>"Registrarse"</strong> en la barra superior. Solo necesitas nombre, correo, país y contraseña. Así podrás comprar entradas y guardar tu álbum.'},
-{keys:['carrito','compra','pagar','checkout'],resp:'🛒 Para comprar entradas, ve a la sección <strong>"Entradas"</strong>, agrega al carrito y haz clic en <strong>"Proceder al Pago"</strong>. Necesitas iniciar sesión primero.'}
-];
-function chatOption(key) {
+
+let chatPath = ['_root'];
+
+function updateBreadcrumb() {
+    const bc = document.getElementById('chatBreadcrumb');
+    if (!bc) return;
+    const names = chatPath.map(id => id === '_root' ? 'Inicio' : (chatTree[id] ? chatTree[id].label : ''));
+    bc.innerHTML = '📍 ' + names.join(' <i class="fas fa-chevron-right"></i> ');
+}
+
+function showChatOptions(node) {
+    const opt = document.getElementById('chatOptions');
+    let html = '';
+    if (chatPath.length > 1) {
+        html += '<button class="chat-opt chat-opt-home" onclick="chatHome()">🏠 Inicio</button>';
+        html += '<button class="chat-opt chat-opt-back" onclick="chatBack()">◀ Volver</button>';
+    }
+    if (node.children && node.children.length > 0) {
+        node.children.forEach(cid => {
+            const child = chatTree[cid];
+            if (child) html += `<button class="chat-opt" onclick="chatOption('${cid}')">${child.label}</button>`;
+        });
+    }
+    opt.innerHTML = html;
+    updateBreadcrumb();
+}
+
+function chatOption(nodeId) {
+    const node = chatTree[nodeId];
+    if (!node) return;
     const msgs = document.getElementById('chatMessages');
-    const labels = { fechas: '📅 ¿Cuáles son las fechas?', sedes: '🏟️ ¿Dónde se juega?', formato: '⚽ ¿Cuál es el formato?', entradas: '🎫 ¿Dónde compro entradas?', equipos: '🌍 ¿Qué equipos clasifican?', inaugural: '🎯 ¿Dónde es el inaugural?', final: '🏆 ¿Dónde es la final?', visa: '🛂 ¿Necesito visa?', mascota: '🦅 ¿Cuál es la mascota?', balon: '⚽ ¿Cómo es el balón?', copa: '🏆 Cuéntame de la Copa', precios: '💰 Precios de entradas', transporte: '🚌 Transporte', clima: '🌤️ Clima en las sedes', seguridad: '🔒 Seguridad' };
-    const u = document.createElement('div'); u.className = 'chat-msg user'; u.textContent = labels[key] || key; msgs.appendChild(u);
-    setTimeout(() => { const b = document.createElement('div'); b.className = 'chat-msg bot'; b.innerHTML = chatResponses[key]; msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; }, 600);
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = node.label;
+    msgs.appendChild(u);
+    chatPath.push(nodeId);
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        b.innerHTML = node.answer;
+        msgs.appendChild(b);
+        showChatOptions(node);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 400);
     msgs.scrollTop = msgs.scrollHeight;
 }
+
+function chatBack() {
+    if (chatPath.length <= 1) return;
+    chatPath.pop();
+    const parentId = chatPath[chatPath.length - 1];
+    const parent = chatTree[parentId];
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = '◀ Volver';
+    msgs.appendChild(u);
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        b.innerHTML = parent.answer;
+        msgs.appendChild(b);
+        showChatOptions(parent);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 300);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
+function chatHome() {
+    chatPath = ['_root'];
+    const root = chatTree._root;
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = '🏠 Menú principal';
+    msgs.appendChild(u);
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        b.innerHTML = root.answer;
+        msgs.appendChild(b);
+        showChatOptions(root);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 300);
+    msgs.scrollTop = msgs.scrollHeight;
+}
+
 function sendChat() {
-    const input = document.getElementById('chatInput'); const text = input.value.trim(); if (!text) return; input.value = '';
-    const msgs = document.getElementById('chatMessages'); const u = document.createElement('div'); u.className = 'chat-msg user'; u.textContent = text; msgs.appendChild(u);
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    const msgs = document.getElementById('chatMessages');
+    const u = document.createElement('div');
+    u.className = 'chat-msg user';
+    u.textContent = text;
+    msgs.appendChild(u);
     const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     let response = null;
-    for (const entry of chatKeywords) { if (entry.keys.some(k => lower.includes(k))) { response = entry.resp; break; } }
-    if (response) { if (response.startsWith('chatResponses.')) { const key = response.replace('chatResponses.', ''); response = chatResponses[key]; } }
-    if (!response) { response = '🤔 No estoy seguro de esa pregunta, pero puedo ayudarte con: <strong>fechas, sedes, formato, entradas, equipos, mascota, balón, copa, visa, transporte, clima, seguridad y más</strong>. ¡Pregúntame algo específico!'; }
-    setTimeout(() => { const b = document.createElement('div'); b.className = 'chat-msg bot'; b.innerHTML = response; msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; }, 600);
+    let navigateTo = null;
+
+    if (['hola','hello','hi','hey','buenas','saludos'].some(k => lower.includes(k))) {
+        response = '¡Hola! 👋 ¡Elige un tema del menú para explorar!';
+    } else if (['gracias','thanks','ty'].some(k => lower.includes(k))) {
+        response = '¡De nada! 😊 Si tienes más dudas, elige una opción del menú.';
+    } else if (['adios','adiós','bye','chao'].some(k => lower.includes(k))) {
+        response = '¡Hasta luego! 👋 ¡Nos vemos en el Mundial 2026! ⚽🏆';
+    } else if (['album','panini','estampa'].some(k => lower.includes(k))) {
+        response = '📓 ¡Visita <strong>"Mi Álbum"</strong> para coleccionar estampas de las 48 selecciones!';
+    } else if (['registrar','cuenta','registro'].some(k => lower.includes(k))) {
+        response = '📝 Haz clic en <strong>"Registrarse"</strong> en la barra superior. Solo necesitas nombre, correo, país y contraseña.';
+    } else if (['carrito','compra','pagar'].some(k => lower.includes(k))) {
+        response = '🛒 Ve a <strong>"Entradas"</strong>, agrega al carrito y haz clic en <strong>"Proceder al Pago"</strong>. Necesitas iniciar sesión.';
+    } else {
+        const kwMap = {
+            'fecha':'fechas','fechas':'fechas','cuando':'fechas','inicio':'fechas',
+            'estadio':'sedes','sede':'sedes','sedes':'sedes','donde':'sedes',
+            'formato':'formato','grupo':'formato','48':'formato',
+            'entrada':'comprar','ticket':'comprar','boleto':'comprar',
+            'precio':'precios','costo':'precios','cuanto':'precios',
+            'visa':'visa','pasaporte':'visa',
+            'transporte':'transporte','metro':'transporte','bus':'transporte',
+            'clima':'clima','temperatura':'clima','calor':'clima',
+            'seguridad':'seguridad','policia':'seguridad',
+            'mascota':'mascota','animal':'mascota',
+            'balon':'balon','pelota':'balon',
+            'copa':'copa','trofeo':'copa',
+            'inaugural':'inaugural','inaugura':'inaugural',
+            'final':'final_sede',
+            'equipo':'equipos','seleccion':'equipos','clasificado':'equipos',
+            'mexico':'pais_mex','azteca':'azteca','monterrey':'bbva','guadalajara':'akron',
+            'usa':'pais_usa','eeuu':'pais_usa','estados unidos':'pais_usa',
+            'canada':'pais_can',
+            'metlife':'metlife','sofi':'sofi',
+            'argentina':'conmebol','brasil':'conmebol',
+            'uefa':'uefa','europa':'uefa',
+            'historia':'historia',
+            'repesca':'repesca'
+        };
+        for (const [kw, nid] of Object.entries(kwMap)) {
+            if (lower.includes(kw) && chatTree[nid]) {
+                navigateTo = nid;
+                break;
+            }
+        }
+    }
+
+    setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-msg bot';
+        if (navigateTo) {
+            const node = chatTree[navigateTo];
+            b.innerHTML = node.answer;
+            chatPath = ['_root', navigateTo];
+            showChatOptions(node);
+        } else {
+            b.innerHTML = response || '🤔 No encontré eso, pero puedes explorar los temas del menú. ¡Selecciona una opción!';
+        }
+        msgs.appendChild(b);
+        msgs.scrollTop = msgs.scrollHeight;
+    }, 500);
     msgs.scrollTop = msgs.scrollHeight;
 }
 function toggleChat() { const cw = document.getElementById('chatWindow'); cw.classList.toggle('open'); const tt = document.getElementById('chatTooltip'); if (cw.classList.contains('open') && tt) { tt.style.display = 'none'; } }
