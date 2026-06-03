@@ -4,19 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mi Álbum - ELE Mundial 2026</title>
-    <!-- FAVICON -->
-    <link rel="icon" type="image/jpeg" href="7182_balon.png">
-    <link rel="apple-touch-icon" href="7182_balon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/jpeg" href="7182_balon.png">
+<link rel="apple-touch-icon" href="7182_balon.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{--g:#1B7A3D;--gl:#2EA050;--gd:#145C2E;--b:#1A3A6B;--bl:#264F8C;--bd:#0F2647;--r:#C41E3A;--rl:#E03050;--w:#FFF;--ow:#F5F5F5;--g100:#F0F0F0;--g200:#E0E0E0;--g300:#C0C0C0;--g500:#888;--g700:#444;--g900:#1A1A1A;--paper:#FFF9F0;--paperD:#EDE4D3;--gold:#C9A84C;--shadow:0 4px 16px rgba(0,0,0,.12);--shadow-lg:0 10px 40px rgba(0,0,0,.15);}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#6B5B45;color:var(--g900);line-height:1.6;min-height:100vh}
-a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;border:none;font-family:inherit}input{font-family:inherit}
+a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;border:none;font-family:inherit}input,select{font-family:inherit}
 .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--bd);border-bottom:3px solid var(--g);height:70px;display:flex;align-items:center;padding:0 24px}
 .navbar-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px;font-weight:700}.nav-logo i{color:var(--gl);font-size:24px}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px;font-weight:700;white-space:nowrap;flex-shrink:0}.nav-logo i{color:var(--gl);font-size:20px;flex-shrink:0}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-text span{font-size:10px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:1.5px;text-transform:uppercase}
+.srv-status{display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,.4);margin-left:12px;padding-left:12px;border-left:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.srv-dot{width:6px;height:6px;border-radius:50%;background:var(--g500);transition:all .3s}
+.srv-dot.on{background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5)}.srv-dot.off{background:var(--r);box-shadow:0 0 6px rgba(196,30,58,.5)}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links a{color:rgba(255,255,255,.8);font-size:13px;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .3s ease}
 .nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,.1)}
@@ -26,6 +29,9 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 .btn-nav-outline:hover{border-color:#fff}
 .btn-nav-fill{background:var(--r);color:#fff;border:none}
 .btn-nav-fill:hover{background:var(--rl)}
+.nav-cart{position:relative;color:#fff;font-size:20px;cursor:pointer;padding:6px;transition:all .3s ease}
+.nav-cart:hover{color:var(--gl)}
+.cart-badge{position:absolute;top:-4px;right:-6px;background:var(--r);color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .ubar{display:none;align-items:center;gap:10px}.ubar.on{display:flex}
 .uava{width:32px;height:32px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
 .uname{color:#fff;font-size:13px;font-weight:500}
@@ -113,12 +119,74 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 .mx{position:absolute;top:14px;right:14px;background:none;font-size:18px;color:var(--g500);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s}.mx:hover{background:var(--g200);color:var(--g900)}
 .md h2{font-size:24px;font-weight:700;margin-bottom:6px}.md .ms{color:var(--g500);font-size:14px;margin-bottom:24px}
 .fg{margin-bottom:16px}.fg label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--g700)}
-.fg input{width:100%;padding:11px 14px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;outline:none;transition:all .3s}.fg input:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(27,122,61,.1)}
-.bf{width:100%;padding:13px;border-radius:8px;font-size:15px;font-weight:600;transition:all .3s}
-.bf-g{background:var(--g);color:#fff}.bf-g:hover{background:var(--gl)}
-.bf-b{background:var(--b);color:#fff}.bf-b:hover{background:var(--bl)}
+.fg input,.fg select{width:100%;padding:11px 14px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;outline:none;transition:all .3s}.fg input:focus,.fg select:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(27,122,61,.1)}
+.bf{width:100%;padding:13px;border-radius:8px;font-size:15px;font-weight:600;transition:all .3s;position:relative}
+.bf:disabled{opacity:.6;cursor:not-allowed}
+.bf-g{background:var(--g);color:#fff}.bf-g:hover:not(:disabled){background:var(--gl)}
+.bf-b{background:var(--b);color:#fff}.bf-b:hover:not(:disabled){background:var(--bl)}
 .fs{text-align:center;margin-top:16px;font-size:13px;color:var(--g500)}.fs a{color:var(--g);font-weight:600;cursor:pointer}.fs a:hover{text-decoration:underline}
+.cart-sb{position:fixed;top:0;right:-420px;z-index:2000;width:400px;max-width:90vw;height:100vh;background:#fff;box-shadow:-10px 0 40px rgba(0,0,0,.15);transition:right .4s ease;display:flex;flex-direction:column}
+.cart-sb.open{right:0}
+.cart-hd{padding:20px 24px;border-bottom:1px solid var(--g200);display:flex;justify-content:space-between;align-items:center}
+.cart-hd h3{font-size:18px;font-weight:700}
+.cart-cl{background:none;font-size:20px;color:var(--g500);padding:4px}.cart-cl:hover{color:var(--g900)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+.cart-empty{text-align:center;padding:40px 0;color:var(--g500)}
+.cart-empty i{font-size:48px;margin-bottom:12px;display:block;color:var(--g300)}
+.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--g100)}
+.cart-item-img{width:60px;height:60px;border-radius:8px;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-size:14px;font-weight:600}
+.cart-item-info p{font-size:12px;color:var(--g500)}
+.cart-item-price{font-size:15px;font-weight:700;color:var(--g);margin-top:4px}
+.cart-item-rm{background:none;color:var(--g300);font-size:16px;padding:4px;transition:all .3s;align-self:flex-start}.cart-item-rm:hover{color:var(--r)}
+.cart-ft{padding:20px 24px;border-top:1px solid var(--g200)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.cart-total span:first-child{font-size:15px;font-weight:600}
+.cart-total span:last-child{font-size:22px;font-weight:700;color:var(--g)}
+.btn-co{width:100%;padding:14px;border-radius:8px;background:var(--g);color:#fff;font-size:15px;font-weight:600;transition:all .3s}.btn-co:hover{background:var(--gl)}
+.cart-ov{display:none;position:fixed;inset:0;z-index:1999;background:rgba(0,0,0,.4)}.cart-ov.open{display:block}
+.footer{background:var(--bd);color:rgba(255,255,255,.7);padding:60px 24px 24px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand h3{color:#fff;font-size:20px;margin-bottom:12px}
+.footer-brand p{font-size:14px;line-height:1.6;max-width:300px}
+.footer-col h4{color:#fff;font-size:14px;font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.footer-col a{display:block;font-size:14px;padding:4px 0;transition:all .3s ease}
+.footer-col a:hover{color:var(--gl)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:12px}
+.footer-socials{display:flex;gap:14px}
+.footer-socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+.footer-socials a:hover{background:var(--g);color:#fff}
+.cbt{position:fixed;bottom:28px;right:28px;z-index:1500;width:72px;height:72px;border-radius:50%;background:var(--g);border:3px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(27,122,61,.5);transition:all .3s ease;overflow:visible}
+.cbt:hover{transform:scale(1.1);background:var(--gl)}
+.cbt img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.cbt-tip{position:absolute;right:90px;top:50%;transform:translateY(-50%);background:#fff;color:var(--g900);padding:10px 18px;border-radius:12px 12px 12px 0;font-size:14px;font-weight:600;box-shadow:var(--shadow-lg);white-space:nowrap;pointer-events:none;animation:tipB 2s ease infinite}
+.cbt-tip::after{content:'';position:absolute;bottom:0;right:-8px;width:0;height:0;border-style:solid;border-width:0 0 12px 12px;border-color:transparent transparent transparent #fff}
+@keyframes tipB{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(-6px)}}
+.cw{position:fixed;bottom:110px;right:28px;z-index:1500;width:400px;max-width:calc(100vw - 48px);height:580px;max-height:calc(100vh - 140px);background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);display:none;flex-direction:column;overflow:hidden;animation:mA .3s ease}
+.cw.open{display:flex}
+.cwh{background:var(--g);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px}
+.cwa{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.3);flex-shrink:0}
+.cwa img{width:100%;height:100%;object-fit:cover}
+.cwhi h4{font-size:15px;font-weight:600}
+.cwhi p{font-size:11px;opacity:.8}
+.cwx{margin-left:auto;background:rgba(255,255,255,.15);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.cw-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.cm{max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+.cm.bot{background:var(--g100);color:var(--g900);align-self:flex-start;border-bottom-left-radius:4px}
+.cm.user{background:var(--g);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.cwo{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px 14px;border-top:1px solid var(--g200);max-height:220px;overflow-y:auto;background:var(--ow)}
+.cob{padding:10px 8px;border-radius:8px;font-size:11px;font-weight:600;background:#fff;border:1.5px solid var(--g200);color:var(--g700);transition:all .3s ease;text-align:center;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}
+.cob:hover{background:var(--g);color:#fff;border-color:var(--g);transform:scale(1.02)}
+.cob.back{background:transparent;border:1px dashed var(--g300);color:var(--g500);font-size:10px;grid-column:span 2}
+.cob.back:hover{background:var(--g100);color:var(--g700);border-color:var(--g300);transform:none}
+.cob.home{background:rgba(26,58,107,.08);border-color:rgba(26,58,107,.2);color:var(--b)}
+.cob.home:hover{background:var(--b);color:#fff;border-color:var(--b)}
+.cwb{padding:8px 14px;font-size:11px;color:var(--g500);border-top:1px solid var(--g200);display:flex;align-items:center;gap:4px;background:var(--ow);flex-wrap:wrap}
+.cwb i{font-size:8px;color:var(--g300)}
 @media(max-width:768px){
+.footer-grid{grid-template-columns:1fr}
 .nav-links,.nav-actions .btn-nav{display:none}.hamburger{display:block}
 .book-area{padding:120px 8px 16px}
 .bwrap{flex-direction:column}.bnav{display:none}
@@ -134,21 +202,26 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 </head>
 <body>
 <nav class="navbar"><div class="navbar-inner">
-<a href="index.html" class="nav-logo"><i class="fas fa-futbol"></i> ELE Mundial 2026</a>
+<div style="display:flex;align-items:center;flex-shrink:0">
+<a href="index.html" class="nav-logo"><i class="fas fa-futbol"></i>
+<div class="nav-logo-text">ELE Mundial 2026<span></span></div></a>
+<span class="srv-status"><span class="srv-dot" id="srvDot"></span><span id="srvLbl"></span></span>
+</div>
 <div class="nav-links">
 <a href="index.html">Inicio</a><a href="index.html#introduccion">Introducción</a><a href="index.html#historia">Historia</a><a href="index.html#sedes">Sedes</a>
-<a href="index.html#mascota">Mascota</a><a href="index.html#copa">Copa</a><a href="index.html#entradas">Entradas</a>
+<a href="index.html#mascotas">Mascotas y Balón</a><a href="index.html#copa">Copa</a><a href="index.html#entradas">Entradas</a>
 <a href="calendario.html">Calendario</a><a href="album.html" class="active">Mi Álbum</a><a href="noticias.html">Noticias</a>
 </div>
 <div class="nav-actions">
 <button class="btn-nav btn-nav-outline" onclick="openM('lg')" id="btnL">Iniciar Sesión</button>
 <button class="btn-nav btn-nav-fill" onclick="openM('rg')" id="btnR">Registrarse</button>
 <div class="ubar" id="ubar"><div class="uava" id="uava">U</div><span class="uname" id="unm"></span><button class="ubtn-out" onclick="logout()">Salir</button></div>
+<div class="nav-cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="cart-badge" id="cartBadge">0</span></div>
 <div class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')"><i class="fas fa-bars"></i></div>
 </div></div></nav>
 <div class="mmenu" id="mm">
 <a href="index.html">Inicio</a><a href="index.html#introduccion">Introducción</a><a href="index.html#historia">Historia</a><a href="index.html#sedes">Sedes</a>
-<a href="index.html#entradas">Entradas</a><a href="album.html">Mi Álbum</a><a href="noticias.html">Noticias</a>
+<a href="index.html#entradas">Entradas</a><a href="calendario.html">Calendario</a><a href="album.html">Mi Álbum</a><a href="noticias.html">Noticias</a>
 </div>
 <div class="topbar">
 <span class="ptxt">7182 -🏆 Mi Álbum</span>
@@ -166,11 +239,91 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;bo
 </div>
 </div>
 <div class="nc" id="nc"></div>
+<!-- ===== PIE DE PÁGINA ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3><i class="fas fa-futbol"></i> Mundial 2026</h3>
+                <p>Sitio informativo no oficial sobre la Copa Mundial de la FIFA 2026. Todos los derechos de marca pertenecen a la FIFA.<br><br>Hecho por elementt<br>Carné: 6190-26-7182</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <a href="index.html">Inicio</a>
+                <a href="index.html#introduccion">Introducción</a>
+                <a href="index.html#historia">Historia</a>
+                <a href="index.html#sedes">Sedes</a>
+                <a href="index.html#entradas">Entradas</a>
+            </div>
+            <div class="footer-col">
+                <h4>Páginas</h4>
+                <a href="calendario.html">Calendario</a>
+                <a href="album.html">Mi Álbum</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="FAQ.html">Preguntas Frecuentes</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#">Términos de Uso</a>
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Cookies</a>
+                <a href="#">Contacto</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Mundial 2026 Info. Sitio informativo no oficial.</span>
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
 <input type="file" id="imgUpl" accept="image/*" style="display:none">
 <canvas id="imgCvs" style="display:none"></canvas>
-<div class="mo" id="lgMo"><div class="md"><button class="mx" onclick="closeM('lg')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="ms">Accede a tu cuenta para coleccionar y guardar estampas</p><div class="fg"><label>Correo electrónico</label><input type="email" id="lE" placeholder="tucorreo@ejemplo.com"></div><div class="fg"><label>Contraseña</label><input type="password" id="lP" placeholder="Tu contraseña"></div><button class="bf bf-g" onclick="doLogin()">Iniciar Sesión</button><div class="fs">¿No tienes cuenta? <a onclick="swM('lg','rg')">Regístrate aquí</a></div></div></div>
-<div class="mo" id="rgMo"><div class="md"><button class="mx" onclick="closeM('rg')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="ms">Regístrate para coleccionar estampas del Mundial</p><div class="fg"><label>Nombre completo</label><input id="rN" placeholder="Tu nombre"></div><div class="fg"><label>Correo electrónico</label><input type="email" id="rE" placeholder="tucorreo@ejemplo.com"></div><div class="fg"><label>Contraseña</label><input type="password" id="rP" placeholder="Mínimo 6 caracteres"></div><button class="bf bf-b" onclick="doReg()">Crear Cuenta</button><div class="fs">¿Ya tienes cuenta? <a onclick="swM('rg','lg')">Inicia sesión</a></div></div></div>
+<!-- CARRITO - Overlay -->
+<div class="cart-ov" id="cartOv" onclick="toggleCart()"></div>
+<!-- CARRITO - Sidebar -->
+<div class="cart-sb" id="cartSb">
+<div class="cart-hd"><h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3><button class="cart-cl" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+<div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div></div>
+<div class="cart-ft"><div class="cart-total"><span>Total:</span><span id="cartTotal">$0 USD</span></div><button class="btn-co" onclick="checkout()">Proceder al Pago</button></div>
+</div>
+<!-- ===== CHATBOT ===== -->
+<button class="cbt" id="cbt" onclick="tgChat()">
+    <img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="Bot">
+    <span class="cbt-tip" id="cbtTip">¿Dudas? ¡Explora!</span>
+</button>
+<div class="cw" id="cw">
+    <div class="cwh">
+        <div class="cwa"><img src="https://z-cdn-media.chatglm.cn/files/b084c0b3-1a93-4024-bb80-65f7bdb39665.jpg?auth_key=1879740057-4cc46186e745428cb405122bd58ddd83-0-52ff493a7beab50038f7747d204ab1c1" alt="Bot"></div>
+        <div class="cwhi"><h4>FIFA Bot 2026</h4><p>Mapa conceptual interactivo</p></div>
+        <button class="cwx" onclick="tgChat()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cw-msgs" id="cwMsgs">
+        <div class="cm bot">¡Hola! 👋 Soy tu guía del Mundial 2026. Elige un tema para comenzar a explorar:</div>
+    </div>
+    <div class="cwb" id="cwBc">📍 Inicio</div>
+    <div class="cwo" id="cwOpts"></div>
+</div>
+<!-- LOGIN MODAL -->
+<div class="mo" id="lgMo"><div class="md"><button class="mx" onclick="closeM('lg')"><i class="fas fa-times"></i></button><h2>Iniciar Sesión</h2><p class="ms">Accede a tu cuenta para coleccionar y guardar estampas</p><div class="fg"><label>Correo electrónico</label><input type="email" id="lE" placeholder="tucorreo@ejemplo.com"></div><div class="fg"><label>Contraseña</label><input type="password" id="lP" placeholder="Tu contraseña"></div><button class="bf bf-g" id="btnLg" onclick="doLogin()">Iniciar Sesión</button><div class="fs">¿No tienes cuenta? <a onclick="swM('lg','rg')">Regístrate aquí</a></div></div></div>
+<!-- REGISTER MODAL -->
+<div class="mo" id="rgMo"><div class="md"><button class="mx" onclick="closeM('rg')"><i class="fas fa-times"></i></button><h2>Crear Cuenta</h2><p class="ms">Regístrate para coleccionar estampas del Mundial</p><div class="fg"><label>Nombre completo</label><input id="rN" placeholder="Tu nombre"></div><div class="fg"><label>Correo electrónico</label><input type="email" id="rE" placeholder="tucorreo@ejemplo.com"></div><div class="fg"><label>País</label><select id="rC"><option value="">Selecciona tu país</option><option value="MX">México</option><option value="US">Estados Unidos</option><option value="CA">Canadá</option><option value="AR">Argentina</option><option value="BR">Brasil</option><option value="CO">Colombia</option><option value="ES">España</option><option value="OTRO">Otro</option></select></div><div class="fg"><label>Contraseña</label><input type="password" id="rP" placeholder="Mínimo 6 caracteres"></div><div class="fg"><label style="display:flex;align-items:center;gap:8px;font-weight:400;font-size:13px;cursor:pointer"><input type="checkbox" id="rNotif" checked style="width:auto"> Quiero recibir notificaciones</label></div><button class="bf bf-b" id="btnRg" onclick="doReg()">Crear Cuenta</button><div class="fs">¿Ya tienes cuenta? <a onclick="swM('rg','lg')">Inicia sesión</a></div></div></div>
+
 <script>
+// ===== API CONFIG =====
+const API_URL=window.location.hostname==='localhost'||window.location.hostname==='127.0.0.1'?'http://localhost:3000/api/auth':'https://7182-mundial.onrender.com/api/auth';
+let authToken=localStorage.getItem('wc2026_token')||null;
+let serverOnline=false;
+
+// ===== CARRITO STATE =====
+let cart=JSON.parse(localStorage.getItem('wc2026_cart'))||[];
+
+// ===== TEAM DATA =====
 const T=[
 {n:"México",f:"🇲🇽",c1:"#006847",c2:"#FFF",c3:"#CE1126",r:"latam"},
 {n:"Sudáfrica",f:"🇿🇦",c1:"#007749",c2:"#FFB81C",c3:"#000",r:"african"},
@@ -210,7 +363,6 @@ const T=[
 {n:"Noruega",f:"🇳🇴",c1:"#BA0C2F",c2:"#00205B",c3:"#FFF",r:"scandinavian"},
 {n:"Argentina",f:"🇦🇷",c1:"#74ACDF",c2:"#FFF",c3:"#74ACDF",r:"latam"},
 {n:"Argelia",f:"🇩🇿",c1:"#006233",c2:"#FFF",c3:"#D21034",r:"arabic"},
-{n:"Austria",f:"🇦🇹",c1:"#ED2939",c2:"#FFF",c3:"#ED2939",r:"germanic"},
 {n:"Jordania",f:"🇯🇴",c1:"#000",c2:"#FFF",c3:"#007A3D",r:"arabic"},
 {n:"Portugal",f:"🇵🇹",c1:"#006600",c2:"#FF0000",c3:"#006600",r:"latam"},
 {n:"El Congo",f:"🇨🇬",c1:"#009543",c2:"#FCD116",c3:"#FBDE4A",r:"african"},
@@ -247,19 +399,22 @@ cc:[{l:"Fútbol y Alegría",s:"cc0"},{l:"Sostenibilidad",s:"cc1"},{l:"Afición G
 };
 function sR(s){let v=s;return()=>{v=(v*16807)%2147483647;return(v-1)/2147483646}}
 function gP(ti){const t=T[ti],p=NP[t.r],rng=sR(ti*1000+7),pl=[],u=new Set;for(let i=0;i<20;i++){let f,l,c,a=0;do{f=p.f[Math.floor(rng()*p.f.length)];l=p.l[Math.floor(rng()*p.l.length)];c=f+l;a++}while(u.has(c)&&a<50);u.add(c);pl.push({num:i+1,name:f+" "+l,pos:POS[i]})}return pl}
-// STATE
+
+// ===== STATE =====
 let CU=JSON.parse(localStorage.getItem('wc2026_user'))||null;
 let col={};let cp=0;
 const TS_TEAMS=T.length*20;
 const TS_SPECIAL=5+4+5+6+14;
 const TS=TS_TEAMS+TS_SPECIAL;
 const SP=T.length+5;
+
 function ldA(){if(CU&&CU.album)col=CU.album;else col={}}
 function svA(){if(!CU)return;CU.album=col;try{localStorage.setItem('wc2026_user',JSON.stringify(CU));const us=JSON.parse(localStorage.getItem('wc2026_users'))||[];const i=us.findIndex(u=>u.email===CU.email);if(i!==-1){us[i].album=col;localStorage.setItem('wc2026_users',JSON.stringify(us))}}catch(e){notif('err','Sin espacio','Tu navegador no puede guardar más datos. Prueba reiniciar el álbum.')}}
 function iC(k){const v=col[k];return v===true||(v&&v.c)}
 function gImg(k){const v=col[k];return(v&&v.img)?v.img:''}
 function cT(ti){let c=0;for(let i=1;i<=20;i++)if(iC(ti+'-'+i))c++;return c}
 function countCol(){let c=0;for(const k in col)if(iC(k))c++;return c}
+
 function hStamp(el,ti,sn){
 if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para coleccionar.');openM('lg');return}
 const key=ti+'-'+sn;if(iC(key))return;col[key]={c:true,img:''};svA();el.classList.add('on');uProg();
@@ -267,7 +422,8 @@ const b=document.getElementById('tc-'+ti);if(b)b.textContent=cT(ti)+'/20'}
 function hSp(el,key){
 if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para coleccionar.');openM('lg');return}
 if(iC(key))return;col[key]={c:true,img:''};svA();el.classList.add('on');uProg()}
-// IMAGE UPLOAD
+
+// ===== IMAGE UPLOAD =====
 let _aStamp=null;
 function trigUpload(key,btn){
 if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para subir imágenes.');openM('lg');return}
@@ -287,31 +443,115 @@ const piEl=_aStamp.el.querySelector('.pi');if(piEl)piEl.src=base64;
 const camBtn=_aStamp.el.querySelector('.cam-btn');if(camBtn)camBtn.classList.add('has-img');
 notif('ok','¡Imagen guardada!','Foto agregada a la estampa');_aStamp=null};
 img.src=ev.target.result};reader.readAsDataURL(e.target.files[0]);e.target.value=''});
+
+// ===== NOTIFICATIONS =====
 function notif(t,h,m){const c=document.getElementById('nc'),ic={ok:'fa-check',err:'fa-exclamation',inf:'fa-info'};
 const n=document.createElement('div');n.className='nf'+(t==='err'?' err':t==='inf'?' inf':'');
 n.innerHTML=`<div class="ni"><i class="fas ${ic[t]}"></i></div><div class="nt"><h4>${h}</h4><p>${m}</p></div>`;
 c.appendChild(n);setTimeout(()=>n.remove(),5000)}
+
+// ===== MODALS =====
 function openM(id){document.getElementById(id+'Mo').classList.add('on')}
 function closeM(id){document.getElementById(id+'Mo').classList.remove('on')}
 function swM(a,b){closeM(a);setTimeout(()=>openM(b),200)}
 document.querySelectorAll('.mo').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('on')}));
-function doReg(){
-const nm=document.getElementById('rN').value.trim(),em=document.getElementById('rE').value.trim(),pw=document.getElementById('rP').value;
-if(!nm||!em||!pw){notif('err','Campos incompletos','Completa todos los campos');return}
+
+// ===== SERVER CHECK =====
+async function checkSrv(){
+const d=document.getElementById('srvDot'),l=document.getElementById('srvLbl');
+try{const r=await fetch(API_URL.replace('/auth','/health'),{signal:AbortSignal.timeout(3000)});
+if(r.ok){serverOnline=true;d.className='srv-dot on';l.textContent=''}else throw new Error()}
+catch(e){serverOnline=false;d.className='srv-dot off';l.textContent=''}}
+
+// ===== SESSION CHECK =====
+async function checkSess(){
+const st=localStorage.getItem('wc2026_token'),su=localStorage.getItem('wc2026_user');
+if(st&&su){authToken=st;CU=JSON.parse(su);uUI();ldA();
+if(serverOnline){try{const r=await fetch(`${API_URL}/profile`,{headers:{'Authorization':`Bearer ${authToken}`}});
+if(!r.ok){doLogoutLocal()}else{const d=await r.json();
+CU={id:d._id,name:d.name,email:d.email,country:d.country,notifications:d.notifications,role:d.role,album:CU.album||{}};
+localStorage.setItem('wc2026_user',JSON.stringify(CU));uUI()}}
+catch(e){console.log('Sin conexión al servidor, sesión local activa')}}}}
+
+// ===== REGISTER =====
+async function doReg(){
+const nm=document.getElementById('rN').value.trim(),em=document.getElementById('rE').value.trim(),
+ctry=document.getElementById('rC').value,pw=document.getElementById('rP').value,
+ntf=document.getElementById('rNotif').checked;
+if(!nm||!em||!ctry||!pw){notif('err','Campos incompletos','Completa todos los campos');return}
 if(pw.length<6){notif('err','Contraseña débil','Mínimo 6 caracteres');return}
 if(!em.includes('@')){notif('err','Email inválido','Ingresa un correo válido');return}
+const btn=document.getElementById('btnRg'),orig=btn.textContent;btn.disabled=true;btn.textContent='Registrando...';
+if(serverOnline){try{const r=await fetch(`${API_URL}/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:nm,email:em,password:pw,country:ctry,notifications:ntf})});
+const d=await r.json();btn.disabled=false;btn.textContent=orig;
+if(!r.ok){notif('err','Error de registro',d.error);return}
+authToken=d.token;CU={...d.user,album:{}};localStorage.setItem('wc2026_token',authToken);localStorage.setItem('wc2026_user',JSON.stringify(CU));
+closeM('rg');uUI();ldA();goP(cp);uProg();notif('ok','¡Registro exitoso!',`Bienvenido, ${nm}`);
+if(ntf)setTimeout(()=>notif('inf','📧 Correo enviado',`Se envió un correo a ${em}`),3000);return}
+catch(e){btn.disabled=false;btn.textContent=orig;notif('err','Error de conexión','No se pudo conectar. Modo local...')}}
 const us=JSON.parse(localStorage.getItem('wc2026_users'))||[];
-if(us.find(u=>u.email===em)){notif('err','Email registrado','Ya existe cuenta con ese correo');return}
-const u={name:nm,email:em,password:pw,album:{}};us.push(u);localStorage.setItem('wc2026_users',JSON.stringify(us));
-localStorage.setItem('wc2026_user',JSON.stringify(u));CU=u;closeM('rg');uUI();ldA();goP(cp);uProg();notif('ok','¡Registro exitoso!',`Bienvenido, ${nm}`)}
-function doLogin(){
+if(us.find(u=>u.email===em)){notif('err','Email registrado','Ya existe cuenta con ese correo');btn.disabled=false;btn.textContent=orig;return}
+const u={name:nm,email:em,password:pw,country:ctry,notifications:ntf,album:{},registeredAt:new Date().toISOString()};
+us.push(u);localStorage.setItem('wc2026_users',JSON.stringify(us));localStorage.setItem('wc2026_user',JSON.stringify(u));CU=u;
+btn.disabled=false;btn.textContent=orig;closeM('rg');uUI();ldA();goP(cp);uProg();notif('ok','¡Registro exitoso!',`Bienvenido, ${nm} (Modo local)`)}
+
+// ===== LOGIN =====
+async function doLogin(){
 const em=document.getElementById('lE').value.trim(),pw=document.getElementById('lP').value;
 if(!em||!pw){notif('err','Campos vacíos','Ingresa correo y contraseña');return}
+const btn=document.getElementById('btnLg'),orig=btn.textContent;btn.disabled=true;btn.textContent='Ingresando...';
+if(serverOnline){try{const r=await fetch(`${API_URL}/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,password:pw})});
+const d=await r.json();btn.disabled=false;btn.textContent=orig;
+if(!r.ok){notif('err','Datos incorrectos',d.error);return}
+authToken=d.token;CU={...d.user,album:d.user.album||{}};localStorage.setItem('wc2026_token',authToken);localStorage.setItem('wc2026_user',JSON.stringify(CU));
+closeM('lg');uUI();ldA();goP(cp);uProg();notif('ok','¡Bienvenido!',`${CU.name}: ${countCol()} estampa(s)`);return}
+catch(e){btn.disabled=false;btn.textContent=orig;notif('err','Error de conexión','No se pudo conectar. Modo local...')}}
 const us=JSON.parse(localStorage.getItem('wc2026_users'))||[];
 const u=us.find(u=>u.email===em&&u.password===pw);
-if(!u){notif('err','Datos incorrectos','No se encontró esa cuenta');return}
-localStorage.setItem('wc2026_user',JSON.stringify(u));CU=u;closeM('lg');uUI();ldA();goP(cp);uProg();notif('ok','¡Bienvenido!',`${u.name}: ${countCol()} estampa(s)`)}
-function logout(){localStorage.removeItem('wc2026_user');CU=null;col={};uUI();goP(cp);uProg();notif('inf','Sesión cerrada','Tu álbum se guardó')}
+if(!u){notif('err','Datos incorrectos','No se encontró esa cuenta');btn.disabled=false;btn.textContent=orig;return}
+localStorage.setItem('wc2026_user',JSON.stringify(u));CU=u;
+btn.disabled=false;btn.textContent=orig;closeM('lg');uUI();ldA();goP(cp);uProg();notif('ok','¡Bienvenido!',`${u.name}: ${countCol()} estampa(s) (Modo local)`)}
+
+// ===== LOGOUT =====
+function doLogoutLocal(){localStorage.removeItem('wc2026_token');localStorage.removeItem('wc2026_user');authToken=null;CU=null;col={};uUI();goP(cp);uProg()}
+function logout(){doLogoutLocal();notif('inf','Sesión cerrada','Tu álbum se guardó')}
+
+// ===== CARRITO =====
+function addToCart(name,price,icon){
+if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para comprar entradas.');openM('lg');return}
+const ex=cart.find(i=>i.name===name);if(ex)ex.qty++;else cart.push({name,price,icon,qty:1,id:Date.now()});
+saveCart();renderCart();notif('ok','Agregado al carrito',`${name} — $${price} USD`)}
+function removeFromCart(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart()}
+function saveCart(){localStorage.setItem('wc2026_cart',JSON.stringify(cart))}
+function renderCart(){
+const c=document.getElementById('cartItems'),b=document.getElementById('cartBadge'),t=document.getElementById('cartTotal');
+const tq=cart.reduce((s,i)=>s+i.qty,0),tp=cart.reduce((s,i)=>s+i.price*i.qty,0);
+b.textContent=tq;
+if(!cart.length)c.innerHTML='<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>';
+else c.innerHTML=cart.map(i=>`<div class="cart-item"><div class="cart-item-img">${i.icon}</div><div class="cart-item-info"><h4>${i.name} ${i.qty>1?'×'+i.qty:''}</h4><p>Entrada individual</p><div class="cart-item-price">$${i.price*i.qty} USD</div></div><button class="cart-item-rm" onclick="removeFromCart(${i.id})"><i class="fas fa-trash-alt"></i></button></div>`).join('');
+t.textContent='$'+tp.toLocaleString()+' USD'}
+function toggleCart(){document.getElementById('cartSb').classList.toggle('open');document.getElementById('cartOv').classList.toggle('open')}
+
+// ===== CHECKOUT =====
+async function checkout(){
+if(!CU){notif('err','Inicia sesión','Debes iniciar sesión para proceder al pago.');openM('lg');return}
+if(!cart.length){notif('err','Carrito vacío','Agrega entradas antes de pagar.');return}
+const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+if(serverOnline&&authToken){const items=cart.map(i=>({name:i.name,price:i.price,qty:i.qty}));
+try{const r=await fetch(`${API_URL}/purchase`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${authToken}`},body:JSON.stringify({items})});
+const d=await r.json();if(!r.ok){notif('err','Error',d.error);return}
+notif('ok','¡Compra procesada!',`Total: $${total.toLocaleString()} USD. Orden: ${d.order.orderId}`);
+cart=[];saveCart();renderCart();toggleCart();
+setTimeout(()=>notif('inf','📧 Confirmación',`Se envió un correo a ${CU.email}`),3000);return}
+catch(e){notif('err','Error de conexión','No se pudo procesar. Guardando localmente...')}}
+notif('ok','¡Compra procesada!',`Total: $${total.toLocaleString()} USD${serverOnline?' (Modo local)':''}`);
+const orders=JSON.parse(localStorage.getItem('wc2026_orders'))||[];
+orders.push({user:CU.email,items:[...cart],total,date:new Date().toISOString(),id:'ORD-'+Date.now()});
+localStorage.setItem('wc2026_orders',JSON.stringify(orders));
+cart=[];saveCart();renderCart();toggleCart();
+setTimeout(()=>notif('inf','📧 Confirmación',`Se enviaría confirmación a ${CU.email}. ¡Nos vemos en el Mundial!`),4000)}
+
+// ===== UI UPDATE =====
 function uUI(){
 const lb=document.getElementById('btnL'),rb=document.getElementById('btnR'),ub=document.getElementById('ubar');
 if(CU){lb.style.display='none';rb.style.display='none';ub.classList.add('on');
@@ -323,7 +563,8 @@ const c=countCol(),m=TS-c,p=Math.round((c/TS)*100);
 document.getElementById('pF').style.width=p+'%';
 document.getElementById('pC').innerHTML=`${c}/${TS} · <b>Faltan: ${m}</b>`}
 function resetA(){if(!CU){notif('err','Inicia sesión','');return}if(confirm('¿Reiniciar álbum? Se perderán todas las estampas e imágenes.')){col={};svA();goP(cp);uProg();notif('inf','Álbum reiniciado','Tu álbum se ha reiniciado.')}}
-// STAMP RENDERING
+
+// ===== STAMP RENDERING =====
 function rS(ti,sn,pl,hz){
 const t=T[ti],key=ti+'-'+sn,c=iC(key),imgSrc=gImg(key)||`https://picsum.photos/seed/p${ti*100+sn}/80/80.jpg`,cls=hz?'sh':'sv';
 const hasImg=gImg(key)?'has-img':'';
@@ -347,7 +588,8 @@ return `<div class="sc ${cls} ${c?'on':''}" onclick="hSp(this,'${key}')">
 <span class="pn">${label}</span><span class="pp">Especial</span>${hz?'</div>':''}
 <div class="cam-btn ${hasImg}" onclick="event.stopPropagation();trigUpload('${key}',this)" title="Subir imagen"><i class="fas fa-camera"></i></div>
 </div></div></div>`}
-// SECCIONES
+
+// ===== SECTIONS =====
 function rPanini(){const d=SP_DATA.pan;
 return `<div class="page page-l"><div class="sec-hdr gold"><i class="fas fa-star"></i> PANINI</div>
 <div class="g-pan-l" style="flex:1">
@@ -422,7 +664,8 @@ return `<div class="page page-l"><div class="sec-hdr red"><i class="fas fa-glass
 <div class="spine"></div>
 <div class="page page-r"><div class="sec-hdr red" style="opacity:.6">COCA-COLA</div>
 <div class="g-7v">${R}</div><div class="pnum">Pág. ${T.length*2+10}</div></div>`}
-// NAVEGACIÓN
+
+// ===== NAVIGATION =====
 function renderP(){const bk=document.getElementById('book');bk.classList.add('fade');
 setTimeout(()=>{if(cp===0)bk.innerHTML=rPanini();else if(cp===1)bk.innerHTML=rEmblema();
 else if(cp>=2&&cp<=T.length+1)bk.innerHTML=rTeam(cp-2);
@@ -444,7 +687,97 @@ h+=`<button class="tb ${cp===T.length+4?'on':''}" onclick="goP(${T.length+4})"><
 s.innerHTML=h}
 function uStrip(){document.querySelectorAll('.tb').forEach((b,i)=>{b.classList.toggle('on',i===cp)});
 const a=document.querySelector('.tb.on');if(a)a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})}
-ldA();uUI();uProg();rStrip();renderP();
+
+// ===== CHATBOT — MAPA CONCEPTUAL =====
+const cTree={
+_root:{answer:'¡Hola! 👋 Soy tu guía del Mundial 2026. Elige un tema para comenzar a explorar:',children:['sedes','torneo','entradas_viaje','simbolos','paises']},
+sedes:{label:'🏟️ Sede y Estadios',answer:'🏟️ Habrá <strong>16 estadios</strong> en 3 países. ¿De qué quieres saber?',children:['sedes_usa','sedes_mex','sedes_can','inaugural','final_sede']},
+sedes_usa:{label:'🇺🇸 Estadios en EE.UU.',answer:'🇺🇸 EE.UU. tiene <strong>11 sedes</strong>. ¿Quieres detalles de alguno?',children:['metlife','sofi','hard_rock','mas_usa']},
+metlife:{label:'🏟️ MetLife Stadium',answer:'🏟️ <strong>MetLife Stadium</strong> — Nueva Jersey. Capacidad: 87,000. Sede de la <strong>Gran Final</strong> del 19 de julio de 2026.',children:[]},
+sofi:{label:'🏟️ SoFi Stadium',answer:'🏟️ <strong>SoFi Stadium</strong> — Los Ángeles, CA. Capacidad: 70,000 (expandible a 100K). Cuartos y semifinal.',children:[]},
+hard_rock:{label:'🏟️ Hard Rock Stadium',answer:'🏟️ <strong>Hard Rock Stadium</strong> — Miami, FL. Capacidad: 65,000. Fase de grupos y eliminatorias.',children:[]},
+mas_usa:{label:'📋 Más estadios EE.UU.',answer:'📋 Otros estadios en EE.UU.:<br>• <strong>AT&T Stadium</strong> — Dallas, TX (80K)<br>• <strong>Mercedes-Benz</strong> — Atlanta, GA (71K)<br>• <strong>Lumen Field</strong> — Seattle, WA (69K)<br>• <strong>Gillette</strong> — Boston, MA (65K)<br>• <strong>Lincoln Financial</strong> — Filadelfia (69K)<br>• <strong>NRG Stadium</strong> — Houston, TX (72K)<br>• <strong>Arrowhead</strong> — Kansas City (76K)<br>• <strong>Levi\'s Stadium</strong> — Santa Clara (68K)',children:[]},
+sedes_mex:{label:'🇲🇽 Estadios en México',answer:'🇲🇽 México tiene <strong>3 sedes</strong>. ¿De cuál quieres saber?',children:['azteca','bbva','akron']},
+azteca:{label:'🏟️ Estadio Azteca',answer:'🏟️ <strong>Estadio Azteca</strong> — CDMX. Capacidad: 87,000. Primer estadio en albergar <strong>3 mundiales</strong> (1970, 1986 y 2026). Sede del partido inaugural.',children:[]},
+bbva:{label:'🏟️ Estadio BBVA',answer:'🏟️ <strong>Estadio BBVA</strong> — Monterrey, NL. Capacidad: 53,000. "El Gigante de Acero". Fase de grupos y octavos.',children:[]},
+akron:{label:'🏟️ Estadio Akron',answer:'🏟️ <strong>Estadio Akron</strong> — Guadalajara, JAL. Capacidad: 49,000. Hogar de las Chivas. Fase de grupos y octavos.',children:[]},
+sedes_can:{label:'🇨🇦 Estadios en Canadá',answer:'🇨🇦 Canadá tiene <strong>2 sedes</strong>. ¿Cuál te interesa?',children:['bmo_field','bc_place']},
+bmo_field:{label:'🏟️ BMO Field',answer:'🏟️ <strong>BMO Field</strong> — Toronto, ON. Capacidad: 45,000 (expandible). Fase de grupos y octavos.',children:[]},
+bc_place:{label:'🏟️ BC Place',answer:'🏟️ <strong>BC Place</strong> — Vancouver, BC. Capacidad: 54,000. Techo retráctil. Fase de grupos.',children:[]},
+inaugural:{label:'🎯 Partido Inaugural',answer:'🎯 El <strong>partido inaugural</strong> se jugará el <strong>11 de junio de 2026</strong> en el <strong>Estadio Azteca</strong> de CDMX. México será local.',children:[]},
+final_sede:{label:'🏆 La Gran Final',answer:'🏆 La <strong>Gran Final</strong> se jugará el <strong>19 de julio de 2026</strong> en el <strong>MetLife Stadium</strong> de Nueva Jersey, con 87,000 espectadores.',children:[]},
+torneo:{label:'⚽ El Torneo',answer:'⚽ El Mundial 2026 será el más grande de la historia. ¿Qué aspecto te interesa?',children:['fechas','formato','equipos','partidos_fase']},
+fechas:{label:'📅 Fechas del Mundial',answer:'📅 Del <strong>11 de junio al 19 de julio de 2026</strong>. Inaugural: 11 jun en el Azteca. Final: 19 jul en MetLife.',children:[]},
+formato:{label:'⚽ Formato 48 equipos',answer:'⚽ <strong>48 equipos</strong> en <strong>12 grupos de 4</strong>. Clasifican los 2 primeros y los <strong>8 mejores terceros</strong> (32 a eliminatorias). <strong>104 partidos</strong> en total.',children:['clasificacion','repesca']},
+clasificacion:{label:'📊 Plazas por confederación',answer:'📊 Distribución de plazas:<br>• <strong>UEFA:</strong> 16<br>• <strong>CONMEBOL:</strong> 9<br>• <strong>CONCACAF:</strong> 8 (3 anfitriones + 5)<br>• <strong>CAF:</strong> 9<br>• <strong>AFC:</strong> 8<br>• <strong>OFC:</strong> 2<br>Total: 48 selecciones.',children:[]},
+repesca:{label:'🔄 Repesca intercontinental',answer:'🔄 La repesca definirá las últimas 2 plazas. Participarán equipos de distintas confederaciones en un torneo eliminatorio previo.',children:[]},
+equipos:{label:'🌍 Equipos clasificados',answer:'🌍 Las eliminatorias están en curso. ¿De qué confederación quieres saber?',children:['uefa','conmebol','concacaf','caf','afc','ofc']},
+uefa:{label:'🇪🇺 UEFA (Europa)',answer:'🇪🇺 <strong>16 plazas</strong>. Francia, España, Inglaterra, Alemania e Italia buscan su lugar.',children:[]},
+conmebol:{label:'🇧🇷 CONMEBOL (Sudamérica)',answer:'🇧🇷 <strong>9 plazas</strong>. Argentina (campeona defensora) y Brasil lideran. ¡Messi podría jugar su 6º mundial!',children:[]},
+concacaf:{label:'🌎 CONCACAF',answer:'🌎 <strong>8 plazas</strong>: 3 anfitrionas automáticas (🇺🇸🇲🇽🇨🇦) + 5 por clasificación.',children:[]},
+caf:{label:'🌍 CAF (África)',answer:'🌍 <strong>9 plazas</strong>. Marruecos (semifinalista en Qatar 2022) es la gran favorita.',children:[]},
+afc:{label:'🌏 AFC (Asia)',answer:'🌏 <strong>8 plazas</strong>. Japón, Corea del Sur e Irán son potencias.',children:[]},
+ofc:{label:'🏝️ OFC (Oceanía)',answer:'🏝️ <strong>2 plazas</strong>. ¡Por primera vez Oceanía tiene plaza directa! Nueva Zelanda es la favorita.',children:[]},
+partidos_fase:{label:'📊 Partidos por fase',answer:'📊 <strong>Distribución:</strong><br>• Fase de grupos: 72 partidos<br>• Octavos: 16<br>• Cuartos: 8<br>• Semifinales: 4<br>• 3er puesto + Final: 2<br>• Repesca: 2<br><strong>Total: 104 partidos</strong>',children:[]},
+entradas_viaje:{label:'🎫 Entradas y Viaje',answer:'🎫 Todo lo que necesitas para tu viaje. ¿Qué te interesa?',children:['comprar','precios','visa','transporte','clima','seguridad']},
+comprar:{label:'🎫 Dónde comprar',answer:'🎫 En <strong>FIFA.com/tickets</strong>. Proceso: 1) Registro, 2) Sorteo (fase 1), 3) Venta directa (fase 2). ¡También en nuestra sección de Entradas!',children:[]},
+precios:{label:'💰 Precios',answer:'💰 <strong>Precios:</strong><br>• Fase de Grupos: <strong>$95 USD</strong><br>• Octavos: <strong>$185 USD</strong><br>• Semifinal: <strong>$450 USD</strong><br>• Gran Final: <strong>$1,100 USD</strong>',children:[]},
+visa:{label:'🛂 Visa y documentos',answer:'🛂 ¿A dónde viajas?',children:['visa_usa','visa_mex','visa_can']},
+visa_usa:{label:'🇺🇸 Visa para EE.UU.',answer:'🇺🇸 La mayoría necesita <strong>visa B1/B2</strong>. ¡Tramítala con <strong>6 meses</strong> de anticipación! Verifica en <strong>travel.state.gov</strong>.',children:[]},
+visa_mex:{label:'🇲🇽 Visa para México',answer:'🇲🇽 México <strong>no requiere visa</strong> para muchos países latinos y europeos (estancias hasta 180 días).',children:[]},
+visa_can:{label:'🇨🇦 Visa para Canadá',answer:'🇨🇦 Se necesita <strong>eTA</strong> (autorización electrónica) o <strong>visa de residente temporal</strong>. Tramita en <strong>canada.ca</strong>.',children:[]},
+transporte:{label:'🚌 Transporte',answer:'🚌 Las ciudades ofrecerán <strong>metro, tren ligero y shuttles FIFA</strong>. En EE.UU. se recomienda alquilar auto para estadios suburbanos.',children:[]},
+clima:{label:'🌤️ Clima',answer:'🌤️ ¿De qué país?',children:['clima_mex','clima_usa','clima_can']},
+clima_mex:{label:'🇲🇽 Clima en México',answer:'🇲🇽 <strong>Junio-julio:</strong><br>• CDMX: 15-28°C, lluvias por la tarde<br>• Monterrey: 28-40°C, muy caluroso<br>• Guadalajara: 18-33°C',children:[]},
+clima_usa:{label:'🇺🇸 Clima en EE.UU.',answer:'🇺🇸 <strong>Junio-julio:</strong><br>• Nueva York: 22-30°C<br>• LA: 18-28°C<br>• Miami: 26-35°C, húmedo<br>• Dallas/Atlanta: 25-38°C',children:[]},
+clima_can:{label:'🇨🇦 Clima en Canadá',answer:'🇨🇦 <strong>Junio-julio:</strong><br>• Toronto: 18-28°C, agradable<br>• Vancouver: 15-24°C, más fresco',children:[]},
+seguridad:{label:'🔒 Seguridad',answer:'🔒 <strong>Recomendaciones:</strong><br>• Llega 2-3 hrs antes<br>• No lleves objetos prohibidos<br>• Usa transporte oficial FIFA<br>• Lleva documentos siempre',children:[]},
+simbolos:{label:'🏆 Símbolos del Mundial',answer:'🏆 ¿Cuál te interesa?',children:['mascota','balon','copa','historia']},
+mascota:{label:'🦅 Mascota oficial',answer:'🦅 Combina <strong>águila (EE.UU.)</strong>, <strong>jaguar (México)</strong> y <strong>castor (Canadá)</strong>, simbolizando la unión de las tres naciones.',children:[]},
+balon:{label:'⚽ Balón oficial',answer:'⚽ <strong>Adidas Tournament Ball</strong> con tecnología <strong>Connected Ball</strong>. ¿Quieres saber más?',children:['connected_ball']},
+connected_ball:{label:'🔬 Connected Ball',answer:'🔬 Sensor <strong>UWB</strong> interno que envía datos 500 veces/segundo:<br>• Detecta si el balón cruzó la línea<br>• Detecta contacto en jugadas<br>• Mide velocidad y trayectoria<br>Reduce el tiempo del VAR a menos de 30 segundos.',children:[]},
+copa:{label:'🏆 Copa Mundial',answer:'🏆 Diseñada por <strong>Gazzaniga</strong> en 1974. ¿Qué detalle quieres conocer?',children:['copa_peso','copa_historia','copa_champions']},
+copa_peso:{label:'⚖️ Peso y medidas',answer:'⚖️ <strong>Datos:</strong><br>• Peso: 6.175 kg de oro de 18 quilates<br>• Altura: 36.8 cm<br>• Base: Dos anillos de malaquita verde<br>• Valor: más de $20 millones USD',children:[]},
+copa_historia:{label:'📜 Historia del trofeo',answer:'📜 En uso desde <strong>1974</strong>. Antes se usaba la <strong>Copa Jules Rimet</strong> (Brasil la ganó definitivamente en 1970). El trofeo actual es propiedad permanente de la FIFA; los campeones reciben réplica bañada en oro.',children:[]},
+copa_champions:{label:'👑 Campeones históricos',answer:'👑 <strong>Más títulos:</strong><br>🇧🇷 Brasil: 5 (1958, 62, 70, 94, 2002)<br>🇩🇪 Alemania: 4<br>🇮🇹 Italia: 4<br>🇦🇷 Argentina: 3 (última 2022)<br>🇫🇷 Francia: 2<br>¿Quién lo levantará en 2026?',children:[]},
+historia:{label:'📜 Historia del Mundial',answer:'📜 Hitos del Mundial 2026. ¿Cuál te interesa?',children:['hist_2017','hist_2018','hist_2022','hist_2023']},
+hist_2017:{label:'📌 Decisión 2017',answer:'📌 En <strong>enero de 2017</strong>, el Consejo de la FIFA aprobó la expansión de 32 a <strong>48 equipos</strong>.',children:[]},
+hist_2018:{label:'📌 Votación 2018',answer:'📌 El <strong>13 de junio de 2018</strong>, <strong>United 2026</strong> ganó con <strong>134 votos</strong> contra 65 de Marruecos, en el 68º Congreso de la FIFA en Moscú.',children:[]},
+hist_2022:{label:'📌 Formato 2022',answer:'📌 En <strong>2022</strong> se confirmó: 12 grupos de 4. Clasifican los 2 primeros y los <strong>8 mejores terceros</strong>, completando 32 para eliminatorias.',children:[]},
+hist_2023:{label:'📌 Sedes 2023',answer:'📌 En <strong>2023</strong> se anunciaron las <strong>16 ciudades sede</strong>: 11 en EE.UU., 3 en México y 2 en Canadá.',children:[]},
+paises:{label:'🌍 Países Anfitriones',answer:'🌍 Tres naciones unidas por el fútbol. ¿De cuál quieres saber?',children:['pais_usa','pais_mex','pais_can']},
+pais_usa:{label:'🇺🇸 Estados Unidos',answer:'🇺🇸 Principal anfitrión con <strong>11 sedes</strong> y la Gran Final. Segundo mundial masculino que organiza (primero: 1994).',children:[]},
+pais_mex:{label:'🇲🇽 México',answer:'🇲🇽 Anfitrión por <strong>tercera vez</strong> (1970, 1986 y 2026) — ¡récord histórico! El Azteca será sede del inaugural.',children:[]},
+pais_can:{label:'🇨🇦 Canadá',answer:'🇨🇦 Primer mundial masculino que organiza (ya tuvo el Femenino 2015). Tiene 2 sedes: Toronto y Vancouver.',children:[]}
+};
+
+let cPath=['_root'];
+function uBc(){const b=document.getElementById('cwBc');if(!b)return;b.innerHTML='📍 '+cPath.map(id=>id==='_root'?'Inicio':(cTree[id]?cTree[id].label:'')).join(' <i class="fas fa-chevron-right" style="font-size:8px;color:#C0C0C0"></i> ')}
+function sOpts(node){const o=document.getElementById('cwOpts');let h='';
+if(cPath.length>1){h+='<button class="cob home" onclick="cHome()">🏠 Inicio</button><button class="cob back" onclick="cBack()">◀ Volver</button>'}
+if(node.children&&node.children.length>0)node.children.forEach(cid=>{const c=cTree[cid];if(c)h+=`<button class="cob" onclick="cNav('${cid}')">${c.label}</button>`});
+o.innerHTML=h;uBc()}
+function cNav(nid){const node=cTree[nid];if(!node)return;const msgs=document.getElementById('cwMsgs');
+const u=document.createElement('div');u.className='cm user';u.textContent=node.label;msgs.appendChild(u);
+cPath.push(nid);
+setTimeout(()=>{const b=document.createElement('div');b.className='cm bot';b.innerHTML=node.answer;msgs.appendChild(b);sOpts(node);msgs.scrollTop=msgs.scrollHeight},400);msgs.scrollTop=msgs.scrollHeight}
+function cBack(){if(cPath.length<=1)return;cPath.pop();const pid=cPath[cPath.length-1],parent=cTree[pid],msgs=document.getElementById('cwMsgs');
+const u=document.createElement('div');u.className='cm user';u.textContent='◀ Volver';msgs.appendChild(u);
+setTimeout(()=>{const b=document.createElement('div');b.className='cm bot';b.innerHTML=parent.answer;msgs.appendChild(b);sOpts(parent);msgs.scrollTop=msgs.scrollHeight},300);msgs.scrollTop=msgs.scrollHeight}
+function cHome(){cPath=['_root'];const root=cTree._root,msgs=document.getElementById('cwMsgs');
+const u=document.createElement('div');u.className='cm user';u.textContent='🏠 Menú principal';msgs.appendChild(u);
+setTimeout(()=>{const b=document.createElement('div');b.className='cm bot';b.innerHTML=root.answer;msgs.appendChild(b);sOpts(root);msgs.scrollTop=msgs.scrollHeight},300);msgs.scrollTop=msgs.scrollHeight}
+function tgChat(){const w=document.getElementById('cw');w.classList.toggle('open');const t=document.getElementById('cbtTip');if(w.classList.contains('open')&&t)t.style.display='none'}
+
+// ===== INIT =====
+async function init(){
+await checkSrv();
+await checkSess();
+ldA();uUI();renderCart();uProg();rStrip();renderP();
+sOpts(cTree._root);
+if(CU)setTimeout(()=>notif('inf',`¡Hola, ${CU.name.split(' ')[0]}!`,`Tu álbum tiene ${countCol()} estampa(s)`),1500);
+}
+init();
 </script>
 </body>
 </html>
